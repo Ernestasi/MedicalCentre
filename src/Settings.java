@@ -1,4 +1,3 @@
-
 public class Settings {
-            System.out.println("ka jus gaidziai?");
+            System.out.print("ka jus gaidziai?")
 }
