@@ -1,40 +1,66 @@
 //alenskas
 public class Disease {
-    public class Doctor{
-        private String name;
-        private String surName;
-        private int age;
+    private String name;
+    private String time;
+    private double price;
+    private int meetings;
+    private int national;
+    private int personal;
 
-
-        public Doctor(String name, String surName, int age, int insurance){
-            this.name = name;
-            this.surName = surName;
-            this.age = age;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getSurName() {
-            return surName;
-        }
-
-        public void setSurName(String surName) {
-            this.surName = surName;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public void setAge(int age) {
-            this.age = age;
-        }
+    public Disease(String name, String time, double price, int meetings, int national, int personal) {
+        this.name = name;
+        this.time = time;
+        this.price = price;
+        this.meetings = meetings;
+        this.national = national;
+        this.personal = personal;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getMeetings() {
+        return meetings;
+    }
+
+    public void setMeetings(int meetings) {
+        this.meetings = meetings;
+    }
+
+    public int getNational() {
+        return national;
+    }
+
+    public void setNational(int national) {
+        this.national = national;
+    }
+
+    public int getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(int personal) {
+        this.personal = personal;
+    }
 }
