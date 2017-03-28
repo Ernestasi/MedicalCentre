@@ -7,7 +7,7 @@ public class Registration {
     public void registration(Main registration, String ID){
         JFrame window = new JFrame("Registration");
         window.setSize(480,320);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         window.getContentPane().setLayout(new GridLayout(4,4));
         JLabel I = new JLabel("Name");
         window.getContentPane().add(I);
@@ -17,6 +17,7 @@ public class Registration {
         window.add(new JTextField("Type your surname there"));
         window.add(new JLabel("ID"));
         window.add(new JLabel(ID));
+        //Button with options for insurance
 
     }
 
