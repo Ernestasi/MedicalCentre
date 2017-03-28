@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Paths;
 
 public class Main  extends Canvas implements Runnable{
 
@@ -93,18 +94,18 @@ public class Main  extends Canvas implements Runnable{
         main.start();
     }
     public void init(Main main){
+        ReadData rd = new ReadData();
+        rd.readDoctors();
+        rd.readPatients();
         createWindow(main);
-
-
     }
 
 
     public static void main(String[] args) {
         Main main = new Main();
+        System.out.println("Hello World!");
         main.init(main);
 
-
-        System.out.println("Hello World!");
     }
 
 }
