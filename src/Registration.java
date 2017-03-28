@@ -1,0 +1,23 @@
+import javax.swing.*;
+import java.awt.*;
+
+
+public class Registration {
+
+    public void registration(Main registration, String ID){
+        JFrame window = new JFrame("Registration");
+        window.setSize(480,320);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.getContentPane().setLayout(new GridLayout(4,4));
+        JLabel I = new JLabel("Name");
+        window.getContentPane().add(I);
+        window.add(new JTextField("Type your name there"));
+        window.add(new JLabel("Surname"));
+        window.getContentPane().add(I);
+        window.add(new JTextField("Type your surname there"));
+        window.add(new JLabel("ID"));
+        window.add(new JLabel(ID));
+
+    }
+
+}
