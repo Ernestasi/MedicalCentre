@@ -65,7 +65,8 @@ public class Main  extends Canvas implements Runnable{
     }
 
     private void render(){
-        reg.render( "15555" );
+        String ID = "39702150000";
+        reg.render(ID);
     }
 
     private  synchronized  void stop(){
@@ -100,6 +101,7 @@ public class Main  extends Canvas implements Runnable{
     }
 
     public void init(Main main){
+        reg = new Registration();
         ReadData rd = new ReadData();
   //      doctors = rd.readDoctors(doctors);
 //        for(Doctor d : doctors ){
