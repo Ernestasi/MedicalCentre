@@ -1,13 +1,33 @@
+import java.util.Arrays;
+
 public class Doctor{
     private String name;
     private String surName;
-    private int age;
+    private int cab;
+    private String time;
+    private String[] timeDay;
 
 
-    public Doctor(String name, String surName, int age, int insurance){
+    public Doctor(String name, String surName, int cab, String time){
         this.name = name;
         this.surName = surName;
-        this.age = age;
+        this.cab = cab;
+        this.time = time;
+        toDay(time);
+    }
+
+    private void toDay(String time){
+        timeDay = time.split("/");
+    }
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "name='" + name + '\'' +
+                ", surName='" + surName + '\'' +
+                ", cab=" + cab +
+                ", timeDay=" + Arrays.toString(timeDay) +
+                '}';
     }
 
     public String getName() {
@@ -26,11 +46,20 @@ public class Doctor{
         this.surName = surName;
     }
 
-    public int getAge() {
-        return age;
+    public int getCab() {
+        return cab;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setCab(int cab) {
+        this.cab = cab;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+        toDay(time);
     }
 }

@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Paths;
 
 public class Main  extends Canvas implements Runnable{
+
+    private Doctor[] doctors;
 
     private static final long serialVersionUID = 1L;
     public static final int WIDTH = 640;
@@ -93,18 +96,21 @@ public class Main  extends Canvas implements Runnable{
         main.start();
     }
     public void init(Main main){
+        ReadData rd = new ReadData();
+        rd.readDoctors(doctors);
+        for(Doctor d : doctors ){
+            System.out.println(doctors);
+        }
+        rd.readPatients();
         createWindow(main);
-
-
     }
 
 
     public static void main(String[] args) {
         Main main = new Main();
+        System.out.println("Hello World!");
         main.init(main);
 
-
-        System.out.println("Hello World!");
     }
 
 }
