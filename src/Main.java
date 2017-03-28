@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 public class Main  extends Canvas implements Runnable{
 
     private Doctor[] doctors;
+    private Registration reg;
 
     private static final long serialVersionUID = 1L;
     public static final int WIDTH = 640;
@@ -64,7 +65,7 @@ public class Main  extends Canvas implements Runnable{
     }
 
     private void render(){
-
+        reg.render( "15555" );
     }
 
     private  synchronized  void stop(){
@@ -100,10 +101,10 @@ public class Main  extends Canvas implements Runnable{
 
     public void init(Main main){
         ReadData rd = new ReadData();
-        doctors = rd.readDoctors(doctors);
-        for(Doctor d : doctors ){
-            System.out.println(doctors);
-        }
+  //      doctors = rd.readDoctors(doctors);
+//        for(Doctor d : doctors ){
+  //          System.out.println(doctors);
+  //      }
         rd.readPatients();
         createWindow(main);
     }

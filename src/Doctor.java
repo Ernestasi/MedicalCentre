@@ -1,3 +1,4 @@
+import javax.print.Doc;
 import java.util.Arrays;
 
 public class Doctor{
@@ -14,6 +15,10 @@ public class Doctor{
         this.cab = cab;
         this.time = time;
         toDay(time);
+    }
+
+    public Doctor(){
+
     }
 
     private void toDay(String time){

@@ -15,7 +15,7 @@ public class ReadData{
                 Doctor d = new Doctor();
                 while ((line = br.readLine()) != null) {
                   String[] word = line.split(" ");
-                  doc[i] = new Doctor(word[0], word[1], Integer.parseInt(word[2]), word[3]);
+                  d = new Doctor(word[0], word[1], Integer.parseInt(word[2]), word[3]);
                   i++;
                   //System.out.println(word[0] +  word[1] + Integer.parseInt(word[2]) + word[3]);
                 }

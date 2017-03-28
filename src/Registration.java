@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Registration {
 
-    public void registration(Main registration, String ID){
+    public void render(String ID){
         JFrame window = new JFrame("Registration");
         window.setSize(480,320);
         window.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
