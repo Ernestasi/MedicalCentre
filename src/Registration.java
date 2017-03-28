@@ -6,11 +6,10 @@ public class Registration {
 
     public void render(String ID){
         JFrame window = new JFrame("Registration");
-        window.setVisible(true);
         window.setLocationRelativeTo(null);
-        window.setSize(480,320);
+        window.setSize(480,260);
         window.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        window.getContentPane().setLayout(new GridLayout(4,4));
+        window.getContentPane().setLayout(new GridLayout(4,2));
        // JLabel I = new JLabel();
         window.add(new JLabel("Name"));
         window.add(new JTextField("Type your name there"));
@@ -20,6 +19,11 @@ public class Registration {
         //window.getContentPane().add(I);
         window.add(new JLabel("ID"));
         window.add(new JLabel(ID));
+        window.add(new JButton("Submit"));
+        window.add(new JButton("Cancel"));
+        window.setAlwaysOnTop (true);
+        window.pack();
+        window.setVisible(true);
         //Button with options for insurance
 
     }
