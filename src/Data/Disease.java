@@ -1,6 +1,6 @@
 package Data;
 
-//alenskas
+//alenskass
 public class Disease {
     private String name;
     private String time;
