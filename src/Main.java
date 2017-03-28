@@ -107,6 +107,4 @@ public class Main  extends Canvas implements Runnable{
         System.out.println("Hello World!");
     }
 
-
-
 }
