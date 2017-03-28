@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Doctor{
     private String name;
     private String surName;
@@ -16,6 +18,16 @@ public class Doctor{
 
     private void toDay(String time){
         timeDay = time.split("/");
+    }
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "name='" + name + '\'' +
+                ", surName='" + surName + '\'' +
+                ", cab=" + cab +
+                ", timeDay=" + Arrays.toString(timeDay) +
+                '}';
     }
 
     public String getName() {
