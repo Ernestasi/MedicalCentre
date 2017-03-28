@@ -1,3 +1,5 @@
+import oracle.jrockit.jfr.JFR;
+
 import javax.swing.*;
 import java.awt.*;
 import java.nio.file.Paths;
@@ -95,6 +97,7 @@ public class Main  extends Canvas implements Runnable{
 
         main.start();
     }
+
     public void init(Main main){
         ReadData rd = new ReadData();
         rd.readDoctors(doctors);
