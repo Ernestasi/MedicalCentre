@@ -102,7 +102,7 @@ public class Main  extends Canvas implements Runnable{
     public void init(Main main){
         reg = new Registration();
         reg.render( "15555" );
-
+        reg.render( "15555" );
         //reg.render( "15555" );
         ReadData rd = new ReadData();
         //rd.readDoctors(doctors);

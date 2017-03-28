@@ -11,12 +11,13 @@ public class Registration {
         window.setSize(480,320);
         window.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         window.getContentPane().setLayout(new GridLayout(4,4));
-        JLabel I = new JLabel("Name");
-        window.getContentPane().add(I);
+       // JLabel I = new JLabel();
+        window.add(new JLabel("Name"));
         window.add(new JTextField("Type your name there"));
-        window.add(new JLabel("Surname"));
-        window.getContentPane().add(I);
+        //window.getContentPane().add(I);
+        window.add(new JLabel("SurName"));
         window.add(new JTextField("Type your surname there"));
+        //window.getContentPane().add(I);
         window.add(new JLabel("ID"));
         window.add(new JLabel(ID));
         //Button with options for insurance
