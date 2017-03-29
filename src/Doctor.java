@@ -29,8 +29,7 @@ public class Doctor{
     public String toString() {
         return "Doctor name = " + name +
                 ", surName = " + surName +
-                ", cab = " + cab +
-                ", timeDay = " + Arrays.toString(timeDay);
+                ", cab = " + cab;
     }
 
     public String getName() {

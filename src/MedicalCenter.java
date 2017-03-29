@@ -8,12 +8,8 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
     private Registration reg;
     private ReadData rd;
+    private MainFrame mFrame;
 
-    private static final long serialVersionUID = 1L;
-    private static final int WIDTH = 640;
-    private static final int HEIGHT = 480;
-    private static final int SCALE = 1;
-    private final String TITLE = "Medical Centre Application";
 
     private Thread thread;
     private boolean running = false;
@@ -24,6 +20,18 @@ public class MedicalCenter  extends Canvas implements Runnable{
         running = true;
         thread = new Thread(this);
         thread.start();
+    }
+
+    private  synchronized  void stop(){
+        if(!running)
+            return;
+        running = false;
+        try {
+            thread.join();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        System.exit(1);
     }
 
     public void run() {
@@ -68,50 +76,23 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
     }
 
-    private  synchronized  void stop(){
-        if(!running)
-            return;
-        running = false;
-        try {
-            thread.join();
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-        System.exit(1);
-    }
-
-    public void createWindow( MedicalCenter  medCent){
-        // MedicalCenter  medCent = new  MedicalCenter();
-
-         medCent.setPreferredSize(new Dimension(WIDTH *SCALE, HEIGHT * SCALE));
-         medCent.setMaximumSize(new Dimension(WIDTH *SCALE, HEIGHT * SCALE));
-         medCent.setMinimumSize(new Dimension(WIDTH *SCALE, HEIGHT * SCALE));
-
-        JFrame frame = new JFrame();
-        frame.add( medCent);
-        frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        requestFocus();
-
-         medCent.start();
-    }
-
     public void init( MedicalCenter  medCent){
+
+        medCent.start();
 
         reg = new Registration();
         rd = new ReadData();
+        mFrame = new MainFrame();
 
+        mFrame.createWindow( medCent);
         reg.render( "15555" );
         rd.readDoctors(doctors);
 
         for(Doctor d : doctors ){
             System.out.println(d);
         }
-        rd.readPatients();
-        createWindow( medCent);
+
+        //rd.readPatients();
     }
 
 
@@ -122,15 +103,4 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
     }
 
-    public static int getWIDTH() {
-        return WIDTH;
-    }
-
-    public static int getHEIGHT() {
-        return HEIGHT;
-    }
-
-    public static int getSCALE() {
-        return SCALE;
-    }
 }
