@@ -12,7 +12,7 @@ public class TimeFrame {
         window.setVisible(true);
         //window.pack();
 
-        //window.add(new JLabel("Time:" + medCent.dateFormat.format(medCent.cal.getTime())));
+        window.add(new JLabel("Time:" + medCent.dateFormat.format(medCent.cal.getTime())));
 
     }
 }
