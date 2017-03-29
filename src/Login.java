@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 class Login {
 
-    void render() {
+    int render() {
 
         JFrame window = new JFrame("Login");
         window.setLocationRelativeTo((Component)null);
@@ -36,16 +36,16 @@ class Login {
         label1.setVerticalAlignment(JLabel.CENTER);
         window.add(label1);*/
 
-        int loginStatus;
+        final int[] loginStatus = new int[1];
         JButton doctors = new JButton("I am doctor"); //Doctors button
         doctors.setSize(150,75);
         doctors.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                loginStatus =1;
+                loginStatus[0] =1;
                 window.dispose();
             }
-            return loginStatus;
+
         });
         window.add(doctors);
 
@@ -59,7 +59,7 @@ class Login {
             @Override
             public void mouseEntered(MouseEvent e) {
                 ID.setText("");
-                ID.setBackground(Color.Gray);
+                //ID.setBackground(Color);
             }
 
             @Override
@@ -82,5 +82,6 @@ class Login {
         window.setAlwaysOnTop(true);
         window.pack();
         window.setVisible(true);
+        return loginStatus[0];
     }
 }
