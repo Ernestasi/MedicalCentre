@@ -24,7 +24,8 @@ class Login {
         window.setDefaultCloseOperation(1);
         window.getContentPane().setLayout(new GridLayout(3, 2));
 
-/*
+
+        /*
         JLabel label = new JLabel("I am doctor"); //Label : For doctors
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setVerticalAlignment(JLabel.CENTER);
@@ -35,8 +36,17 @@ class Login {
         label1.setVerticalAlignment(JLabel.CENTER);
         window.add(label1);*/
 
+        int loginStatus;
         JButton doctors = new JButton("I am doctor"); //Doctors button
         doctors.setSize(150,75);
+        doctors.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loginStatus =1;
+                window.dispose();
+            }
+            return loginStatus;
+        });
         window.add(doctors);
 
         JButton patients = new JButton("I am patient"); //Doctors button
@@ -48,16 +58,17 @@ class Login {
         ID.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
                 ID.setText("");
-               // ID.setBackground(Color.Gray);
+                ID.setBackground(Color.Gray);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                if (ID.equals("") ){
-                    ID.setText("Type in your ID there");
-                }
+                    if(ID.equals("")){
+                         ID.setText("Type in your ID there");
+                    }
+
+
             }
         });
         window.add (ID);
