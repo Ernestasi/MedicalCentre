@@ -20,7 +20,7 @@ class Registration {
         window.add(new JLabel("  SurName :"));
         window.add(new JTextField(" "));
         window.add(new JLabel("  ID"));
-        window.add(new JLabel(ID));
+        window.add(new JTextField(" "));
         window.add(new JLabel(" Insurance:"));
 
         JRadioButton rb1 = new JRadioButton("National", false);
