@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-
+//
 public class MedicalCenter  extends Canvas implements Runnable{
 
     ArrayList<Doctor> doctors =new ArrayList<>();
