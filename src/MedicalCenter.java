@@ -96,6 +96,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
         rd = new ReadData();
         rd.readDoctors(doctors);
         rd.readPatients(patients);
+        rd.readDisease(diseases);
 
         log = new Login();
         log.render();
@@ -116,7 +117,6 @@ public class MedicalCenter  extends Canvas implements Runnable{
        // for(Patient p: patients){
            // System.out.println(p);
        // }
-        rd.readDisease(diseases);
         for(Disease d: diseases){
             System.out.println(d);
         }
