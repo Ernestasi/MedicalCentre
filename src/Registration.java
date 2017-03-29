@@ -9,7 +9,7 @@ import javax.swing.*;
 
 class Registration {
 
-    void render(String ID) {
+    void render() {
         JFrame window = new JFrame("Registration");
         window.setLocationRelativeTo((Component)null);
         window.setSize(480, 300);

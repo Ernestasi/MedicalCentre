@@ -1,38 +1,21 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
 public class MainFrameForDoctors {
-
-
-    Graphics g ;
-    JFrame Dframe;
-    JTextField DdateF;
-
-
-    public void createWindow(){
-
-        Dframe = new JFrame("Medical Centre Application for Doctors  ");
-        Dframe.setLocationRelativeTo((Component)null);
-        Dframe.setSize(640, 480);
-        Dframe.getContentPane().setLayout(new GridLayout(5, 1));
-        Dframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Dframe.setResizable(false);
-        Dframe.setLocationRelativeTo(null);
-        Dframe.setVisible(true);
-        Dframe.requestFocus();
-
-        DdateF = new JTextField(" Type in your ID there...");
-        //dateFrame.add(new JLabel(medCent.dateFormat.format(medCent.cal.getTime())));
-
+    void render(){
+        JFrame frame = new JFrame("Medical Centre Application for Doctors  ");
+        frame.setLocationRelativeTo((Component)null);
+        frame.setPreferredSize(new Dimension(500   , 200 ));
+        frame.setSize(500, 200);
+        frame.getContentPane().setLayout(new GridLayout(1, 2));
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.requestFocus();
+        frame.add(new Button("TO DO SOME SHIT HERE"));
     }
-
-    public void render(MedicalCenter  medCent){
-
-        // dateF.setHorizontalAlignment(JTextField.CENTER);
-        DdateF.setText(medCent.dateFormat.format(medCent.cal.getTime()));
-
-    }
-
-
 }

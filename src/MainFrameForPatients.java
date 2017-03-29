@@ -1,36 +1,35 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainFrameForPatients {
 
 
-    Graphics g ;
-    MedicalCenter PmedCent;
-    JFrame Pframe;
-    JTextField PdateF;
+    void render(){
 
-
-    public void createWindow(){
-
-        Pframe = new JFrame("Medical Centre Application for Patients  ");
-        Pframe.setLocationRelativeTo((Component)null);
-        Pframe.setSize(640, 480);
-        Pframe.getContentPane().setLayout(new GridLayout(5, 1));
-        Pframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Pframe.setResizable(false);
-        Pframe.setLocationRelativeTo(null);
-        Pframe.setVisible(true);
-        Pframe.requestFocus();
-
-        PdateF = new JTextField(" Type in your ID there...");
-        //dateFrame.add(new JLabel(medCent.dateFormat.format(medCent.cal.getTime())));
-
-    }
-
-    public void render(MedicalCenter  medCent){
-
-        // dateF.setHorizontalAlignment(JTextField.CENTER);
-        PdateF.setText(medCent.dateFormat.format(medCent.cal.getTime()));
+        JFrame frame = new JFrame("Medical Centre Application for Doctors  ");
+        frame.setLocationRelativeTo((Component)null);
+        frame.setPreferredSize(new Dimension(500   , 200 ));
+        frame.setSize(500, 200);
+        frame.getContentPane().setLayout(new GridLayout(1, 2));
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.requestFocus();
+        JButton newB = new JButton("New patient");
+        newB.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Registration reg = new Registration();
+                reg.render();
+                frame.dispose();
+            }
+        });
+        frame.add(newB);
+        JButton oldB = new JButton ("Old patient");
+        frame.add(new JButton("Old patient"));
 
     }
 

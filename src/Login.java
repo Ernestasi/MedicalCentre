@@ -44,7 +44,7 @@ class Login {
             @Override
             public void mouseClicked(MouseEvent e) {
                 MainFrameForDoctors forDoc = new MainFrameForDoctors();
-                forDoc.createWindow();
+                forDoc.render();
                 window.dispose();
             }
 
@@ -56,7 +56,7 @@ class Login {
             @Override
             public void mousePressed(MouseEvent e) {
                 MainFrameForPatients forPatien = new MainFrameForPatients();
-                forPatien.createWindow();
+                forPatien.render();
                 window.dispose();
             }
 
