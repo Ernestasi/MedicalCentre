@@ -107,7 +107,8 @@ public class Main  extends Canvas implements Runnable{
         ReadData rd = new ReadData();
         rd.readDoctors(doctors);
         for(Doctor d : doctors ){
-           System.out.println(doctors);
+            System.out.println(d);
+        //System.out.println(doctors.get(0));
         }
         rd.readPatients();
         createWindow(main);

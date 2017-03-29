@@ -27,12 +27,10 @@ public class Doctor{
 
     @Override
     public String toString() {
-        return "Doctor{" +
-                "name='" + name + '\'' +
-                ", surName='" + surName + '\'' +
-                ", cab=" + cab +
-                ", timeDay=" + Arrays.toString(timeDay) +
-                '}';
+        return "Doctor name = " + name +
+                ", surName = " + surName +
+                ", cab = " + cab +
+                ", timeDay = " + Arrays.toString(timeDay);
     }
 
     public String getName() {
