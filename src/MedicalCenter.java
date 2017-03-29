@@ -33,7 +33,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
     public void run() {
 
         long lastTime = System.nanoTime();
-        final double amountOfTicks = 60.0;
+        final double amountOfTicks = 2.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         int updates = 0;
@@ -98,12 +98,14 @@ public class MedicalCenter  extends Canvas implements Runnable{
         rd.readPatients(patients);
         rd.readDisease(diseases);
 
+
+
         log = new Login();
-        log.render();
-
-        mFrame = new MainFrame();
-        mFrame.createWindow(this);
-
+        int a = log.render();
+        if(a == 1 || a == 2) {
+            mFrame = new MainFrame();
+            mFrame.createWindow(this);
+        }
         reg = new Registration();
         reg.render( "39702150000" );
 

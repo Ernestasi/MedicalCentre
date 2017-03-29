@@ -8,14 +8,12 @@ public class MainFrame {
     Graphics g ;
     MedicalCenter medCent;
     JFrame frame;
-    private static final long serialVersionUID = 1L;
-    private final String TITLE = "Medical Centre Application" ;
 
 
     public void createWindow( MedicalCenter  medCent){
         this.medCent = medCent;
 
-        frame = new JFrame("Medical Centre Application   " + medCent.dateFormat.format(medCent.cal.getTime()));
+        frame = new JFrame("Medical Centre Application   ");
         frame.setLocationRelativeTo((Component)null);
         frame.setSize(640, 480);
         frame.getContentPane().setLayout(new GridLayout(6, 5));
@@ -28,7 +26,7 @@ public class MainFrame {
     }
 
     public void render(MedicalCenter  medCent){
-        frame.setTitle("Medical Centre Application   " + medCent.dateFormat.format(medCent.cal.getTime()));
+        //frame.setTitle("Medical Centre Application   " + medCent.dateFormat.format(medCent.cal.getTime()));
         JTextField myOutput = new JTextField(16);
         myOutput.setText("some text");
         //JTextField myOutput = new JTextField("someInitialValue", 20);s
