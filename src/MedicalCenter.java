@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class MedicalCenter  extends Canvas implements Runnable{
 
     ArrayList<Doctor> doctors =new ArrayList<>();
-    ArrayList<Patient> patients = new ArrayList<>();
 
     private Registration reg;
     private ReadData rd;
@@ -108,16 +107,10 @@ public class MedicalCenter  extends Canvas implements Runnable{
         reg.render( "15555" );
         rd.readDoctors(doctors);
 
-        //for(Doctor d : doctors ){
-            //System.out.println(d);
-        //}
-        rd.readPatients(patients);
-
-        for(Patient p: patients){
-            System.out.println(p);
+        for(Doctor d : doctors ){
+            System.out.println(d);
         }
-
-        for(Patient p: patients)
+        rd.readPatients();
         createWindow( medCent);
     }
 
