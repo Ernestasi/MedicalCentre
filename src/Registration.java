@@ -9,7 +9,7 @@ public class Registration {
         window.setLocationRelativeTo(null);
         window.setSize(480,260);
         window.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        window.getContentPane().setLayout(new GridLayout(4,2));
+        window.getContentPane().setLayout(new GridLayout(5,2));
        // JLabel I = new JLabel();
         window.add(new JLabel("Name"));
         window.add(new JTextField("Type your name there"));
@@ -19,6 +19,8 @@ public class Registration {
         //window.getContentPane().add(I);
         window.add(new JLabel("ID"));
         window.add(new JLabel(ID));
+        window.add(new JLabel("Insurance:"));
+        window.add(new JLabel("Sitoj vietoj option button"));
         window.add(new JButton("Submit"));
         window.add(new JButton("Cancel"));
         window.setAlwaysOnTop (true);
