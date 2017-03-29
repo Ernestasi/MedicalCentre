@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
     private MainFrameForDoctors DmFrame;
     private MainFrameForPatients PmFrame;
     private Login log;
+    private TimeFrame tFrame;
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
     Calendar cal = Calendar.getInstance();
 
@@ -72,7 +74,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
     }
 
     private void render(){
-        DmFrame.render(this);                                    //main frame for doctors ar patients?
+      // DmFrame.render(this);                                    //main frame for doctors ar patients?
                                                                 // jei doctors tai mFrame pakeisti i DmFrame, jei patients tai i PmFrame
     }
 
@@ -97,7 +99,10 @@ public class MedicalCenter  extends Canvas implements Runnable{
         reg = new Registration();
         DmFrame = new MainFrameForDoctors();
         PmFrame = new MainFrameForPatients();
+        log = new Login();
+        tFrame = new TimeFrame();
 
+        tFrame.OpenTime(this);
         rd.readDoctors(doctors);
         rd.readPatients(patients);
         rd.readDisease(diseases);
@@ -105,7 +110,6 @@ public class MedicalCenter  extends Canvas implements Runnable{
         reg.render("123456");
 
 
-        log = new Login();
         int loginStatus = 5;// = log.render();
 
 
