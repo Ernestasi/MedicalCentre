@@ -13,8 +13,7 @@ public class ReadData{
            BufferedReader br = new BufferedReader(new FileReader("./src/Data/Doctors.txt"));
                 String line;
                 int i = 0;
-                while((line = br.readLine()) != null && i<3) {
-                    line = br.readLine();
+                while((line = br.readLine()) != null && i<14) {
                     String[] word = line.split(" ");
                     i++;
                   doc.add(new Doctor(word[0], word[1], Integer.parseInt(word[2]), word[3]));
