@@ -58,7 +58,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
             //System.out.println(System.currentTimeMillis()- timer + " " );
             if(System.currentTimeMillis()- timer > 1000){
                 timer += 1000;
-
+                System.out.println(dateFormat.format(cal.getTime()));
                 cal.add(Calendar.MINUTE, 1);
                 //System.out.println(updates + " Ticks, Fps " + frames);
                 updates = 0;
@@ -70,7 +70,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
     }
 
     private void tick(){
-
+        tFrame.tick();
     }
 
     private void render(){
@@ -100,9 +100,9 @@ public class MedicalCenter  extends Canvas implements Runnable{
         DmFrame = new MainFrameForDoctors();
         PmFrame = new MainFrameForPatients();
         log = new Login();
-        tFrame = new TimeFrame();
+        tFrame = new TimeFrame(this);
 
-        tFrame.OpenTime(this);
+        tFrame.OpenTime();
         rd.readDoctors(doctors);
         rd.readPatients(patients);
         rd.readDisease(diseases);
