@@ -10,8 +10,7 @@ public class MainFrameForPatients {
     JTextField PdateF;
 
 
-    public void createWindow( MedicalCenter  medCent){
-        this.PmedCent = medCent;
+    public void createWindow(){
 
         Pframe = new JFrame("Medical Centre Application for Patients  ");
         Pframe.setLocationRelativeTo((Component)null);

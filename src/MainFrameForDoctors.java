@@ -11,8 +11,7 @@ public class MainFrameForDoctors {
     JTextField DdateF;
 
 
-    public void createWindow( MedicalCenter  medCent){
-        this.DmedCent = medCent;
+    public void createWindow(){
 
         Dframe = new JFrame("Medical Centre Application for Doctors  ");
         Dframe.setLocationRelativeTo((Component)null);

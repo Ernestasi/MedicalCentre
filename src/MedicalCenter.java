@@ -107,22 +107,6 @@ public class MedicalCenter  extends Canvas implements Runnable{
         log = new Login();
         int loginStatus = log.render();
 
-        if(loginStatus == 1) {                              //kai 1(doctors)  atidarom DmFrame
-            DmFrame.createWindow(this);
-
-        }
-
-        else if (loginStatus == 2){                         //kai 2(known patient) atidarom PmFrame
-            PmFrame.createWindow(this);
-        }
-
-        else if (loginStatus == 3){                         //kai 3(unknown patient) atidarom register o po jo atgal i Login
-            reg.render("123456");
-        }
-
-        else if (loginStatus == 0){                         //kai 0 EXIT
-            System.exit(0);
-        }
 
 
 

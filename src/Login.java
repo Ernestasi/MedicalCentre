@@ -43,7 +43,8 @@ class Login {
         doctors.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int loginStatus = 1;
+                MainFrameForDoctors forDoc = new MainFrameForDoctors();
+                forDoc.createWindow();
                 window.dispose();
             }
 
@@ -51,11 +52,11 @@ class Login {
         window.add(doctors);
 
         JButton patients = new JButton("I am patient"); //Doctors button
-        //patients.setSize(150,75);
         patients.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                int loginStatus = 2;
+            public void mousePressed(MouseEvent e) {
+                MainFrameForPatients forPatien = new MainFrameForPatients();
+                forPatien.createWindow();
                 window.dispose();
             }
 
