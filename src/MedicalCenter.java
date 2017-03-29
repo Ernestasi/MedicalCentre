@@ -9,6 +9,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
     ArrayList<Doctor> doctors =new ArrayList<>();
     ArrayList<Patient> patients = new ArrayList<>();
+    ArrayList<Disease> diseases = new ArrayList<>();
 
     private Registration reg;
     private ReadData rd;
@@ -115,6 +116,10 @@ public class MedicalCenter  extends Canvas implements Runnable{
        // for(Patient p: patients){
            // System.out.println(p);
        // }
+        rd.readDisease(diseases);
+        for(Disease d: diseases){
+            System.out.println(d);
+        }
         medCent.start();
     }
 
