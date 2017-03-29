@@ -1,25 +1,24 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Graphics;
 
 public class MainFrame {
 
 
+    Graphics g ;
+    MedicalCenter medCent;
+    JFrame frame;
     private static final long serialVersionUID = 1L;
-    private static final int WIDTH = 640;
-    private static final int HEIGHT = 480;
-    private static final int SCALE = 1;
-    private final String TITLE = "Medical Centre Application";
+    private final String TITLE = "Medical Centre Application" ;
+
 
     public void createWindow( MedicalCenter  medCent){
-        // MedicalCenter  medCent = new  MedicalCenter();
+        this.medCent = medCent;
 
-        medCent.setPreferredSize(new Dimension(WIDTH *SCALE, HEIGHT * SCALE));
-        medCent.setMaximumSize(new Dimension(WIDTH *SCALE, HEIGHT * SCALE));
-        medCent.setMinimumSize(new Dimension(WIDTH *SCALE, HEIGHT * SCALE));
-
-        JFrame frame = new JFrame();
-        frame.add( medCent);
-        frame.pack();
+        frame = new JFrame("Medical Centre Application   " + medCent.dateFormat.format(medCent.cal.getTime()));
+        frame.setLocationRelativeTo((Component)null);
+        frame.setSize(640, 480);
+        frame.getContentPane().setLayout(new GridLayout(6, 5));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
@@ -28,16 +27,17 @@ public class MainFrame {
 
     }
 
-
-    public static int getWIDTH() {
-        return WIDTH;
+    public void render(MedicalCenter  medCent){
+        frame.setTitle("Medical Centre Application   " + medCent.dateFormat.format(medCent.cal.getTime()));
+        JTextField myOutput = new JTextField(16);
+        myOutput.setText("some text");
+        //JTextField myOutput = new JTextField("someInitialValue", 20);s
+       /* Font fnt0 = new Font("arial", Font.PLAIN, 20);
+        g.setFont(fnt0);
+        g.setColor(Color.black);
+        g.drawString("Date: " + medCent.dateFormat.format(medCent.cal.getTime()), 50, 50);*/
+      //  System.out.println("Current Date Time : " + medCent.dateFormat.format(medCent.cal.getTime()));
     }
 
-    public static int getHEIGHT() {
-        return HEIGHT;
-    }
 
-    public static int getSCALE() {
-        return SCALE;
-    }
 }
