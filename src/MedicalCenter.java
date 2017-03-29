@@ -7,6 +7,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
     ArrayList<Doctor> doctors =new ArrayList<>();
 
     private Registration reg;
+    private ReadData rd;
 
     private static final long serialVersionUID = 1L;
     private static final int WIDTH = 640;
@@ -99,20 +100,21 @@ public class MedicalCenter  extends Canvas implements Runnable{
     }
 
     public void init( MedicalCenter  medCent){
+
         reg = new Registration();
+        rd = new ReadData();
+
         reg.render( "15555" );
-        ReadData rd = new ReadData();
         rd.readDoctors(doctors);
         for(Doctor d : doctors ){
             System.out.println(d);
-        //System.out.println(doctors.get(0));
         }
         rd.readPatients();
         createWindow( medCent);
     }
 
 
-    public static void  medCent(String[] args) {
+    public static void  main(String[] args) {
          MedicalCenter medCent = new  MedicalCenter();
         System.out.println("Application started!!");
         medCent.init(medCent);
