@@ -6,7 +6,6 @@ public class MainFrameForDoctors {
 
 
     Graphics g ;
-    MedicalCenter DmedCent;
     JFrame Dframe;
     JTextField DdateF;
 
