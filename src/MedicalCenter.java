@@ -93,40 +93,18 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
 
 
-    public void init( MedicalCenter  medCent){
+    public void init( MedicalCenter  medCent) {
 
         rd = new ReadData();
-        reg = new Registration();
-        DmFrame = new MainFrameForDoctors();
-        PmFrame = new MainFrameForPatients();
         log = new Login();
         tFrame = new TimeFrame();
 
-        tFrame.OpenTime(this);
+        //tFrame.OpenTime(this);
         rd.readDoctors(doctors);
         rd.readPatients(patients);
         rd.readDisease(diseases);
 
-        reg.render("123456");
-
-
-        int loginStatus = 5;// = log.render();
-
-
-
-
-
-        //for(Doctor d : doctors ){
-         //   System.out.println(d);
-        //}
-
-       // for(Patient p: patients){
-           // System.out.println(p);
-       // }
-        for(Disease d: diseases){
-            System.out.println(d);
-        }
-        medCent.start();
+        log.render();
     }
 
 
