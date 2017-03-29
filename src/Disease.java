@@ -16,6 +16,18 @@ public class Disease {
         this.personal = personal;
     }
 
+    @Override
+    public String toString() {
+        return "Disease{" +
+                "name='" + name + '\'' +
+                ", time='" + time + '\'' +
+                ", price=" + price +
+                ", meetings=" + meetings +
+                ", national=" + national +
+                ", personal=" + personal +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

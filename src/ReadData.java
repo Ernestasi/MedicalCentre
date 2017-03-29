@@ -28,12 +28,26 @@ public class ReadData{
         try {
             BufferedReader br = new BufferedReader(new FileReader("./src/Data/Patients.txt"));
                 String line;
-                int i = 0;
                 while( (line = br.readLine()) != null){
                     String[] word = line.split(",");
                     pat.add(new Patient(word[0], word[1], word[2], Integer.parseInt(word[3])));
                 }
         }  catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readDisease(List dis){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("./src/Data/Disease.txt"));
+                String line;
+                while((line = br.readLine()) != null) {
+                    String[] word = line.split(" ");
+                    dis.add(new Disease(word[0], word[1], Double.parseDouble(word[2]), Integer.parseInt(word[3]), Integer.parseInt(word[4]), Integer.parseInt(word[5])));
+                }
+
+
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }
