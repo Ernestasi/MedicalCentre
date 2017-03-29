@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ public class MedicalCenter  extends Canvas implements Runnable{
     private MainFrameForDoctors DmFrame;
     private MainFrameForPatients PmFrame;
     private Login log;
-    private TimeFrame tFrame;
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
     Calendar cal = Calendar.getInstance();
 
@@ -74,7 +72,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
     }
 
     private void render(){
-      // DmFrame.render(this);                                    //main frame for doctors ar patients?
+        //DmFrame.render(this);                                    //main frame for doctors ar patients?
                                                                 // jei doctors tai mFrame pakeisti i DmFrame, jei patients tai i PmFrame
     }
 
@@ -96,37 +94,18 @@ public class MedicalCenter  extends Canvas implements Runnable{
     public void init( MedicalCenter  medCent){
 
         rd = new ReadData();
-        reg = new Registration();
-        DmFrame = new MainFrameForDoctors();
-        PmFrame = new MainFrameForPatients();
-        log = new Login();
-        tFrame = new TimeFrame();
 
-        tFrame.OpenTime(this);
         rd.readDoctors(doctors);
         rd.readPatients(patients);
         rd.readDisease(diseases);
 
-        reg.render("123456");
+        log = new Login();
+        log.render();
 
-
-        int loginStatus = 5;// = log.render();
-
-
-
-
-
-        //for(Doctor d : doctors ){
-         //   System.out.println(d);
-        //}
-
-       // for(Patient p: patients){
-           // System.out.println(p);
-       // }
         for(Disease d: diseases){
             System.out.println(d);
         }
-        medCent.start();
+        //medCent.start();
     }
 
 
