@@ -23,7 +23,7 @@ class Login {
         window.setSize(500, 300);
         window.setResizable(false);
         window.setDefaultCloseOperation(1);
-        window.getContentPane().setLayout(new GridLayout(3, 2));
+        window.getContentPane().setLayout(new GridLayout(3, 1));
 
 
         /*
@@ -64,29 +64,29 @@ class Login {
         });
         window.add(patients);
 
-        window.add(new JLabel(""));
-        final JTextField ID = new JTextField(" Type in your ID there...");
-        ID.setHorizontalAlignment(JTextField.CENTER);
-        ID.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                ID.setText("");
-                //ID.setBackground(Color);
-            }
+//        window.add(new JLabel(""));
+//        final JTextField ID = new JTextField(" Type in your ID there...");
+//        ID.setHorizontalAlignment(JTextField.CENTER);
+//        ID.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mousePressed(MouseEvent e) {
+//                ID.setText("");
+//                //ID.setBackground(Color);
+//            }
 
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                    if(ID.equals("")){
-                         ID.setText("Type in your ID there");
+//            @Override
+//            public void mouseReleased(MouseEvent e) {
+//                    if(ID.equals("")){
+//                         ID.setText("Type in your ID there");
+//
+//                    }
+//
+//
+ //           }
+ //       });
+ //       window.add (ID);
 
-                    }
-
-
-            }
-        });
-        window.add (ID);
-
-        window.add(new JLabel(""));
+ //       window.add(new JLabel(""));
 
 
         JButton loginExit = new JButton("Exit");
