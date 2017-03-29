@@ -72,7 +72,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
     }
 
     private void render(){
-        DmFrame.render(this);                                    //main frame for doctors ar patients?
+        //DmFrame.render(this);                                    //main frame for doctors ar patients?
                                                                 // jei doctors tai mFrame pakeisti i DmFrame, jei patients tai i PmFrame
     }
 
