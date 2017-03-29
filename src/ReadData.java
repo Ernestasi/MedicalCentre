@@ -13,13 +13,14 @@ public class ReadData{
            BufferedReader br = new BufferedReader(new FileReader("./src/Data/Doctors.txt"));
                 String line;
                 int i = 0;
-                while (i<10){//((line = br.readLine()) != null) {
+                while((line = br.readLine()) != null) {
                     line = br.readLine();
                   String[] word = line.split(" ");
                   i++;
                   doc.add(new Doctor(word[0], word[1], Integer.parseInt(word[2]), word[3]));
                   //System.out.println(word[0] +  word[1] + Integer.parseInt(word[2]) + word[3]);
                 }
+                br.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -27,6 +28,13 @@ public class ReadData{
     }
 
     public void readPatients(){
-
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("./src/Data/Patients.txt"));
+                String line;
+                int i = 0;
+                while(i < 10);
+        }  catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 }
