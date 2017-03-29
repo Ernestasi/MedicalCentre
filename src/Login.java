@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 class Login {
@@ -36,13 +35,13 @@ class Login {
         label1.setVerticalAlignment(JLabel.CENTER);
         window.add(label1);*/
 
-        final int[] loginStatus = new int[1];
+
         JButton doctors = new JButton("I am doctor"); //Doctors button
-        doctors.setSize(150,75);
+        //doctors.setSize(150,75);
         doctors.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                loginStatus[0] = 1;
+                int loginStatus = 1;
                 window.dispose();
             }
 
@@ -50,6 +49,17 @@ class Login {
         window.add(doctors);
 
         JButton patients = new JButton("I am patient"); //Doctors button
+        //patients.setSize(150,75);
+        patients.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int loginStatus = 2;
+                window.dispose();
+            }
+
+
+
+        });
         window.add(patients);
 
         window.add(new JLabel(""));
@@ -57,15 +67,16 @@ class Login {
         ID.setHorizontalAlignment(JTextField.CENTER);
         ID.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 ID.setText("");
                 //ID.setBackground(Color);
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseReleased(MouseEvent e) {
                     if(ID.equals("")){
                          ID.setText("Type in your ID there");
+
                     }
 
 
@@ -82,6 +93,7 @@ class Login {
         window.setAlwaysOnTop(true);
         window.pack();
         window.setVisible(true);
-        return loginStatus[0];
-    }
+        int loginStatus;
+        return loginStatus = 1;                                              // 0 uzdaro programa / 1 mainFrameForDoctors /2 mainFrameForPatients
+    }                                                                       // /3 Registration o tada grazinam atgal i Login
 }

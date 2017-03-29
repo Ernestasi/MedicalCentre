@@ -13,7 +13,8 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
     private Registration reg;
     private ReadData rd;
-    private MainFrame mFrame;
+    private MainFrameForDoctors DmFrame;
+    private MainFrameForPatients PmFrame;
     private Login log;
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
     Calendar cal = Calendar.getInstance();
@@ -71,7 +72,8 @@ public class MedicalCenter  extends Canvas implements Runnable{
     }
 
     private void render(){
-        mFrame.render(this);
+        DmFrame.render(this);                                    //main frame for doctors ar patients?
+                                                                // jei doctors tai mFrame pakeisti i DmFrame, jei patients tai i PmFrame
     }
 
     private  synchronized  void stop(){
@@ -93,7 +95,8 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
         rd = new ReadData();
         reg = new Registration();
-        mFrame = new MainFrame();
+        DmFrame = new MainFrameForDoctors();
+        PmFrame = new MainFrameForPatients();
 
         rd.readDoctors(doctors);
         rd.readPatients(patients);
@@ -101,13 +104,25 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
 
 
-      //  log = new Login();
-       // int a =
-      //  log.render();
-        //if(a == 1 || a == 2) {
-            mFrame.createWindow(this);
-       // }
-       // reg.render( "39702150000" );
+        log = new Login();
+        int loginStatus = log.render();
+
+        if(loginStatus == 1) {                              //kai 1(doctors)  atidarom DmFrame
+            DmFrame.createWindow(this);
+
+        }
+
+        else if (loginStatus == 2){                         //kai 2(known patient) atidarom PmFrame
+            PmFrame.createWindow(this);
+        }
+
+        else if (loginStatus == 3){                         //kai 3(unknown patient) atidarom register o po jo atgal i Login
+            reg.render("123456");
+        }
+
+        else if (loginStatus == 0){                         //kai 0 EXIT
+            System.exit(0);
+        }
 
 
 
