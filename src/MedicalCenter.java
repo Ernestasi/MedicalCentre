@@ -1,11 +1,8 @@
-import oracle.jrockit.jfr.JFR;
-
 import javax.swing.*;
 import java.awt.*;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class Main  extends Canvas implements Runnable{
+public class MedicalCenter  extends Canvas implements Runnable{
 
     ArrayList<Doctor> doctors =new ArrayList<>();
 
@@ -82,15 +79,15 @@ public class Main  extends Canvas implements Runnable{
         System.exit(1);
     }
 
-    public void createWindow(Main main){
-        //Main main = new Main();
+    public void createWindow( MedicalCenter  medCent){
+        // MedicalCenter  medCent = new  MedicalCenter();
 
-        main.setPreferredSize(new Dimension(WIDTH *SCALE, HEIGHT * SCALE));
-        main.setMaximumSize(new Dimension(WIDTH *SCALE, HEIGHT * SCALE));
-        main.setMinimumSize(new Dimension(WIDTH *SCALE, HEIGHT * SCALE));
+         medCent.setPreferredSize(new Dimension(WIDTH *SCALE, HEIGHT * SCALE));
+         medCent.setMaximumSize(new Dimension(WIDTH *SCALE, HEIGHT * SCALE));
+         medCent.setMinimumSize(new Dimension(WIDTH *SCALE, HEIGHT * SCALE));
 
         JFrame frame = new JFrame();
-        frame.add(main);
+        frame.add( medCent);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -98,10 +95,10 @@ public class Main  extends Canvas implements Runnable{
         frame.setVisible(true);
         requestFocus();
 
-        main.start();
+         medCent.start();
     }
 
-    public void init(Main main){
+    public void init( MedicalCenter  medCent){
         reg = new Registration();
         reg.render( "15555" );
         ReadData rd = new ReadData();
@@ -111,13 +108,13 @@ public class Main  extends Canvas implements Runnable{
         //System.out.println(doctors.get(0));
         }
         rd.readPatients();
-        createWindow(main);
+        createWindow( medCent);
     }
 
 
-    public static void main(String[] args) {
-        Main medCent = new Main();
-        System.out.println("Hello World!");
+    public static void  medCent(String[] args) {
+         MedicalCenter medCent = new  MedicalCenter();
+        System.out.println("Application started!!");
         medCent.init(medCent);
 
     }
