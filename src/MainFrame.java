@@ -26,15 +26,7 @@ public class MainFrame {
     }
 
     public void render(MedicalCenter  medCent){
-        //frame.setTitle("Medical Centre Application   " + medCent.dateFormat.format(medCent.cal.getTime()));
-        JTextField myOutput = new JTextField(16);
-        myOutput.setText("some text");
-        //JTextField myOutput = new JTextField("someInitialValue", 20);s
-       /* Font fnt0 = new Font("arial", Font.PLAIN, 20);
-        g.setFont(fnt0);
-        g.setColor(Color.black);
-        g.drawString("Date: " + medCent.dateFormat.format(medCent.cal.getTime()), 50, 50);*/
-      //  System.out.println("Current Date Time : " + medCent.dateFormat.format(medCent.cal.getTime()));
+        frame.add(new JLabel("Hi"));
     }
 
 

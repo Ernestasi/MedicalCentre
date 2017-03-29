@@ -91,9 +91,10 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
     public void init( MedicalCenter  medCent){
 
-
-
         rd = new ReadData();
+        reg = new Registration();
+        mFrame = new MainFrame();
+
         rd.readDoctors(doctors);
         rd.readPatients(patients);
         rd.readDisease(diseases);
@@ -103,10 +104,8 @@ public class MedicalCenter  extends Canvas implements Runnable{
         log = new Login();
         int a = log.render();
         if(a == 1 || a == 2) {
-            mFrame = new MainFrame();
             mFrame.createWindow(this);
         }
-        reg = new Registration();
         reg.render( "39702150000" );
 
 
