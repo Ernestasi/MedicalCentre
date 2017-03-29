@@ -113,9 +113,9 @@ public class Main  extends Canvas implements Runnable{
 
 
     public static void main(String[] args) {
-        Main main = new Main();
+        Main medCent = new Main();
         System.out.println("Hello World!");
-        main.init(main);
+        medCent.init(medCent);
 
     }
 
