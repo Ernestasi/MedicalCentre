@@ -3,17 +3,19 @@ import oracle.jrockit.jfr.JFR;
 import javax.swing.*;
 import java.awt.*;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class Main  extends Canvas implements Runnable{
 
-    private Doctor[] doctors;
+    ArrayList<Doctor> doctors =new ArrayList<>();
+
     private Registration reg;
 
     private static final long serialVersionUID = 1L;
-    public static final int WIDTH = 640;
-    public static final int HEIGHT = 480;
-    public static final int SCALE = 1;
-    public final String TITLE = "Medical Centre Application";
+    private static final int WIDTH = 640;
+    private static final int HEIGHT = 480;
+    private static final int SCALE = 1;
+    private final String TITLE = "Medical Centre Application";
 
     private Thread thread;
     private boolean running = false;
@@ -103,10 +105,10 @@ public class Main  extends Canvas implements Runnable{
         reg = new Registration();
         reg.render( "15555" );
         ReadData rd = new ReadData();
-        //rd.readDoctors(doctors);
-//        for(Doctor d : doctors ){
+        rd.readDoctors(doctors);
+        for(Doctor d : doctors ){
            System.out.println(doctors);
-  //      }
+        }
         rd.readPatients();
         createWindow(main);
     }
@@ -119,4 +121,15 @@ public class Main  extends Canvas implements Runnable{
 
     }
 
+    public static int getWIDTH() {
+        return WIDTH;
+    }
+
+    public static int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    public static int getSCALE() {
+        return SCALE;
+    }
 }
