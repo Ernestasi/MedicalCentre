@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TimeFrame {
 
@@ -18,14 +20,55 @@ public class TimeFrame {
         window.setResizable(false);
         window.getContentPane().setLayout(new GridLayout(3, 3));
         window.setVisible(true);
+        window.setAlwaysOnTop(true);
         //window.pack();
         time = new JLabel(mc.dateFormat.format(mc.cal.getTime()));
+        JButton pDay = new JButton("plus day");
+        JButton pWeek = new JButton("plus week");
+        JButton pMonth = new JButton("plus month");
+        JButton pYear = new JButton("plus year");
         window.add(new JLabel("  Current Time:"));
         window.add(time);
-        window.add(new JButton("plus day"));
-        window.add(new JButton("plus week"));
-        window.add(new JButton("plus month"));
-        window.add(new JButton("plus year"));
+
+        pDay.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("pDay Pressed");
+                mc.setTimeplus(1);
+            }
+
+        });
+        window.add(pDay);
+
+        pWeek.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("pWeek Pressed");
+                mc.setTimeplus(2);
+            }
+
+        });
+        window.add(pWeek);
+
+        pMonth.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("pMonth Pressed");
+                mc.setTimeplus(3);
+            }
+
+        });
+        window.add(pMonth);
+
+        pYear.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("pYear Pressed");
+                mc.setTimeplus(4);
+            }
+
+        });
+        window.add(pYear);
 
     }
 

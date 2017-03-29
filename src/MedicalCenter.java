@@ -18,6 +18,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
     private MainFrameForPatients PmFrame;
     private Login log;
     private TimeFrame tFrame;
+    private int  timeplus = 0;
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
     Calendar cal = Calendar.getInstance();
 
@@ -55,11 +56,25 @@ public class MedicalCenter  extends Canvas implements Runnable{
             }
             render();
             frames++;
+            if(timeplus == 1){
+                cal.add(Calendar.HOUR, 24);
+                timeplus = 0;
+            }else if(timeplus == 2){
+                cal.add(Calendar.HOUR, 24*7);
+                timeplus = 0;
+            }else if(timeplus == 3){
+                cal.add(Calendar.MONTH, 1);
+                timeplus = 0;
+            }else if(timeplus == 4){
+                cal.add(Calendar.YEAR, 1);
+                timeplus = 0;
+            }
             //System.out.println(System.currentTimeMillis()- timer + " " );
             if(System.currentTimeMillis()- timer > 1000){
                 timer += 1000;
-                System.out.println(dateFormat.format(cal.getTime()));
+                //System.out.println(dateFormat.format(cal.getTime()));
                 cal.add(Calendar.MINUTE, 1);
+
                 //System.out.println(updates + " Ticks, Fps " + frames);
                 updates = 0;
                 frames = 0;
@@ -136,5 +151,9 @@ public class MedicalCenter  extends Canvas implements Runnable{
         System.out.println("Application started!!");
         medCent.init(medCent);
 
+    }
+
+    public void setTimeplus(int timeplus) {
+        this.timeplus = timeplus;
     }
 }
