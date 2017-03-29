@@ -24,7 +24,7 @@ class Login {
         window.setResizable(false);
         window.setDefaultCloseOperation(1);
         window.getContentPane().setLayout(new GridLayout(3, 1));
-
+        window.pack();
 
         /*
         JLabel label = new JLabel("I am doctor"); //Label : For doctors

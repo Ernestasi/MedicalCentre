@@ -102,10 +102,11 @@ public class MedicalCenter  extends Canvas implements Runnable{
         rd.readPatients(patients);
         rd.readDisease(diseases);
 
+        reg.render("123456");
 
 
         log = new Login();
-        int loginStatus = log.render();
+        int loginStatus = 5;// = log.render();
 
         if(loginStatus == 1) {                              //kai 1(doctors)  atidarom DmFrame
             DmFrame.createWindow(this);

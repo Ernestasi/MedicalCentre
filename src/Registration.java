@@ -5,11 +5,7 @@
 
 import java.awt.Component;
 import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 class Registration {
 
@@ -26,10 +22,16 @@ class Registration {
         window.add(new JLabel("  ID"));
         window.add(new JLabel(ID));
         window.add(new JLabel(" Insurance:"));
+
         JRadioButton rb1 = new JRadioButton("National", false);
         JRadioButton rb2 = new JRadioButton("Personal", false);
         JRadioButton rb3 = new JRadioButton("Both", false);
         JRadioButton rb0 = new JRadioButton("None", true);
+        ButtonGroup group = new ButtonGroup();
+        group.add(rb0);
+        group.add(rb1);
+        group.add(rb2);
+        group.add(rb3);
         window.add(rb1);
         window.add(new JLabel(""));
         window.add(new JLabel(""));
@@ -51,4 +53,28 @@ class Registration {
         window.pack();
         window.setVisible(true);
     }
+
+    /*public void tick(){
+        if( rb0.isSelected()){
+            rb1.setSelected(false);
+            rb2.setSelected(false);
+            rb3.setSelected(false);
+        }
+        if( rb1.isSelected()){
+            rb0.setSelected(false);
+            rb2.setSelected(false);
+            rb3.setSelected(false);
+        }
+        if( rb3.isSelected()){
+            rb1.setSelected(false);
+            rb2.setSelected(false);
+            rb0.setSelected(false);
+        }
+        if( rb2.isSelected()){
+            rb1.setSelected(false);
+            rb0.setSelected(false);
+            rb3.setSelected(false);
+        }
+    }*/
+
 }
