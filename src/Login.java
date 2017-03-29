@@ -50,7 +50,7 @@ class Login {
             public void mouseEntered(MouseEvent e) {
 
                 ID.setText("");
-               // ID.setBackground(Color.lightGray);
+               // ID.setBackground(Color.Gray);
             }
 
             @Override
