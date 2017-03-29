@@ -42,7 +42,7 @@ class Login {
         doctors.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                loginStatus[0] =1;
+                loginStatus[0] = 1;
                 window.dispose();
             }
 

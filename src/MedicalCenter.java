@@ -101,12 +101,13 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
 
 
-        log = new Login();
-        int a = log.render();
-        if(a == 1 || a == 2) {
+      //  log = new Login();
+       // int a =
+      //  log.render();
+        //if(a == 1 || a == 2) {
             mFrame.createWindow(this);
-        }
-        reg.render( "39702150000" );
+       // }
+       // reg.render( "39702150000" );
 
 
 
