@@ -13,6 +13,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
     private Registration reg;
     private ReadData rd;
     private MainFrame mFrame;
+    private Login log;
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
     Calendar cal = Calendar.getInstance();
 
@@ -89,18 +90,28 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
     public void init( MedicalCenter  medCent){
 
-        reg = new Registration();
-        rd = new ReadData();
-        mFrame = new MainFrame();
 
-        mFrame.createWindow(this);
-        reg.render( "15555" );
+
+        rd = new ReadData();
         rd.readDoctors(doctors);
+        rd.readPatients(patients);
+
+        log = new Login();
+        log.render();
+
+        mFrame = new MainFrame();
+        mFrame.createWindow(this);
+
+        reg = new Registration();
+        reg.render( "39702150000" );
+
+
+
 
         //for(Doctor d : doctors ){
          //   System.out.println(d);
         //}
-        rd.readPatients(patients);
+
        // for(Patient p: patients){
            // System.out.println(p);
        // }
