@@ -13,7 +13,7 @@ public class ReadData{
            BufferedReader br = new BufferedReader(new FileReader("./src/Data/Doctors.txt"));
                 String line;
                 int i = 0;
-                while((line = br.readLine()) != null && i<10) {
+                while((line = br.readLine()) != null && i<3) {
                     line = br.readLine();
                     String[] word = line.split(" ");
                     i++;

@@ -106,6 +106,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
         reg.render( "15555" );
         rd.readDoctors(doctors);
+
         for(Doctor d : doctors ){
             System.out.println(d);
         }
