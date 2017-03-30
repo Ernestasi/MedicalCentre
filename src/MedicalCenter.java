@@ -70,7 +70,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
     }
 
     private void tick(){
-
+        tFrame.tick();
     }
 
     private void render(){
@@ -97,9 +97,10 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
         rd = new ReadData();
         log = new Login();
-        tFrame = new TimeFrame();
+        tFrame = new TimeFrame(this);
 
-        //tFrame.OpenTime(this);
+        medCent.start();
+        tFrame.OpenTime();
         rd.readDoctors(doctors);
         rd.readPatients(patients);
         rd.readDisease(diseases);

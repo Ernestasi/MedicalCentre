@@ -22,7 +22,7 @@ class Login {
         window.setPreferredSize(new Dimension(500   , 300 ));
         window.setSize(500, 300);
         window.setResizable(false);
-        window.setDefaultCloseOperation(1);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setLayout(new GridLayout(3, 1));
         window.pack();
 
