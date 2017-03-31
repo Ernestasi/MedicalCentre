@@ -1,13 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
- import java.awt.event.MouseAdapter;
- import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Calendar;
 
 public class TimeFrame {
 
-    MedicalCenter mc;
 
+    MedicalCenter mc;
     JLabel time;
 
     public TimeFrame(MedicalCenter mc){
@@ -16,6 +16,7 @@ public class TimeFrame {
 
     public void OpenTime() {
         JFrame window = new JFrame("Time Simulation");
+
         window.setResizable(false);
         window.setDefaultCloseOperation(0);
         window.setSize(380, 180);

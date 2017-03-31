@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,8 +13,8 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
     private Registration reg;
     private ReadData rd;
-    private MainFrameForDoctors DmFrame;
-    private MainFrameForPatients PmFrame;
+//    private MainFrameForDoctors DmFrame;
+//    private MainFrameForPatients PmFrame;
     private Login log;
     private TimeFrame tFrame;
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
