@@ -70,4 +70,12 @@ public class Doctor{
         this.time = time;
         toDay(time);
     }
+
+    public String getTimeDay(int i) {
+        return timeDay[i];
+    }
+
+    public void setTimeDay(String[] timeDay) {
+        this.timeDay = timeDay;
+    }
 }
