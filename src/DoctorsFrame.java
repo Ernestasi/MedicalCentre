@@ -29,11 +29,27 @@ public class DoctorsFrame{
 
 
         for(Doctor d : mc.doctors){
-            JButton button = new JButton( d.toString() );
-            button.setHorizontalAlignment(SwingConstants.LEFT);
-            button.setPreferredSize(new Dimension( 300, 30));
-            panelD.add(button);
+            JButton but = new JButton();
+            but.setHorizontalAlignment(SwingConstants.LEFT );
+            but.add(new JLabel(String.format("%1$"+ 15 + "s", d.getName())));
+            but.add(new JLabel( String.format("%1$"+ 50 + "s", d.getSurName())));
+            but.add(new JLabel( String.format("%1$"+ 90 + "s", d.getCab())));
+            but.add(new JLabel( String.format("%1$"+ 130 + "s", "Specelizatoin")));
+            but.setPreferredSize(new Dimension( 300, 30));
+            panelD.add(but);
         }
+
+        scrollPane =  new JScrollPane(panelD);
+        JLabel lab = new JLabel();
+        lab.setLayout(new BorderLayout());
+        lab.add(new JLabel(String.format("%1$"+ 19 + "s","Name")
+                +String.format("%1$"+ 29 + "s", "Surname")
+                +String.format("%1$"+ 30 + "s", "Cab")
+                +String.format("%1$"+ 36 + "s", "Specelizatoin")
+        ), BorderLayout.NORTH);
+        lab.add(scrollPane);
+        tabs.addTab("Doctors List", lab);
+
         for(Patient p : mc.patients){
             JButton but = new JButton();
             but.setHorizontalAlignment(SwingConstants.LEFT );
@@ -41,14 +57,21 @@ public class DoctorsFrame{
             but.add(new JLabel(String.format("%1$"+ 50 + "s", p.getName())));
             but.add(new JLabel(String.format("%1$"+ 90 + "s", p.getSurName())));
             but.add(new JLabel(String.format("%1$"+ 130 + "s", p.getInsType())));
-            //l.setText(String.format("%1$-"+ 15 + "s", p.getId()) + String.format("%-15s", p.getName()).replace(' ', '_') + String.format("%1$-"+ 15 + "s", p.getSurName()) );
             but.setPreferredSize(new Dimension( 300, 30));
             panelP.add(but);
         }
 
-        //frame.getContentPane().add(new JScrollPane(panelD));
-        tabs.addTab("Doctors", new JScrollPane(panelD));
-        tabs.addTab("Patients", new JScrollPane(panelP));
+        JScrollPane scrollPaneP =  new JScrollPane(panelP);
+        JLabel labP = new JLabel();
+        labP.setLayout(new BorderLayout());
+        labP.add(new JLabel(
+                String.format("%1$"+ 17 + "s","ID")
+                        +String.format("%1$"+ 36 + "s", "Name")
+                        +String.format("%1$"+ 33 + "s", "Surname")
+                        +String.format("%1$"+ 32 + "s", "Insurnace")
+                        ), BorderLayout.NORTH);
+        labP.add(scrollPaneP);
+        tabs.addTab("Patients", labP);
         tabs.setSelectedIndex(0);
         frame.add(tabs, BorderLayout.CENTER);
 
