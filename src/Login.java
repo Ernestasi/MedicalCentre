@@ -54,7 +54,7 @@ public class Login {
         patients.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                PatientsFrame forPatien = new PatientsFrame();
+                PatientsFrame forPatien = new PatientsFrame(mc);
                 forPatien.render();
                 window.dispose();
             }
