@@ -8,7 +8,7 @@ public class TimeFrame {
 
 
     MedicalCenter mc;
-    JLabel time;
+    JLabel time = new JLabel();
 
     public TimeFrame(MedicalCenter mc){
         this.mc = mc;
@@ -22,7 +22,7 @@ public class TimeFrame {
         window.setResizable(false);
         window.setDefaultCloseOperation(0);
         window.setSize(400, 110);
-       // window.getContentPane().setLayout(new GridLayout(2, 1));
+        // window.getContentPane().setLayout(new GridLayout(2, 1));
         window.setVisible(true);
         window.setAlwaysOnTop(true);
         //window.pack();
@@ -86,7 +86,8 @@ public class TimeFrame {
     }
 
     public void tick(){
-       time.setText((mc.dateFormat.format(mc.cal.getTime())));
+        time.setText("");
+        time.setText((mc.dateFormat.format(mc.cal.getTime())));
     }
 }
 //

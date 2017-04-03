@@ -13,7 +13,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
     private Registration reg;
     private ReadData rd;
-//    private MainFrameForDoctors DmFrame;
+    //    private MainFrameForDoctors DmFrame;
 //    private MainFrameForPatients PmFrame;
     private Login log;
     private TimeFrame tFrame;
@@ -73,8 +73,8 @@ public class MedicalCenter  extends Canvas implements Runnable{
     }
 
     private void render(){
-      // DmFrame.render(this);                                    //main frame for doctors ar patients?
-                                                                // jei doctors tai mFrame pakeisti i DmFrame, jei patients tai i PmFrame
+        // DmFrame.render(this);                                    //main frame for doctors ar patients?
+        // jei doctors tai mFrame pakeisti i DmFrame, jei patients tai i PmFrame
     }
 
     private  synchronized  void stop(){
