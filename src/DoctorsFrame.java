@@ -13,13 +13,13 @@ public class DoctorsFrame{
 
     public void render(){
         JFrame frame = new JFrame("Medical Centre Application for Doctors  ");
-        JPanel panel = new JPanel();
+        JPanel panelD = new JPanel();
+        JPanel panelP = new JPanel();
         JScrollPane scrollPane = new JScrollPane();
-        //panel.add(scrollPane);
-        //scrollPane.setLayout(new ScrollPaneLayout());
-        panel.setLayout(new GridLayout(mc.doctors.size(), 1));
+        JTabbedPane tabs = new JTabbedPane();
+        panelD.setLayout(new GridLayout(mc.doctors.size(), 1));
+        panelP.setLayout(new GridLayout(mc.patients.size(), 4));
 
-        frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo((Component)null);
         frame.setSize(500, 600);
@@ -27,15 +27,34 @@ public class DoctorsFrame{
         frame.requestFocus();
 
 
-        frame.getContentPane().setLayout(new GridLayout(1, 2));
-
 
         for(Doctor d : mc.doctors){
             JButton button = new JButton( d.toString() );
+            button.setHorizontalAlignment(SwingConstants.LEFT);
             button.setPreferredSize(new Dimension( 300, 30));
-            panel.add(button);
+            panelD.add(button);
         }
-        frame.getContentPane().add(new JScrollPane(panel));
-        //frame.getContentPane().add(panel);
+        for(Patient p : mc.patients){
+            JButton but = new JButton();
+            but.setHorizontalAlignment(SwingConstants.LEFT );
+            but.add(new JLabel(p.getId()));
+            but.add(new JLabel(String.format("%1$"+ 50 + "s", p.getName())));
+            but.add(new JLabel(String.format("%1$"+ 90 + "s", p.getSurName())));
+            but.add(new JLabel(String.format("%1$"+ 130 + "s", p.getInsType())));
+            //l.setText(String.format("%1$-"+ 15 + "s", p.getId()) + String.format("%-15s", p.getName()).replace(' ', '_') + String.format("%1$-"+ 15 + "s", p.getSurName()) );
+            but.setPreferredSize(new Dimension( 300, 30));
+            panelP.add(but);
+        }
+
+        //frame.getContentPane().add(new JScrollPane(panelD));
+        tabs.addTab("Doctors", new JScrollPane(panelD));
+        tabs.addTab("Patients", new JScrollPane(panelP));
+        tabs.setSelectedIndex(0);
+        frame.add(tabs, BorderLayout.CENTER);
+
+
+
+
+        frame.setVisible(true);
     }
 }

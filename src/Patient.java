@@ -1,9 +1,12 @@
+import com.sun.deploy.util.StringUtils;
+
 public class Patient {
 
     private String name;
     private String surName;
     private String id;
     private int insurance;
+    private String insType;
 
 
     public Patient(String name, String surName, String id, int insurance){
@@ -11,16 +14,25 @@ public class Patient {
         this.surName = surName;
         this.id = id;
         this.insurance = insurance;
+        insType = intToIns(insurance);
     }
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "name='" + name + '\'' +
-                ", surName='" + surName + '\'' +
-                ", id='" + id + '\'' +
-                ", insurance=" + insurance +
-                '}';
+        return String.format("%1$-"+ 15 + "s", id)
+                + "| " + String.format("%1$-"+ 15 + "s", name) + "| " + String.format("%1$-"+ 20 + "s", surName) + " " +  String.format("%1$-"+ 20 + "s", insType);
+    }
+
+    private String intToIns(int i){
+        if(i==0){
+            return "Type0";
+        }else if(i==1){
+            return "Type1";
+        }else if(i==2){
+            return "Type2";
+        }else{
+            return "Type3";
+        }
     }
 
     public String getName() {
@@ -55,5 +67,11 @@ public class Patient {
         this.insurance = insurance;
     }
 
+    public String getInsType() {
+        return insType;
+    }
 
+    public void setInsType(String insType) {
+        this.insType = insType;
+    }
 }

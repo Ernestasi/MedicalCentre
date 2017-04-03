@@ -113,5 +113,9 @@ public class MedicalCenter  extends Canvas implements Runnable{
         System.out.println("Application started!!");
         medCent.init(medCent);
 
+        /*for(Patient p : medCent.patients){
+            System.out.println(p.toString());
+        }*/
+
     }
 }
