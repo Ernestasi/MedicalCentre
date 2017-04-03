@@ -68,7 +68,7 @@ public class PatientsFrame extends JFrame{
                         if(ID != null) {
                             int check = 0;
                             for(Patient p: mc.patients){
-                                if(ID == p.getId()){
+                                if(ID.equals(p.getId())){
                                     test.setText("SUTAPO IR NEZINAU KA DARYT");
                                     check++;
                                 }
