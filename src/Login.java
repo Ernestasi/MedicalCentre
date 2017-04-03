@@ -17,7 +17,7 @@ public class Login {
    public int render() {
 
         JFrame window = new JFrame("Login");
-        window.setLocationRelativeTo((Component)null);
+        window.setLocationRelativeTo(null);
         window.setPreferredSize(new Dimension(500   , 300 ));
         window.setSize(500, 300);
         window.setResizable(false);
@@ -79,3 +79,4 @@ public class Login {
         return loginStatus = 1;                                              // 0 uzdaro programa / 1 mainFrameForDoctors /2 mainFrameForPatients
     }                                                                       // /3 Registration o tada grazinam atgal i Login
 }
+//

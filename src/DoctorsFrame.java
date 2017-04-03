@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
-
+//
 public class DoctorsFrame{
 
     MedicalCenter mc;
@@ -21,7 +21,7 @@ public class DoctorsFrame{
         panelP.setLayout(new GridLayout(mc.patients.size(), 4));
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo((Component)null);
+        frame.setLocationRelativeTo(null);
         frame.setSize(500, 600);
         frame.setResizable(false);
         frame.requestFocus();

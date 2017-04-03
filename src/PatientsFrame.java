@@ -9,7 +9,7 @@ public class PatientsFrame {
     public void render(){
 
         JFrame frame = new JFrame("Medical Centre Application for Doctors  ");
-        frame.setLocationRelativeTo((Component)null);
+        frame.setLocationRelativeTo(null);
         frame.setPreferredSize(new Dimension(500   , 200 ));
         frame.setSize(500, 200);
         frame.getContentPane().setLayout(new GridLayout(1, 2));
@@ -35,3 +35,4 @@ public class PatientsFrame {
 
 
 }
+//

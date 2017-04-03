@@ -1,5 +1,4 @@
-import com.sun.deploy.util.StringUtils;
-
+//
 public class Patient {
 
     private String name;

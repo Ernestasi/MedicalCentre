@@ -118,4 +118,5 @@ public class MedicalCenter  extends Canvas implements Runnable{
         }*/
 
     }
+    //
 }

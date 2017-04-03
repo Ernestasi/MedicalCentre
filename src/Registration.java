@@ -6,7 +6,7 @@ public class Registration {
 
     public void render() {
         JFrame window = new JFrame("Registration");
-        window.setLocationRelativeTo((Component)null);
+        window.setLocationRelativeTo(null);
         window.setSize(480, 300);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setLayout(new GridLayout(6, 5));
@@ -73,3 +73,4 @@ public class Registration {
     }*/
 
 }
+//
