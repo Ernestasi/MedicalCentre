@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,10 +5,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
-class Login {
+public class Login {
 
     int render() {
 
@@ -43,7 +36,7 @@ class Login {
         doctors.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                MainFrameForDoctors forDoc = new MainFrameForDoctors();
+                DoctorsFrame forDoc = new DoctorsFrame();
                 forDoc.render();
                 window.dispose();
             }
@@ -55,7 +48,7 @@ class Login {
         patients.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                MainFrameForPatients forPatien = new MainFrameForPatients();
+                PatientsFrame forPatien = new PatientsFrame();
                 forPatien.render();
                 window.dispose();
             }

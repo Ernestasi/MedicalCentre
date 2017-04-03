@@ -7,7 +7,7 @@ import java.util.Calendar;
 //
 public class MedicalCenter  extends Canvas implements Runnable{
 
-    ArrayList<Doctor> doctors =new ArrayList<>();
+    ArrayList<Doctor> doctors = new ArrayList<>();
     ArrayList<Patient> patients = new ArrayList<>();
     ArrayList<Disease> diseases = new ArrayList<>();
 

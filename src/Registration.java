@@ -1,13 +1,8 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 import java.awt.Component;
 import java.awt.GridLayout;
 import javax.swing.*;
 
-class Registration {
+public class Registration {
 
     void render() {
         JFrame window = new JFrame("Registration");

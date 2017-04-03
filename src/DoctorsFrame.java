@@ -4,7 +4,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class MainFrameForDoctors {
+public class DoctorsFrame{
     void render(){
         JFrame frame = new JFrame("Medical Centre Application for Doctors  ");
         frame.setLocationRelativeTo((Component)null);
