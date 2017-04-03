@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class Registration {
 
-    void render() {
+    public void render() {
         JFrame window = new JFrame("Registration");
         window.setLocationRelativeTo((Component)null);
         window.setSize(480, 300);

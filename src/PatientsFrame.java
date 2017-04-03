@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 public class PatientsFrame {
 
 
-    void render(){
+    public void render(){
 
         JFrame frame = new JFrame("Medical Centre Application for Doctors  ");
         frame.setLocationRelativeTo((Component)null);

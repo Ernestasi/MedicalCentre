@@ -8,7 +8,13 @@ import javax.swing.JFrame;
 
 public class Login {
 
-    int render() {
+    MedicalCenter mc;
+
+    public Login(MedicalCenter mc){
+        this.mc = mc;
+    }
+
+   public int render() {
 
         JFrame window = new JFrame("Login");
         window.setLocationRelativeTo((Component)null);
@@ -36,7 +42,7 @@ public class Login {
         doctors.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                DoctorsFrame forDoc = new DoctorsFrame();
+                DoctorsFrame forDoc = new DoctorsFrame(mc);
                 forDoc.render();
                 window.dispose();
             }

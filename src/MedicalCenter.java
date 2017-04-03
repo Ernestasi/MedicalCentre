@@ -93,9 +93,8 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
 
     public void init( MedicalCenter  medCent) {
-
         rd = new ReadData();
-        log = new Login();
+        log = new Login(this);
         tFrame = new TimeFrame(this);
 
         medCent.start();

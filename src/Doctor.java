@@ -7,6 +7,7 @@ public class Doctor{
     private int cab;
     private String time;
     private String[] timeDay;
+    private String data;
 
 
     public Doctor(String name, String surName, int cab, String time){
@@ -15,6 +16,7 @@ public class Doctor{
         this.cab = cab;
         this.time = time;
         toDay(time);
+        constructData();
     }
 
     public Doctor(){
@@ -27,9 +29,13 @@ public class Doctor{
 
     @Override
     public String toString() {
-        return "Doctor name = " + name +
-                ", surName = " + surName +
-                ", cab = " + cab;
+        return  name +
+                " " + surName +
+                "  " + cab ;
+    }
+
+    private void constructData(){
+        data = name + " \t" + surName + " \t" + cab + " \t" + timeDay;
     }
 
     public String getName() {
