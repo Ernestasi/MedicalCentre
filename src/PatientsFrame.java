@@ -1,9 +1,6 @@
-import com.sun.deploy.panel.JSmartTextArea;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -70,6 +67,9 @@ public class PatientsFrame extends JFrame{
                             for(Patient p: mc.patients){
                                 if(ID.equals(p.getId())){
                                     test.setText("SUTAPO IR NEZINAU KA DARYT");
+                                    frame.dispose();
+                                    PatientsFrame goBack = new PatientsFrame(mc);
+                                    goBack.render();
                                     check++;
                                 }
                             }

@@ -140,7 +140,7 @@ public class DoctorsFrame{
                 for (double i= (time0%1==0)?0:0.5;  i < time1 - time0; i += 0.5) {
                     pan.add(new JLabel(  String.format("%1$" + 2 + "s", (int)(Integer.parseInt(s[0]) + i)).replace(" ", "0") + ":" + ((i%1==0)?"00":"30")
                             + " - " + String.format("%1$" + 2 + "s", (int)(Integer.parseInt(s[0]) + i +0.5)).replace(" ", "0") + ":" + ((i%1==0)?"30":"00")));
-                    pan2.add(new JButton("Patient"), BorderLayout.CENTER);
+                    pan2.add(new JButton("penis xd"), BorderLayout.CENTER);
                 }
                 temp.add(pan, BorderLayout.WEST);
                 temp.add(pan2, BorderLayout.EAST);

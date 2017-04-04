@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
@@ -23,13 +21,13 @@ public class Registration {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 0, 5,5));
         panel.add(new JLabel("Name :"));
-        JTextField name = new JTextField(" ");
+        JTextField name = new JTextField("");
         panel.add(name);
         panel.add(new JLabel("SurName :"));
-        JTextField surName = new JTextField(" ");
+        JTextField surName = new JTextField("");
         panel.add(surName);
         panel.add(new JLabel("ID:"));
-        JTextField ID = new JTextField(" ");
+        JTextField ID = new JTextField("");
         panel.add(ID);
         window.add(panel);
 
@@ -94,34 +92,21 @@ public class Registration {
             }
         });
         window.add(submit);
-        window.add(new JButton("Cancel"));
+        JButton cancel = new JButton("Back");
+        cancel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                PatientsFrame goBack = new PatientsFrame(mc);
+                goBack.render();
+                window.dispose();
+            }
+        });
+        window.add(cancel);
         window.setAlwaysOnTop(true);
         window.pack();
         window.setVisible(true);
     }
 
-    /*public void tick(){
-        if( rb0.isSelected()){
-            rb1.setSelected(false);
-            rb2.setSelected(false);
-            rb3.setSelected(false);
-        }
-        if( rb1.isSelected()){
-            rb0.setSelected(false);
-            rb2.setSelected(false);
-            rb3.setSelected(false);
-        }
-        if( rb3.isSelected()){
-            rb1.setSelected(false);
-            rb2.setSelected(false);
-            rb0.setSelected(false);
-        }
-        if( rb2.isSelected()){
-            rb1.setSelected(false);
-            rb0.setSelected(false);
-            rb3.setSelected(false);
-        }
-    }*/
 
 }
 //
