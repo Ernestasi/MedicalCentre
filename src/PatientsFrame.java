@@ -30,7 +30,7 @@ public class PatientsFrame extends JFrame{
         newB.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Registration reg = new Registration();
+                Registration reg = new Registration(mc);
                 reg.render();
                 frame.dispose();
             }
