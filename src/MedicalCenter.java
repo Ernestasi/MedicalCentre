@@ -15,11 +15,11 @@ public class MedicalCenter  extends Canvas implements Runnable{
     private ReadData rd;
     //    private MainFrameForDoctors DmFrame;
 //    private MainFrameForPatients PmFrame;
-    private Login log;
-    private TimeFrame tFrame;
-    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+    Login log;
+    TimeFrame tFrame;
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm  E");
     Calendar cal = Calendar.getInstance();
-
+    DoctorsFrame DocFrame;
 
     private Thread thread;
     private boolean running = false;
@@ -57,7 +57,6 @@ public class MedicalCenter  extends Canvas implements Runnable{
             //System.out.println(System.currentTimeMillis()- timer + " " );
             if(System.currentTimeMillis()- timer > 1000){
                 timer += 1000;
-
                 cal.add(Calendar.MINUTE, 1);
                 //System.out.println(updates + " Ticks, Fps " + frames);
                 updates = 0;
@@ -69,6 +68,8 @@ public class MedicalCenter  extends Canvas implements Runnable{
     }
 
     private void tick(){
+        if(DocFrame != null)
+            DocFrame.tick();
         tFrame.tick();
     }
 
@@ -94,8 +95,8 @@ public class MedicalCenter  extends Canvas implements Runnable{
 
     public void init( MedicalCenter  medCent) {
         rd = new ReadData();
-        log = new Login(this);
         tFrame = new TimeFrame(this);
+
 
         medCent.start();
         tFrame.OpenTime();
@@ -103,6 +104,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
         rd.readPatients(patients);
         rd.readDisease(diseases);
 
+        log = new Login(this);
         log.render();
     }
 

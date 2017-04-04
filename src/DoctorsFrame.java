@@ -1,18 +1,23 @@
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.DayOfWeek;
+import java.util.Calendar;
 import javax.swing.*;
 //
 public class DoctorsFrame{
+    int currentDoctor = 0; //TODO reikia kad reaguotu kuris daktaras!!!!
 
     MedicalCenter mc;
+    JFrame frame;
+    JLabel timeDisp = new JLabel();
 
     public DoctorsFrame(MedicalCenter mc){
         this.mc = mc;
     }
 
-    public void render(){
-        JFrame frame = new JFrame("Medical Centre Application for Doctors  ");
+    public void init(){
+        frame = new JFrame("Medical Centre Application for Doctors  ");
 
         JTabbedPane tabs = new JTabbedPane();
 
@@ -28,7 +33,7 @@ public class DoctorsFrame{
         tabs.addTab("Patients", tabPatients());
         tabs.addTab("Schedule", tabSchedule());
 
-        tabs.setSelectedIndex(2);
+        tabs.setSelectedIndex(0);
         frame.add(tabs, BorderLayout.CENTER);
 
         frame.setVisible(true);
@@ -94,13 +99,8 @@ public class DoctorsFrame{
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 2, 50, 60));
 
-        Doctor d = mc.doctors.get(0);
-        /*panel.add(new JButton("1"));
-        panel.add(new JButton("2"));
-        panel.add(new JButton("3"));
-        panel.add(new JButton("4"));
-        panel.add(new JButton("5"));
-*/
+        Doctor d = mc.doctors.get(currentDoctor);
+
         panel.setPreferredSize(new Dimension(0,1000));
         panel.add(timeGraph(d, 0, "Monday: "));
         panel.add(timeGraph(d, 1,"Tuesday: "));
@@ -113,7 +113,7 @@ public class DoctorsFrame{
 
         JLabel lab = new JLabel();
         lab.setLayout(new BorderLayout());
-        lab.add(new JLabel("Time"),BorderLayout.NORTH);
+        lab.add(timeDisp,BorderLayout.NORTH);
         lab.add(scrollPaneP);
 
 
@@ -127,7 +127,7 @@ public class DoctorsFrame{
         temp.setLayout(new BorderLayout());
         if(!(d.getTimeDay(day).equals("-"))){
 
-            temp.add(new JLabel(String.format("%1$-" + 12 + "s", name) + d.getTimeDay(day)), BorderLayout.NORTH);
+            temp.add(new JLabel(String.format("%1$-" + 37 + "s", name) + String.format("%1$" + 11 + "s",d.getTimeDay(day)).replace(" ", "0")), BorderLayout.NORTH);
             //temp.add(new JLabel());
             {
                 String[] s = (d.getTimeDay(day).split("-|:"));
@@ -148,10 +148,14 @@ public class DoctorsFrame{
 
             return temp;
         }else{
-            temp.add(new JLabel(String.format("%1$-" + 12 + "s", name) ));
-            temp.add(new JLabel(d.getTimeDay(day)));
+            temp.add(new JLabel(String.format("%1$-" + 12 + "s", name) +d.getTimeDay(day) ), BorderLayout.NORTH);
             temp.add(new JLabel("Laisvas nx"));
             return temp;
         }
+    }
+
+    public void tick(){
+        timeDisp.setText("Time: " + (mc.dateFormat.format(mc.cal.getTime())));
+       // System.out.println(mc.cal.get(Calendar.DAY_OF_WEEK)); // TODO will need this ;)
     }
 }

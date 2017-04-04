@@ -86,7 +86,6 @@ public class TimeFrame {
     }
 
     public void tick(){
-        time.setText("");
         time.setText((mc.dateFormat.format(mc.cal.getTime())));
     }
 }

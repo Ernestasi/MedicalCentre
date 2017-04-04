@@ -42,8 +42,8 @@ public class Login {
         doctors.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                DoctorsFrame forDoc = new DoctorsFrame(mc);
-                forDoc.render();
+                mc.DocFrame = new DoctorsFrame(mc);
+                mc.DocFrame.init();
                 window.dispose();
             }
 
