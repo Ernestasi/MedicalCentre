@@ -14,7 +14,7 @@ public class Registration {
     public void render() {
         JFrame window = new JFrame("Registration");
         window.setLocationRelativeTo(null);
-        window.setSize(480, 300);
+        window.setSize(500, 300);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setLayout(new GridLayout(0, 1));
 
@@ -60,34 +60,42 @@ public class Registration {
                 String surNameString = surName.getText();
                 String IDString = ID.getText();
                 int count = 0;
-                for(Patient p : mc.patients){
-                    if(p.getId().equals(IDString)){
-                        count++;
+                if((IDString.length()==11) && (nameString.length() > 1) && (surNameString.length() > 1)){
+                    for(Patient p : mc.patients){
+                        if(p.getId().equals(IDString)){
+                            count++;
+                        }
                     }
-                }
-                if(count == 0){
-                    System.out.println(count);
-                    String filename = "./src/Data/Patients.txt";
-                    try{
-                        FileWriter fw = new FileWriter(filename,true);
-                        fw.write(nameString + "," +  surNameString + "," +  IDString + "," + "0");
-                        fw.write("\n");
-                        fw.close();
-                        Patient pat = new Patient(nameString, surNameString, IDString, 0);
-                        mc.patients.add(pat);
-                        window.dispose();
-                        JFrame submited = new JFrame("Thank you");
-                        submited.setLocationRelativeTo(null);
-                        submited.setSize(480, 300);
-                        submited.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        submited.setVisible(true);
-                        submited.add(new JLabel("SUBMITED NICE AND GOOD INFO"));
-                    } catch(IOException ioe)
-                    {
-                        System.err.println("IOException: " + ioe.getMessage());
+                    if(count == 0){
+                        System.out.println(count);
+                        String filename = "./src/Data/Patients.txt";
+                        try{
+                            FileWriter fw = new FileWriter(filename,true);
+                            fw.write(nameString + "," +  surNameString + "," +  IDString + "," + "0");
+                            fw.write("\n");
+                            fw.close();
+                            Patient pat = new Patient(nameString, surNameString, IDString, 0);
+                            mc.patients.add(pat);
+                            window.dispose();
+                            JFrame submited = new JFrame("Thank you");
+                            submited.setLocationRelativeTo(null);
+                            submited.setSize(480, 300);
+                            submited.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                            submited.setVisible(true);
+                            submited.add(new JLabel("SUBMITED NICE AND GOOD INFO"));
+                        } catch(IOException ioe)
+                        {
+                            System.err.println("IOException: " + ioe.getMessage());
+                        }
                     }
+                    else warning.setText("  You are already on the system!");
                 }
-                else warning.setText("You are already on the system!");
+                else if(nameString.length() <= 1)
+                    warning.setText("  Entered name is too short!");
+                else if(surNameString.length() <= 1)
+                    warning.setText("  Entered sur name is too short!");
+                else warning.setText("  ID has to be 11 digits long!");
+
 
             }
         });

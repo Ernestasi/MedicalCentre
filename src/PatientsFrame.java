@@ -42,8 +42,8 @@ public class PatientsFrame extends JFrame{
 
                 JFrame securityID = new JFrame("Enter your security ID");
                 securityID.setLocationRelativeTo((Component)null);
-                securityID.setPreferredSize(new Dimension(200   , 150 ));
-                securityID.setSize(200, 150);
+                securityID.setPreferredSize(new Dimension(300   , 150 ));
+                securityID.setSize(300, 150);
                 securityID.getContentPane().setLayout(new GridLayout(4, 1));
                 securityID.setResizable(false);
                 securityID.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,17 +65,22 @@ public class PatientsFrame extends JFrame{
                         if(ID != null) {
                             int check = 0;
                             for(Patient p: mc.patients){
-                                if(ID.equals(p.getId())){
-                                    test.setText("SUTAPO IR NEZINAU KA DARYT");
-                                    frame.dispose();
-                                    PatientsFrame goBack = new PatientsFrame(mc);
-                                    goBack.render();
-                                    check++;
+                                if(ID.length() == 11){
+                                    if(ID.equals(p.getId())){
+                                        test.setText("ID is good (go to user inferface)");
+                                        frame.dispose();
+                                        PatientsFrame goBack = new PatientsFrame(mc);
+                                        goBack.render();
+                                        check++;
+                                    }
+                                    if(check == 0){
+                                        test.setText("No such ID");
+                                    }
                                 }
-                            }
-                            if(check == 0){
-                                test.setText("No such ID");
-                            }
+                                else test.setText("ID has to be 11 digits long!");
+
+                                }
+
                         }
 
                     }

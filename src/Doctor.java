@@ -1,9 +1,7 @@
 import javax.print.Doc;
 import java.util.Arrays;
 
-public class Doctor{
-    private String name;
-    private String surName;
+public class Doctor extends Human{
     private int cab;
     private String time;
     private String[] timeDay;
@@ -11,8 +9,8 @@ public class Doctor{
 
 
     public Doctor(String name, String surName, int cab, String time){
-        this.name = name;
-        this.surName = surName;
+        setName(name);
+        setSurName(surName);
         this.cab = cab;
         this.time = time;
         toDay(time);
@@ -29,29 +27,13 @@ public class Doctor{
 
     @Override
     public String toString() {
-        return  name +
-                " " + surName +
+        return  getName() +
+                " " + getSurName() +
                 "  " + cab ;
     }
 
     private void constructData(){
-        data = name + " \t" + surName + " \t" + cab + " \t" + timeDay;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurName() {
-        return surName;
-    }
-
-    public void setSurName(String surName) {
-        this.surName = surName;
+        data = getName() + " \t" + getSurName() + " \t" + cab + " \t" + timeDay;
     }
 
     public int getCab() {

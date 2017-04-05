@@ -1,16 +1,15 @@
 //
-public class Patient {
+public class Patient extends Human {
 
-    private String name;
-    private String surName;
+
     private String id;
     private int insurance;
     private String insType;
 
 
     public Patient(String name, String surName, String id, int insurance){
-        this.name = name;
-        this.surName = surName;
+        setName(name);
+        setSurName(surName);
         this.id = id;
         this.insurance = insurance;
         insType = intToIns(insurance);
@@ -19,7 +18,7 @@ public class Patient {
     @Override
     public String toString() {
         return String.format("%1$-"+ 15 + "s", id)
-                + "| " + String.format("%1$-"+ 15 + "s", name) + "| " + String.format("%1$-"+ 20 + "s", surName) + " " +  String.format("%1$-"+ 20 + "s", insType);
+                + "| " + String.format("%1$-"+ 15 + "s", getName()) + "| " + String.format("%1$-"+ 20 + "s", getSurName()) + " " +  String.format("%1$-"+ 20 + "s", insType);
     }
 
     private String intToIns(int i){
@@ -32,22 +31,6 @@ public class Patient {
         }else{
             return "Type3";
         }
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurName() {
-        return surName;
-    }
-
-    public void setSurName(String surName) {
-        this.surName = surName;
     }
 
     public String getId() {
