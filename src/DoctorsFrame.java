@@ -184,7 +184,7 @@ public class DoctorsFrame{
         }
         return jb;
     }
-int checkTime = 0;
+int checkTime = 0;//useless comment
     public void tick(){
         timeDisp.setText("Time: " + (mc.dateFormat.format(mc.cal.getTime())));
         //System.out.println(aaa);
