@@ -14,7 +14,7 @@ public class Login {
         this.mc = mc;
     }
 
-   public int render() {
+   public void render() {
 
         JFrame window = new JFrame("Login");
         window.setLocationRelativeTo(null);
@@ -75,8 +75,7 @@ public class Login {
         window.setAlwaysOnTop(true);
         window.pack();
         window.setVisible(true);
-        int loginStatus;
-        return loginStatus = 1;                                              // 0 uzdaro programa / 1 mainFrameForDoctors /2 mainFrameForPatients
+                                         // 0 uzdaro programa / 1 mainFrameForDoctors /2 mainFrameForPatients
     }                                                                       // /3 Registration o tada grazinam atgal i Login
 }
 //

@@ -14,7 +14,7 @@ public class Registration {
     public void render() {
         JFrame window = new JFrame("Registration");
         window.setLocationRelativeTo(null);
-        window.setSize(500, 300);
+        window.setSize(600, 300);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setLayout(new GridLayout(0, 1));
 
@@ -79,10 +79,62 @@ public class Registration {
                             window.dispose();
                             JFrame submited = new JFrame("Thank you");
                             submited.setLocationRelativeTo(null);
-                            submited.setSize(480, 300);
+                            submited.setSize(600, 300);
                             submited.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                            submited.setLayout(new GridLayout(0,1));
+
+                            JLabel name = new    JLabel("Name: "+ pat.getName());
+                            name.setFont(new Font("Serif", Font.BOLD, 24));
+                            //name.setHorizontalAlignment(SwingConstants.LEFT );
+                            submited.add(name);
+
+                            JLabel surName = new JLabel("Surname: "+ pat.getSurName());
+                            surName.setFont(new Font("Serif", Font.BOLD, 24));
+                            //surName.setHorizontalAlignment(SwingConstants.LEFT );
+                            submited.add(surName);
+
+                            JLabel ID = new      JLabel("ID: "+ pat.getId());
+                            ID.setFont(new Font("Serif", Font.BOLD, 24));
+                            //ID.setHorizontalAlignment(SwingConstants.LEFT );
+                            submited.add(ID);
+
+                            JLabel empty = new JLabel("");
+                            JPanel decision = new JPanel();
+                            decision.setLayout(new GridLayout(0,3));
+                            decision.add(empty);
+                            decision.add(empty);
+                            JButton confirm = new JButton("Confirm");
+                            confirm.addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mousePressed(MouseEvent e) {
+                                    PatientsFrame forPatien = new PatientsFrame(mc);
+                                    forPatien.render();
+                                    submited.dispose();
+                                }
+
+
+
+                            });
+
+                            decision.add(confirm);
+                            JButton back = new JButton("Back");
+                            back.addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mousePressed(MouseEvent e) {
+                                    Registration reg = new Registration(mc);
+                                    reg.render();
+                                    submited.dispose();
+                                }
+
+
+
+                            });
+                            decision.add(back);
+                            submited.add(decision);
+
                             submited.setVisible(true);
-                            submited.add(new JLabel("SUBMITED NICE AND GOOD INFO"));
+
                         } catch(IOException ioe)
                         {
                             System.err.println("IOException: " + ioe.getMessage());
