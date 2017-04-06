@@ -33,7 +33,7 @@ public class DoctorsFrame{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocation(900, 200);
         //frame.setLocationRelativeTo(null);
-        frame.setSize(600, 600);
+        frame.setSize(650, 600);
         frame.setResizable(false);
         frame.requestFocus();
 
@@ -160,7 +160,7 @@ public class DoctorsFrame{
                 for (double i= (time0%1==0)?0:0.5;  i < time1 - time0; i += 0.5) {
                     pan.add(new JLabel(  String.format("%1$" + 2 + "s", (int)(Integer.parseInt(s[0]) + i)).replace(" ", "0") + ":" + ((i%1==0)?"00":"30")
                             + " - " + String.format("%1$" + 2 + "s", (int)(Integer.parseInt(s[0]) + i +0.5)).replace(" ", "0") + ":" + ((i%1==0)?"30":"00")));
-                    pan2.add(patient(day, (int)i*2), BorderLayout.CENTER);
+                    pan2.add(patientBut(day, (int)i*2), BorderLayout.CENTER);
                 }
                 //pan2.add(patient(day), BorderLayout.CENTER);
                 temp.add(pan, BorderLayout.WEST);
@@ -176,11 +176,17 @@ public class DoctorsFrame{
     }
 
 
-    private JButton patient(int day, int i){
+    private JPanel patientBut(int day, int i){
         Patient p = mc.patients.get(i);
-        JButton jb = new JButton("Bye");
+        JPanel jb = new JPanel();
+        jb.setLayout(new BorderLayout());
+
         if(mc.cal.get(Calendar.DAY_OF_WEEK)-1 == day+1){
-            jb.setText(p.getName() + " " + p.getSurName());
+            jb.add(new JLabel(p.getName() + " " + p.getSurName()), BorderLayout.WEST);
+            jb.add(new JButton("⌂"), BorderLayout.EAST);
+        }else{
+            jb.add(new JLabel(String.format("%1$-"+ 20 + "s","----")), BorderLayout.WEST);
+            jb.add(new JButton("add"), BorderLayout.EAST);
         }
         return jb;
     }
@@ -192,8 +198,8 @@ int checkTime = 0;//useless comment
         if(checkTime != mc.cal.get(Calendar.WEEK_OF_YEAR)){
             int indexOfTab = tabs.getSelectedIndex();
             panelSh.removeAll();
-            tabs.remove(2);
             tabs.add("Schedule", tabSchedule());
+            tabs.remove(2);
             tabs.setSelectedIndex(indexOfTab);
            // aaa=10;
             checkTime = mc.cal.get(Calendar.WEEK_OF_YEAR);

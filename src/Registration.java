@@ -99,11 +99,8 @@ public class Registration {
                             //ID.setHorizontalAlignment(SwingConstants.LEFT );
                             submited.add(ID);
 
-                            JLabel empty = new JLabel("");
                             JPanel decision = new JPanel();
-                            decision.setLayout(new GridLayout(0,3));
-                            decision.add(empty);
-                            decision.add(empty);
+                            decision.setLayout(new FlowLayout());
                             JButton confirm = new JButton("Confirm");
                             confirm.addMouseListener(new MouseAdapter() {
                                 @Override
@@ -116,7 +113,6 @@ public class Registration {
 
 
                             });
-
                             decision.add(confirm);
                             JButton back = new JButton("Back");
                             back.addMouseListener(new MouseAdapter() {

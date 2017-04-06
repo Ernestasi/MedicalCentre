@@ -7,8 +7,8 @@ import java.util.Calendar;
 public class TimeFrame {
 
 
-    MedicalCenter mc;
-    JLabel time = new JLabel();
+    private MedicalCenter mc;
+    private JLabel time = new JLabel();
 
     public TimeFrame(MedicalCenter mc){
         this.mc = mc;
