@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Registration {
-    MedicalCenter mc;
+    private MedicalCenter mc;
     public Registration(MedicalCenter mc){
         this.mc = mc;
     }
@@ -14,7 +14,7 @@ public class Registration {
     public void render() {
         JFrame window = new JFrame("Registration");
         window.setLocationRelativeTo(null);
-        window.setSize(600, 300);
+        window.setSize(500, 200);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setLayout(new GridLayout(0, 1));
 
@@ -78,7 +78,7 @@ public class Registration {
                             mc.patients.add(pat);
                             window.dispose();
                             JFrame submited = new JFrame("Thank you");
-                            submited.setLocationRelativeTo(null);
+                            submited.setLocation(200, 200);
                             submited.setSize(600, 300);
                             submited.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

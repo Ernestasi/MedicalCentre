@@ -6,21 +6,20 @@ import java.awt.event.MouseEvent;
 
 public class PatientsFrame extends JFrame{
 
-    MedicalCenter mc;
+    private MedicalCenter mc;
     public PatientsFrame(MedicalCenter mc){
         this.mc = mc;
     }
 
     public void render(){
 
-        JFrame frame = new JFrame("Medical Centre Application for Doctors  ");
+        JFrame frame = new JFrame("Medical Centre Application for Patients  ");
         frame.setLocationRelativeTo(null);
         frame.setPreferredSize(new Dimension(500   , 200 ));
         frame.setSize(500, 200);
         frame.getContentPane().setLayout(new GridLayout(1, 2));
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.requestFocus();
         JButton newB = new JButton("New patient");
@@ -38,19 +37,16 @@ public class PatientsFrame extends JFrame{
             String ID;
             @Override
             public void mouseClicked(MouseEvent e) {
-
-
+                frame.dispose();
                 JFrame securityID = new JFrame("Enter your security ID");
-                securityID.setLocationRelativeTo((Component)null);
+                securityID.setLocationRelativeTo(null);
                 securityID.setPreferredSize(new Dimension(300   , 150 ));
                 securityID.setSize(300, 150);
                 securityID.getContentPane().setLayout(new GridLayout(4, 1));
                 securityID.setResizable(false);
                 securityID.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                securityID.setLocationRelativeTo(null);
                 securityID.setVisible(true);
                 securityID.requestFocus();
-                frame.dispose();
                 JLabel test = new JLabel("Enter your ID");
                 securityID.add(test);
                 JPanel jp = new JPanel();
@@ -91,8 +87,8 @@ public class PatientsFrame extends JFrame{
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         PatientsFrame goBack = new PatientsFrame(mc);
+                        securityID.dispose();
                         goBack.render();
-                        frame.dispose();
                     }
                 });
                 securityID.add(back);
