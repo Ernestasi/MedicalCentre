@@ -70,7 +70,7 @@ public class Registration {
                         System.out.println(count);
                         Patient pat = new Patient(nameString, surNameString, IDString, 0);
                         mc.patients.add(pat);
-                        window.dispose();
+                        //window.dispose();
                         JFrame submited = new JFrame("Thank you");
                         submited.setLocation(200, 200);
                         submited.setSize(600, 300);
@@ -108,6 +108,7 @@ public class Registration {
                                         PatientsFrame forPatien = new PatientsFrame(mc);
                                         forPatien.render();
                                         submited.dispose();
+                                        window.dispose();
                                     }
                                     catch(IOException ioe)
                                     {
