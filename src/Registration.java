@@ -74,6 +74,7 @@ public class Registration {
                         JFrame submited = new JFrame("Thank you");
                         submited.setLocation(200, 200);
                         submited.setSize(600, 300);
+                        submited.setResizable(false);
                         submited.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         submited.setLayout(new GridLayout(0,1));
 
@@ -98,7 +99,7 @@ public class Registration {
                         confirm.addMouseListener(new MouseAdapter() {
                                 @Override
                                 public void mousePressed(MouseEvent e) {
-                                    FileWriter fw = null;
+                                    FileWriter fw;
                                     try {
                                         String filename = "./src/Data/Patients.txt";
                                         fw = new FileWriter(filename,true);
