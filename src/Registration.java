@@ -71,8 +71,7 @@ public class Registration {
                         String filename = "./src/Data/Patients.txt";
                         try{
                             FileWriter fw = new FileWriter(filename,true);
-                            fw.write(nameString + "," +  surNameString + "," +  IDString + "," + "0");
-                            fw.write("\n");
+
                             fw.close();
                             Patient pat = new Patient(nameString, surNameString, IDString, 0);
                             mc.patients.add(pat);
@@ -107,6 +106,12 @@ public class Registration {
                                 public void mousePressed(MouseEvent e) {
                                     PatientsFrame forPatien = new PatientsFrame(mc);
                                     forPatien.render();
+                                    try {
+                                        fw.write(nameString + "," +  surNameString + "," +  IDString + "," + "0");
+                                        fw.write("\n");
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
                                     submited.dispose();
                                 }
 
@@ -138,10 +143,16 @@ public class Registration {
                     }
                     else warning.setText("  You are already on the system!");
                 }
+                else if ((!nameString.matches("[0-9]+")))
+                    warning.setText("  Entered name can't contain numbers!");
                 else if(nameString.length() <= 1)
                     warning.setText("  Entered name is too short!");
+                else if ((!nameString.matches("[0-9]+")))
+                    warning.setText("  Entered sur name can't contain numbers!");
                 else if(surNameString.length() <= 1)
                     warning.setText("  Entered sur name is too short!");
+                else if((!IDString.matches("[0-9]+")))
+                    warning.setText("  ID can contain only digits!");
                 else warning.setText("  ID has to be 11 digits long!");
 
 

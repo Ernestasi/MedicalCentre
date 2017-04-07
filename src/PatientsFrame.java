@@ -61,7 +61,7 @@ public class PatientsFrame extends JFrame{
                         if(ID != null) {
                             int check = 0;
                             for(Patient p: mc.patients){
-                                if(ID.length() == 11){
+                                if( (ID.length() == 11) && (ID.matches("[0-9]+")) ){
                                     if(ID.equals(p.getId())){
                                         test.setText("ID is good (go to user inferface)");
                                         frame.dispose();
@@ -73,7 +73,11 @@ public class PatientsFrame extends JFrame{
                                         test.setText("No such ID");
                                     }
                                 }
-                                else test.setText("ID has to be 11 digits long!");
+                                else if (!ID.matches("[0-9]+"))
+                                    test.setText("ID can contain only digits!");
+                                else if (ID.length() != 11 )
+                                    test.setText("ID has to be 11 digits long!");
+
 
                                 }
 

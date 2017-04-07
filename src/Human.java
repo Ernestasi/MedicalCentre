@@ -1,6 +1,4 @@
-/**
- * Created by ulis on 2017-04-05.
- */
+
 public class Human {
     private String name;
     private String surName;
