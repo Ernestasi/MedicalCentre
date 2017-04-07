@@ -3,7 +3,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.io.FileWriter;
-import java.io.IOException;
+import java.io.IOException;//
 
 public class Registration {
     private MedicalCenter mc;
@@ -151,20 +151,19 @@ public class Registration {
         });
         window.add(submit);
         JButton cancel = new JButton("Back");
-        cancel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                PatientsFrame goBack = new PatientsFrame(mc);
-                goBack.render();
-                window.dispose();
-            }
+                cancel.addMouseListener(new MouseAdapter() {
+@Override
+public void mouseClicked(MouseEvent e) {
+        PatientsFrame goBack = new PatientsFrame(mc);
+        goBack.render();
+        window.dispose();
+        }
         });
         window.add(cancel);
         window.setAlwaysOnTop(true);
         window.pack();
         window.setVisible(true);
-    }
+        }
 
 
-}
-//
+        }
