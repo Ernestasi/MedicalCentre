@@ -68,46 +68,52 @@ public class Registration {
                     }
                     if(count == 0){
                         System.out.println(count);
-                        String filename = "./src/Data/Patients.txt";
-                        try{
-                            FileWriter fw = new FileWriter(filename,true);
-                            fw.write(nameString + "," +  surNameString + "," +  IDString + "," + "0");
-                            fw.write("\n");
-                            fw.close();
-                            Patient pat = new Patient(nameString, surNameString, IDString, 0);
-                            mc.patients.add(pat);
-                            window.dispose();
-                            JFrame submited = new JFrame("Thank you");
-                            submited.setLocation(200, 200);
-                            submited.setSize(600, 300);
-                            submited.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        Patient pat = new Patient(nameString, surNameString, IDString, 0);
+                        mc.patients.add(pat);
+                        window.dispose();
+                        JFrame submited = new JFrame("Thank you");
+                        submited.setLocation(200, 200);
+                        submited.setSize(600, 300);
+                        submited.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        submited.setLayout(new GridLayout(0,1));
 
-                            submited.setLayout(new GridLayout(0,1));
+                        JLabel name = new    JLabel("Name: "+ pat.getName());
+                        name.setFont(new Font("Serif", Font.BOLD, 24));
+                        //name.setHorizontalAlignment(SwingConstants.LEFT );
+                        submited.add(name);
 
-                            JLabel name = new    JLabel("Name: "+ pat.getName());
-                            name.setFont(new Font("Serif", Font.BOLD, 24));
-                            //name.setHorizontalAlignment(SwingConstants.LEFT );
-                            submited.add(name);
+                        JLabel surName = new JLabel("Surname: "+ pat.getSurName());
+                        surName.setFont(new Font("Serif", Font.BOLD, 24));
+                        //surName.setHorizontalAlignment(SwingConstants.LEFT );
+                        submited.add(surName);
 
-                            JLabel surName = new JLabel("Surname: "+ pat.getSurName());
-                            surName.setFont(new Font("Serif", Font.BOLD, 24));
-                            //surName.setHorizontalAlignment(SwingConstants.LEFT );
-                            submited.add(surName);
+                        JLabel ID = new      JLabel("ID: "+ pat.getId());
+                        ID.setFont(new Font("Serif", Font.BOLD, 24));
+                        //ID.setHorizontalAlignment(SwingConstants.LEFT );
+                        submited.add(ID);
 
-                            JLabel ID = new      JLabel("ID: "+ pat.getId());
-                            ID.setFont(new Font("Serif", Font.BOLD, 24));
-                            //ID.setHorizontalAlignment(SwingConstants.LEFT );
-                            submited.add(ID);
-
-                            JPanel decision = new JPanel();
-                            decision.setLayout(new FlowLayout());
-                            JButton confirm = new JButton("Confirm");
-                            confirm.addMouseListener(new MouseAdapter() {
+                        JPanel decision = new JPanel();
+                        decision.setLayout(new FlowLayout());
+                        JButton confirm = new JButton("Confirm");
+                        confirm.addMouseListener(new MouseAdapter() {
                                 @Override
                                 public void mousePressed(MouseEvent e) {
-                                    PatientsFrame forPatien = new PatientsFrame(mc);
-                                    forPatien.render();
-                                    submited.dispose();
+                                    FileWriter fw = null;
+                                    try {
+                                        String filename = "./src/Data/Patients.txt";
+                                        fw = new FileWriter(filename,true);
+                                        fw.write("\n");
+                                        fw.write(nameString + "," +  surNameString + "," +  IDString + "," + "0");
+                                        fw.close();
+                                        PatientsFrame forPatien = new PatientsFrame(mc);
+                                        forPatien.render();
+                                        submited.dispose();
+                                    }
+                                    catch(IOException ioe)
+                                    {
+                                        System.err.println("IOException: " + ioe.getMessage());
+                                    }
+
                                 }
 
 
@@ -124,17 +130,13 @@ public class Registration {
                                 }
 
 
-
                             });
-                            decision.add(back);
-                            submited.add(decision);
+                        decision.add(back);
+                        submited.add(decision);
 
-                            submited.setVisible(true);
+                        submited.setVisible(true);
 
-                        } catch(IOException ioe)
-                        {
-                            System.err.println("IOException: " + ioe.getMessage());
-                        }
+
                     }
                     else warning.setText("  You are already on the system!");
                 }

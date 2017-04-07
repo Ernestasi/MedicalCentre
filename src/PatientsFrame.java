@@ -64,7 +64,7 @@ public class PatientsFrame extends JFrame{
                                 if(ID.length() == 11){
                                     if(ID.equals(p.getId())){
                                         test.setText("ID is good (go to user inferface)");
-                                        frame.dispose();
+                                        securityID.dispose();
                                         PatientsFrame goBack = new PatientsFrame(mc);
                                         goBack.render();
                                         check++;

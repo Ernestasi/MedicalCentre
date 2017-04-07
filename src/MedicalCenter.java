@@ -20,6 +20,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm  E");
     Calendar cal = Calendar.getInstance();
     DoctorsFrame DocFrame;
+    PatientsFrame PatFrame;
 
     private Thread thread;
     private boolean running = false;

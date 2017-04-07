@@ -10,15 +10,15 @@ public class Login {
 
     MedicalCenter mc;
 
-    public Login(MedicalCenter mc){
+    public Login(MedicalCenter mc) {
         this.mc = mc;
     }
 
-   public void render() {
+    public void render() {
 
         JFrame window = new JFrame("Login");
         window.setLocationRelativeTo(null);
-        window.setPreferredSize(new Dimension(500   , 300 ));
+        window.setPreferredSize(new Dimension(500, 300));
         window.setSize(500, 300);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,11 +54,10 @@ public class Login {
         patients.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                PatientsFrame forPatien = new PatientsFrame(mc);
-                forPatien.render();
+                mc.PatFrame = new PatientsFrame(mc);
+                mc.PatFrame.render();
                 window.dispose();
             }
-
 
 
         });
@@ -75,7 +74,6 @@ public class Login {
         window.setAlwaysOnTop(true);
         window.pack();
         window.setVisible(true);
-                                         // 0 uzdaro programa / 1 mainFrameForDoctors /2 mainFrameForPatients
-    }                                                                       // /3 Registration o tada grazinam atgal i Login
+
+    }
 }
-//
