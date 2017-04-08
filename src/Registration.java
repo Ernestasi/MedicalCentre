@@ -78,11 +78,13 @@ public class Registration {
 
                         window.setEnabled(false);
 
+
                         JFrame submited = new JFrame("Thank you");
                         submited.setLocation(200, 200);
                         submited.setSize(600, 300);
                         submited.setResizable(false);
-                        submited.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        submited.isAlwaysOnTop();
+                        submited.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         submited.setLayout(new GridLayout(0,1));
 
                         JLabel name = new    JLabel("Name: "+ pat.getName());
