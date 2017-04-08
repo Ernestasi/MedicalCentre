@@ -1,3 +1,6 @@
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.text.TextAlignment;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -59,6 +62,12 @@ public class DoctorsFrame{
             but.add(new JLabel( String.format("%1$"+ 90 + "s", d.getCab())));
             but.add(new JLabel( String.format("%1$"+ 130 + "s", "Specelizatoin")));
             but.setPreferredSize(new Dimension( 300, 30));
+            but.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    System.out.println("Pressed on doctor: " + d.getName() + " " + d.getSurName());
+                }
+            });
             panelD.add(but);
         }
 
@@ -87,6 +96,13 @@ public class DoctorsFrame{
             but.add(new JLabel(String.format("%1$"+ 90 + "s", p.getSurName())));
             but.add(new JLabel(String.format("%1$"+ 130 + "s", p.getInsType())));
             but.setPreferredSize(new Dimension( 300, 30));
+            but.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    System.out.println("Pressed on patient: " + p.getName() + " " + p.getSurName());
+                    patientInfoFrame(p);
+                }
+            });
             panel.add(but);
         }
 
@@ -171,6 +187,7 @@ public class DoctorsFrame{
         }else{
             temp.add(new JLabel(String.format("%1$-" + 12 + "s", name) +d.getTimeDay(day) ), BorderLayout.NORTH);
             temp.add(new JLabel("Chilling at home"));
+
             return temp;
         }
     }
@@ -180,13 +197,27 @@ public class DoctorsFrame{
         Patient p = mc.patients.get(i);
         JPanel jb = new JPanel();
         jb.setLayout(new BorderLayout());
-
+        JButton but;
         if(mc.cal.get(Calendar.DAY_OF_WEEK)-1 == day+1){
+            but = new JButton("⌂");
             jb.add(new JLabel(p.getName() + " " + p.getSurName()), BorderLayout.WEST);
-            jb.add(new JButton("⌂"), BorderLayout.EAST);
+            jb.add(but, BorderLayout.EAST);
+            but.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    System.out.println("Cheking patient: " + p.getName() + " " + p.getSurName());
+                }
+            });
         }else{
+            but = new JButton("add");
             jb.add(new JLabel(String.format("%1$-"+ 20 + "s","----")), BorderLayout.WEST);
-            jb.add(new JButton("add"), BorderLayout.EAST);
+            jb.add(but, BorderLayout.EAST);
+            but.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    System.out.println("Setting up new appointment");
+                }
+            });
         }
         return jb;
     }
@@ -207,5 +238,38 @@ int checkTime = 0;//useless comment
         frame.repaint();
 
         // System.out.println(mc.cal.get(Calendar.DAY_OF_WEEK)); // TODO will need this ;)
+    }
+
+    private void patientInfoFrame(Patient p){
+        JFrame infoF = new JFrame(p.getName() + " "+  p.getSurName());
+        infoF.setSize(400, 500);
+        infoF.setLocationRelativeTo(null);
+        infoF.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JPanel panel = new JPanel();
+
+        JPanel info = new JPanel();
+        info.add(new JLabel("Patient: "));
+        JTextField txt = new JTextField( p.getName() + " " + p.getSurName(),15);
+        txt.setEditable(false);
+        info.add(txt);
+        info.add(new JLabel("  ID: "));
+        JTextField txt1 = new JTextField(p.getId(),8);
+        txt1.setEditable(false);
+        info.add(txt1);
+
+        JPanel info2 = new JPanel();
+        info2.add(new JLabel("Insurance: "));
+        JTextField txt3 = new JTextField(p.getInsType(), 10);
+        info2.add(txt3);
+        txt3.setEditable(false);
+
+        panel.setLayout(new BorderLayout(10, 10));
+        panel.add(info, BorderLayout.BEFORE_FIRST_LINE);
+        panel.add(info2);
+
+
+        infoF.add(panel);
+        infoF.setVisible(true);
     }
 }

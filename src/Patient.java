@@ -5,7 +5,8 @@ public class Patient extends Human {
     private String id;
     private int insurance;
     private String insType;
-
+    //  String name
+    //  String surName
 
     public Patient(String name, String surName, String id, int insurance){
         setName(name);
