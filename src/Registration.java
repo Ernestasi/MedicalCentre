@@ -14,7 +14,8 @@ public class Registration {
     public void render() {
         JFrame window = new JFrame("Registration");
         window.setLocationRelativeTo(null);
-        window.setSize(500, 200);
+        window.setSize(600, 300);
+        window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setLayout(new GridLayout(0, 1));
 
@@ -22,12 +23,15 @@ public class Registration {
         panel.setLayout(new GridLayout(1, 0, 5,5));
         panel.add(new JLabel("Name :"));
         JTextField name = new JTextField("");
+        name.setEditable(true);
         panel.add(name);
         panel.add(new JLabel("SurName :"));
         JTextField surName = new JTextField("");
+        surName.setEditable(true);
         panel.add(surName);
         panel.add(new JLabel("ID:"));
         JTextField ID = new JTextField("");
+        ID.setEditable(true);
         panel.add(ID);
         window.add(panel);
 
@@ -71,6 +75,9 @@ public class Registration {
                         Patient pat = new Patient(nameString, surNameString, IDString, 0);
                         mc.patients.add(pat);
                         //window.dispose();
+
+                        window.setEnabled(false);
+
                         JFrame submited = new JFrame("Thank you");
                         submited.setLocation(200, 200);
                         submited.setSize(600, 300);
@@ -99,6 +106,7 @@ public class Registration {
                         confirm.addMouseListener(new MouseAdapter() {
                                 @Override
                                 public void mousePressed(MouseEvent e) {
+
                                     FileWriter fw;
                                     try {
                                         String filename = "./src/Data/Patients.txt";
@@ -126,8 +134,7 @@ public class Registration {
                             back.addMouseListener(new MouseAdapter() {
                                 @Override
                                 public void mousePressed(MouseEvent e) {
-                                    Registration reg = new Registration(mc);
-                                    reg.render();
+                                    window.setEnabled(true);
                                     submited.dispose();
                                 }
 
@@ -163,7 +170,7 @@ public void mouseClicked(MouseEvent e) {
         });
         window.add(cancel);
         window.setAlwaysOnTop(true);
-        window.pack();
+        //window.pack();
         window.setVisible(true);
         }
 

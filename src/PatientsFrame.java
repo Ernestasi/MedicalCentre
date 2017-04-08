@@ -32,7 +32,7 @@ public class PatientsFrame extends JFrame{
             }
         });
         frame.add(newB);
-        JButton oldB = new JButton ("Old patient");
+        JButton oldB = new JButton ("Registered patient");
         oldB.addMouseListener(new MouseAdapter() {
             String ID;
             @Override

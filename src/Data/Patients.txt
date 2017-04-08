@@ -101,4 +101,3 @@ Richard,Davis,2062360762,1
 Domantas,Alenskas,39801206987,0
 Justinas,Kilas,39707129654,0
 Ernestas,Ivanovas,39702150000,0
-Ernestas,Ivanovas,39702156432,0
