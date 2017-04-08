@@ -241,11 +241,11 @@ int checkTime = 0;//useless comment
     }
 
     private void patientInfoFrame(Patient p){
+        //JDialog infoF = new JDialog(frame, p.getName() + " " + p.getSurName(), Dialog.ModalityType.DOCUMENT_MODAL);
         JFrame infoF = new JFrame(p.getName() + " "+  p.getSurName());
         infoF.setSize(400, 500);
         infoF.setLocationRelativeTo(null);
         infoF.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
         JPanel panel = new JPanel();
 
         JPanel info = new JPanel();
@@ -260,13 +260,20 @@ int checkTime = 0;//useless comment
 
         JPanel info2 = new JPanel();
         info2.add(new JLabel("Insurance: "));
+        JTextField txt2 = new JTextField(p.getInsType(), 10);
+        info2.add(txt2);
+        txt2.setEditable(false);
+
+        JPanel info3 = new JPanel();
+        info3.add(new JLabel("Description: "));
         JTextField txt3 = new JTextField(p.getInsType(), 10);
-        info2.add(txt3);
+        info3.add(txt3);
         txt3.setEditable(false);
 
         panel.setLayout(new BorderLayout(10, 10));
         panel.add(info, BorderLayout.BEFORE_FIRST_LINE);
         panel.add(info2);
+
 
 
         infoF.add(panel);
