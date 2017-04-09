@@ -5,6 +5,7 @@ public class Patient extends Human {
     private String id;
     private int insurance;
     private String insType;
+    public String Description = " Needs to be added";
     //  String name
     //  String surName
 
@@ -56,5 +57,13 @@ public class Patient extends Human {
 
     public void setInsType(String insType) {
         this.insType = insType;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
     }
 }

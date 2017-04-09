@@ -39,8 +39,6 @@ public class TimeFrame {
 
         panel.add(new JLabel("  Current Time:")).setFont(font);
         panel.add(time).setFont(font);
-        panel.add(new JLabel(""));
-        panel.add(new JLabel(""));
 
         pDay.addMouseListener(new MouseAdapter() {
             @Override

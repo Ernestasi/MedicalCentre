@@ -1,3 +1,4 @@
+import com.sun.deploy.panel.JSmartTextArea;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.text.TextAlignment;
 
@@ -8,8 +9,9 @@ import java.time.DayOfWeek;
 import java.util.Calendar;
 import java.util.EventListener;
 import javax.swing.*;
+
 //
-public class DoctorsFrame{
+public class DoctorsFrame {
     int currentDoctor = 0; //TODO reikia kad reaguotu kuris daktaras!!!!
 
     MedicalCenter mc;
@@ -17,20 +19,17 @@ public class DoctorsFrame{
     JFrame frame;
 
     JLabel timeDisp = new JLabel();
-    String string1 = "a";
-    String string2 = "bb";
     JPanel panelSh = new JPanel();
 
     JTabbedPane tabs = new JTabbedPane();
 
-    public DoctorsFrame(MedicalCenter mc){
+    public DoctorsFrame(MedicalCenter mc) {
         this.mc = mc;
     }
 
-    public void init(){
+    public void init() {
         d = mc.doctors.get(currentDoctor);
         frame = new JFrame("Medical Centre Application for Doctors  ");
-
 
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,52 +49,54 @@ public class DoctorsFrame{
         frame.setVisible(true);
     }
 
-    private JLabel tabDoctors(){
+    private JLabel tabDoctors() {
         JPanel panelD = new JPanel();
         panelD.setLayout(new GridLayout(0, 1));
 
-        for(Doctor d : mc.doctors){
+        for (Doctor d : mc.doctors) {
             JButton but = new JButton();
-            but.setHorizontalAlignment(SwingConstants.LEFT );
-            but.add(new JLabel(String.format("%1$"+ 15 + "s", d.getName())));
-            but.add(new JLabel( String.format("%1$"+ 50 + "s", d.getSurName())));
-            but.add(new JLabel( String.format("%1$"+ 90 + "s", d.getCab())));
-            but.add(new JLabel( String.format("%1$"+ 130 + "s", "Specelizatoin")));
-            but.setPreferredSize(new Dimension( 300, 30));
+            but.setHorizontalAlignment(SwingConstants.LEFT);
+            but.add(new JLabel(String.format("%1$" + 15 + "s", d.getName())));
+            but.add(new JLabel(String.format("%1$" + 50 + "s", d.getSurName())));
+            but.add(new JLabel(String.format("%1$" + 90 + "s", d.getCab())));
+            but.add(new JLabel(String.format("%1$" + 130 + "s", "Specelizatoin")));
+            but.setPreferredSize(new Dimension(300, 30));
             but.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     System.out.println("Pressed on doctor: " + d.getName() + " " + d.getSurName());
+                    doctorInfoFrame(d);
                 }
             });
             panelD.add(but);
         }
 
-        JScrollPane scrollPane =  new JScrollPane(panelD);
+        JScrollPane scrollPane = new JScrollPane(panelD);
         JLabel lab = new JLabel();
         lab.setLayout(new BorderLayout());
-        lab.add(new JLabel(String.format("%1$"+ 19 + "s","Name")
-                +String.format("%1$"+ 29 + "s", "Surname")
-                +String.format("%1$"+ 30 + "s", "Cab")
-                +String.format("%1$"+ 36 + "s", "Specelizatoin")
+        lab.add(new JLabel(String.format("%1$" + 19 + "s", "Name")
+                + String.format("%1$" + 29 + "s", "Surname")
+                + String.format("%1$" + 30 + "s", "Cab")
+                + String.format("%1$" + 36 + "s", "Specelizatoin")
         ), BorderLayout.NORTH);
         lab.add(scrollPane);
 
         return lab;
     }
-    private JLabel tabPatients(){
+
+    private JLabel tabPatients() {
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 1));
 
-        for(Patient p : mc.patients){
+        for (Patient p : mc.patients) {
             JButton but = new JButton();
-            but.setHorizontalAlignment(SwingConstants.LEFT );
+            but.setHorizontalAlignment(SwingConstants.LEFT);
             but.add(new JLabel(p.getId()));
-            but.add(new JLabel(String.format("%1$"+ 50 + "s", p.getName())));
-            but.add(new JLabel(String.format("%1$"+ 90 + "s", p.getSurName())));
-            but.add(new JLabel(String.format("%1$"+ 130 + "s", p.getInsType())));
-            but.setPreferredSize(new Dimension( 300, 30));
+            but.add(new JLabel(String.format("%1$" + 50 + "s", p.getName())));
+            but.add(new JLabel(String.format("%1$" + 90 + "s", p.getSurName())));
+            but.add(new JLabel(String.format("%1$" + 130 + "s", p.getInsType())));
+            but.setPreferredSize(new Dimension(300, 30));
             but.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -106,23 +107,23 @@ public class DoctorsFrame{
             panel.add(but);
         }
 
-        JScrollPane scrollPaneP =  new JScrollPane(panel);
+        JScrollPane scrollPaneP = new JScrollPane(panel);
         JLabel lab = new JLabel();
         lab.setLayout(new BorderLayout());
         lab.add(new JLabel(
-                String.format("%1$"+ 17 + "s","ID")
-                        +String.format("%1$"+ 36 + "s", "Name")
-                        +String.format("%1$"+ 33 + "s", "Surname")
-                        +String.format("%1$"+ 32 + "s", "Insurnace")
+                String.format("%1$" + 17 + "s", "ID")
+                        + String.format("%1$" + 36 + "s", "Name")
+                        + String.format("%1$" + 33 + "s", "Surname")
+                        + String.format("%1$" + 32 + "s", "Insurnace")
         ), BorderLayout.NORTH);
         lab.add(scrollPaneP);
         return lab;
     }
 
-    private JLabel tabSchedule(){
+    private JLabel tabSchedule() {
 
         panelSh.setLayout(new GridLayout(0, 2, 50, 60));
-        panelSh.setPreferredSize(new Dimension(0,1000));
+        panelSh.setPreferredSize(new Dimension(0, 1000));
         panelSh.add(timeGraph(1));
         panelSh.add(timeGraph(2));
         panelSh.add(timeGraph(3));
@@ -134,36 +135,36 @@ public class DoctorsFrame{
 
         JLabel lab = new JLabel();
         lab.setLayout(new BorderLayout());
-        lab.add(timeDisp,BorderLayout.NORTH);
+        lab.add(timeDisp, BorderLayout.NORTH);
         lab.add(scrollPaneP);
 
 
         return lab;
     }
 
-    private JLabel timeGraph(int day){
+    private JLabel timeGraph(int day) {
         String name;
-        if(day==1)
+        if (day == 1)
             name = "Monday: ";
-        else if(day==2)
+        else if (day == 2)
             name = "Tuesday: ";
-        else if(day==3)
+        else if (day == 3)
             name = "Wednesday: ";
-        else if(day==4)
+        else if (day == 4)
             name = "Thursday: ";
-        else if(day==5)
+        else if (day == 5)
             name = "Friday: ";
-        else if(day==6)
+        else if (day == 6)
             name = "Saturday: ";
         else
             name = "Sunday: ";
-        day-=1;
+        day -= 1;
         JLabel temp = new JLabel();
 
         temp.setLayout(new BorderLayout());
-        if(!(d.getTimeDay(day).equals("-"))){
+        if (!(d.getTimeDay(day).equals("-"))) {
 
-            temp.add(new JLabel(String.format("%1$-" + 37 + "s", name) + String.format("%1$" + 11 + "s",d.getTimeDay(day)).replace(" ", "0")), BorderLayout.NORTH);
+            temp.add(new JLabel(String.format("%1$-" + 37 + "s", name) + String.format("%1$" + 11 + "s", d.getTimeDay(day)).replace(" ", "0")), BorderLayout.NORTH);
             //temp.add(new JLabel());
             {
                 String[] s = (d.getTimeDay(day).split("-|:"));
@@ -173,19 +174,18 @@ public class DoctorsFrame{
                 pan.setLayout(new GridLayout(0, 1));
                 JPanel pan2 = new JPanel();
                 pan2.setLayout(new GridLayout(0, 1));
-                for (double i= (time0%1==0)?0:0.5;  i < time1 - time0; i += 0.5) {
-                    pan.add(new JLabel(  String.format("%1$" + 2 + "s", (int)(Integer.parseInt(s[0]) + i)).replace(" ", "0") + ":" + ((i%1==0)?"00":"30")
-                            + " - " + String.format("%1$" + 2 + "s", (int)(Integer.parseInt(s[0]) + i +0.5)).replace(" ", "0") + ":" + ((i%1==0)?"30":"00")));
-                    pan2.add(patientBut(day, (int)i*2), BorderLayout.CENTER);
+                for (double i = (time0 % 1 == 0) ? 0 : 0.5; i < time1 - time0; i += 0.5) {
+                    pan.add(new JLabel(String.format("%1$" + 2 + "s", (int) (Integer.parseInt(s[0]) + i)).replace(" ", "0") + ":" + ((i % 1 == 0) ? "00" : "30")
+                            + " - " + String.format("%1$" + 2 + "s", (int) (Integer.parseInt(s[0]) + i + 0.5)).replace(" ", "0") + ":" + ((i % 1 == 0) ? "30" : "00")));
+                    pan2.add(patientBut(day, (int) i * 2), BorderLayout.CENTER);
                 }
-                //pan2.add(patient(day), BorderLayout.CENTER);
                 temp.add(pan, BorderLayout.WEST);
                 temp.add(pan2, BorderLayout.EAST);
             }
 
             return temp;
-        }else{
-            temp.add(new JLabel(String.format("%1$-" + 12 + "s", name) +d.getTimeDay(day) ), BorderLayout.NORTH);
+        } else {
+            temp.add(new JLabel(String.format("%1$-" + 12 + "s", name) + d.getTimeDay(day)), BorderLayout.NORTH);
             temp.add(new JLabel("Chilling at home"));
 
             return temp;
@@ -193,12 +193,12 @@ public class DoctorsFrame{
     }
 
 
-    private JPanel patientBut(int day, int i){
+    private JPanel patientBut(int day, int i) {
         Patient p = mc.patients.get(i);
         JPanel jb = new JPanel();
         jb.setLayout(new BorderLayout());
         JButton but;
-        if(mc.cal.get(Calendar.DAY_OF_WEEK)-1 == day+1){
+        if (mc.cal.get(Calendar.DAY_OF_WEEK) - 1 == day + 1) {
             but = new JButton("⌂");
             jb.add(new JLabel(p.getName() + " " + p.getSurName()), BorderLayout.WEST);
             jb.add(but, BorderLayout.EAST);
@@ -208,9 +208,9 @@ public class DoctorsFrame{
                     System.out.println("Cheking patient: " + p.getName() + " " + p.getSurName());
                 }
             });
-        }else{
+        } else {
             but = new JButton("add");
-            jb.add(new JLabel(String.format("%1$-"+ 20 + "s","----")), BorderLayout.WEST);
+            jb.add(new JLabel(String.format("%1$-" + 20 + "s", "----")), BorderLayout.WEST);
             jb.add(but, BorderLayout.EAST);
             but.addMouseListener(new MouseAdapter() {
                 @Override
@@ -221,18 +221,20 @@ public class DoctorsFrame{
         }
         return jb;
     }
-int checkTime = 0;//useless comment
-    public void tick(){
+
+    int checkTime = 0;
+
+    public void tick() {
         timeDisp.setText("Time: " + (mc.dateFormat.format(mc.cal.getTime())));
         //System.out.println(aaa);
-      //  aaa--;
-        if(checkTime != mc.cal.get(Calendar.WEEK_OF_YEAR)){
+        //  aaa--;
+        if (checkTime != mc.cal.get(Calendar.WEEK_OF_YEAR)) {
             int indexOfTab = tabs.getSelectedIndex();
             panelSh.removeAll();
             tabs.add("Schedule", tabSchedule());
             tabs.remove(2);
             tabs.setSelectedIndex(indexOfTab);
-           // aaa=10;
+            // aaa=10;
             checkTime = mc.cal.get(Calendar.WEEK_OF_YEAR);
         }
         frame.repaint();
@@ -240,8 +242,8 @@ int checkTime = 0;//useless comment
         // System.out.println(mc.cal.get(Calendar.DAY_OF_WEEK)); // TODO will need this ;)
     }
 
-    private void patientInfoFrame(Patient p){
-        JFrame infoF = new JFrame(p.getName() + " "+  p.getSurName());
+    private void patientInfoFrame(Patient p) {
+        JFrame infoF = new JFrame(p.getName() + " " + p.getSurName());
         infoF.setSize(400, 500);
         infoF.setLocationRelativeTo(null);
         infoF.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -250,26 +252,90 @@ int checkTime = 0;//useless comment
 
         JPanel info = new JPanel();
         info.add(new JLabel("Patient: "));
-        JTextField txt = new JTextField( p.getName() + " " + p.getSurName(),15);
+        JTextField txt = new JTextField(p.getName().toUpperCase() + " " + p.getSurName().toUpperCase(), 15);
         txt.setEditable(false);
         info.add(txt);
         info.add(new JLabel("  ID: "));
-        JTextField txt1 = new JTextField(p.getId(),8);
+        JTextField txt1 = new JTextField(p.getId(), 8);
         txt1.setEditable(false);
         info.add(txt1);
 
         JPanel info2 = new JPanel();
         info2.add(new JLabel("Insurance: "));
-        JTextField txt3 = new JTextField(p.getInsType(), 10);
-        info2.add(txt3);
+        JTextField txt2 = new JTextField(p.getInsType(), 13);
+        info2.add(txt2);
+        info2.add(new JLabel("    Description:            "));
+        txt2.setEditable(false);
+
+        JPanel info3 = new JPanel();
+        info3.setLayout(new BorderLayout(10, 0));
+        // info3.add(new JLabel("Description: "), BorderLayout.PAGE_START);
+        JTextArea txt3 = new JTextArea(p.getDescription(), 14, 20);
+        txt3.setLineWrap(true);
+        txt3.setWrapStyleWord(true);
+        info3.add(txt3, BorderLayout.CENTER);
+        info3.add(new JLabel(), BorderLayout.PAGE_END);
         txt3.setEditable(false);
 
         panel.setLayout(new BorderLayout(10, 10));
-        panel.add(info, BorderLayout.BEFORE_FIRST_LINE);
-        panel.add(info2);
-
+        JPanel info0 = new JPanel();
+        info0.setLayout(new GridLayout(0, 1));
+        info0.add(info);
+        info0.add(info2);
+        panel.add(info0, BorderLayout.BEFORE_FIRST_LINE);
+        //panel.add(info2, BorderLayout.NORTH);
+        panel.add(info3, BorderLayout.CENTER);
+        panel.add(new JLabel(""), BorderLayout.BEFORE_LINE_BEGINS);
+        panel.add(new JLabel(" "), BorderLayout.AFTER_LINE_ENDS);
+        panel.add(new JLabel(), BorderLayout.PAGE_END);
 
         infoF.add(panel);
+        infoF.setVisible(true);
+    }
+
+    private void doctorInfoFrame(Doctor d) {
+        JFrame infoF = new JFrame(d.getName() + " " + d.getSurName());
+        infoF.setSize(400, 500);
+        infoF.setLocationRelativeTo(null);
+        infoF.setLocationByPlatform(true);
+        infoF.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JPanel danel = new JPanel();
+
+        JPanel info = new JPanel();
+        info.add(new JLabel("Doctor: "));
+        JTextField txt = new JTextField(d.getName().toUpperCase() + " " + d.getSurName().toUpperCase(), 15);
+        txt.setEditable(false);
+        info.add(txt);
+        info.add(new JLabel("  Cab: "));
+        JTextField txt1 = new JTextField(Integer.toString(d.getCab()), 8);
+        txt1.setEditable(false);
+        info.add(txt1);
+
+
+        JPanel info3 = new JPanel();
+        info3.setLayout(new BorderLayout(10, 0));
+        // info3.add(new JLabel("Descridtion: "), BorderLayout.PAGE_START);
+        JTextArea txt3 = new JTextArea("", 14, 20);
+        txt3.setLineWrap(true);
+        txt3.setWrapStyleWord(true);
+        info3.add(txt3, BorderLayout.CENTER);
+        info3.add(new JLabel(), BorderLayout.PAGE_END);
+        txt3.setEditable(false);
+
+        danel.setLayout(new BorderLayout(10, 10));
+        JPanel info0 = new JPanel();
+        info0.setLayout(new GridLayout(0, 1));
+        info0.add(info);
+        //info0.add(info2);
+        danel.add(info0, BorderLayout.BEFORE_FIRST_LINE);
+        //danel.add(info2, BorderLayout.NORTH);
+        danel.add(info3, BorderLayout.CENTER);
+        danel.add(new JLabel(""), BorderLayout.BEFORE_LINE_BEGINS);
+        danel.add(new JLabel(" "), BorderLayout.AFTER_LINE_ENDS);
+        danel.add(new JLabel(), BorderLayout.PAGE_END);
+
+        infoF.add(danel);
         infoF.setVisible(true);
     }
 }
