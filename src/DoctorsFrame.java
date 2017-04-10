@@ -156,7 +156,7 @@ public class DoctorsFrame{
         time.set(mc.cal.DAY_OF_WEEK, day+1);
         if(day == 1){
             name = "Monday: ";
-           // time.set(Calendar.YEAR, Calendar.MONTH, Calendar.)  ;
+           // time.set(Calendar.YEAR, Calendar.MONTH, Calendar.)  ;;
         }else if(day == 2){
             name = "Tuesday: ";
         }else if(day == 3){
