@@ -286,12 +286,12 @@ public class DoctorsFrame{
         info2.add(new JLabel("Insurance: "));
         JTextField txt2 = new JTextField(p.getInsType(), 13);
         info2.add(txt2);
-        info2.add(new JLabel("    Description:            "));
+        info2.add(new JLabel("    description:            "));
         txt2.setEditable(false);
 
         JPanel info3 = new JPanel();
         info3.setLayout(new BorderLayout(10, 0));
-        // info3.add(new JLabel("Description: "), BorderLayout.PAGE_START);
+        // info3.add(new JLabel("description: "), BorderLayout.PAGE_START);
         JTextArea txt3 = new JTextArea(p.getDescription(), 14, 20);
         txt3.setLineWrap(true);
         txt3.setWrapStyleWord(true);

@@ -5,16 +5,17 @@ public class Patient extends Human {
     private String id;
     private int insurance;
     private String insType;
-    public String Description = " Needs to be added";
+    public String description;
     //  String name
     //  String surName
 
-    public Patient(String name, String surName, String id, int insurance){
+    public Patient(String name, String surName, String id, int insurance, String description){
         setName(name);
         setSurName(surName);
         this.id = id;
         this.insurance = insurance;
         insType = intToIns(insurance);
+        this.description = description;
     }
 
     @Override
@@ -60,10 +61,10 @@ public class Patient extends Human {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 }

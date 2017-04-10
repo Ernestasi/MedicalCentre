@@ -1,16 +1,17 @@
-Petras,Vileisis,78556182145,1
-Ona,Petraite,99286715699,0
-Kazimiera,Stukyte,91824671241,3
-Saulius,Padanginis,26238629610,1
-Tomas,Poligamas,31614972363,2
-Aivaras,Karvelis,86921265667,0
-Aivaras,Petrasiunas,58756476513,2
-Jonas,Sebestinas,80913251991,1
-Juozas,Suolininkas,80916555405,3
-Eisvinas,Raguckas,56494700490,0
-Liudmila,Alksniniene,20926475361,3
-Justinas,Kilas,19545123214,0
-Domantas,Alenskas,39801202688,0
-Justinas,Kilas,39712250055,0
-Justinas,Kilas,aaaaaaaaaaa,0
-Ernestas,Ivanovas,39702150000,0
+Petras_Vileisis_78556182145_1_ _
+Ona_Petraite_99286715699_0_ _
+Kazimiera_Stukyte_91824671241_3_ _
+Saulius_Padanginis_26238629610_1_ _
+Tomas_Poligamas_31614972363_2_ _
+Aivaras_Karvelis_86921265667_0_ _
+Aivaras_Petrasiunas_58756476513_2_ _
+Jonas_Sebestinas_80913251991_1_ _
+Juozas_Suolininkas_80916555405_3_ _
+Eisvinas_Raguckas_56494700490_0_ _
+Liudmila_Alksniniene_20926475361_3_ _
+Justinas_Kilas_19545123214_0_ _
+Domantas_Alenskas_39801202688_0_ _
+Justinas_Kilas_39712250055_0_ _
+Justinas_Kilas_aaaaaaaaaaa_0_ _
+Ernestas_Ivanovas_39702150000_0_ _
+Justinas_Kilas_39712250011_0_ _

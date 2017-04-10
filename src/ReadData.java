@@ -28,8 +28,8 @@ public class ReadData{
             BufferedReader br = new BufferedReader(new FileReader("./src/Data/Patients.txt"));
                 String line;
                 while( (line = br.readLine()) != null){
-                    String[] word = line.split(",");
-                    pat.add(new Patient(word[0], word[1], word[2], Integer.parseInt(word[3])));
+                    String[] word = line.split("_");
+                    pat.add(new Patient(word[0], word[1], word[2], Integer.parseInt(word[3]), word[4]));
                 }
         }  catch(IOException e) {
             e.printStackTrace();
