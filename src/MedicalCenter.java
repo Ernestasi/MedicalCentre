@@ -11,7 +11,6 @@ public class MedicalCenter  extends Canvas implements Runnable{
     ArrayList<Patient> patients = new ArrayList<>();
     ArrayList<Disease> diseases = new ArrayList<>();
 
-    private Registration reg;
     private ReadData rd;
     //    private MainFrameForDoctors DmFrame;
 //    private MainFrameForPatients PmFrame;

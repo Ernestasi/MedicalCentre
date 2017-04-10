@@ -40,7 +40,7 @@ public class DoctorsFrame {
         frame.requestFocus();
 
         tabs.addTab("Doctors List", tabDoctors());
-        tabs.addTab("Patients", tabPatients());
+        tabs.addTab("Patients", tabPatients(0));
         tabs.addTab("Schedule", tabSchedule());
 
         tabs.setSelectedIndex(0);
@@ -84,7 +84,7 @@ public class DoctorsFrame {
         return lab;
     }
 
-    private JLabel tabPatients() {
+    private JLabel tabPatients(int a) {
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 1));
@@ -100,8 +100,12 @@ public class DoctorsFrame {
             but.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    if(a == 0){
                     System.out.println("Pressed on patient: " + p.getName() + " " + p.getSurName());
                     patientInfoFrame(p);
+                    }else if(a == 1){
+                        //todo setting up patient's appointment
+                    }
                 }
             });
             panel.add(but);
@@ -206,6 +210,7 @@ public class DoctorsFrame {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     System.out.println("Cheking patient: " + p.getName() + " " + p.getSurName());
+                    patientInfoFrame(p);
                 }
             });
         } else {
@@ -216,6 +221,8 @@ public class DoctorsFrame {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     System.out.println("Setting up new appointment");
+
+                    but.setText(addPatientAppointment());
                 }
             });
         }
@@ -245,7 +252,8 @@ public class DoctorsFrame {
     private void patientInfoFrame(Patient p) {
         JFrame infoF = new JFrame(p.getName() + " " + p.getSurName());
         infoF.setSize(400, 500);
-        infoF.setLocationRelativeTo(null);
+        infoF.setLocation(100, 160);
+        infoF.setLocationByPlatform(true);
         infoF.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel();
@@ -296,7 +304,7 @@ public class DoctorsFrame {
     private void doctorInfoFrame(Doctor d) {
         JFrame infoF = new JFrame(d.getName() + " " + d.getSurName());
         infoF.setSize(400, 500);
-        infoF.setLocationRelativeTo(null);
+        infoF.setLocation(100, 160);
         infoF.setLocationByPlatform(true);
         infoF.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -315,7 +323,6 @@ public class DoctorsFrame {
 
         JPanel info3 = new JPanel();
         info3.setLayout(new BorderLayout(10, 0));
-        // info3.add(new JLabel("Descridtion: "), BorderLayout.PAGE_START);
         JTextArea txt3 = new JTextArea("", 14, 20);
         txt3.setLineWrap(true);
         txt3.setWrapStyleWord(true);
@@ -327,9 +334,7 @@ public class DoctorsFrame {
         JPanel info0 = new JPanel();
         info0.setLayout(new GridLayout(0, 1));
         info0.add(info);
-        //info0.add(info2);
         danel.add(info0, BorderLayout.BEFORE_FIRST_LINE);
-        //danel.add(info2, BorderLayout.NORTH);
         danel.add(info3, BorderLayout.CENTER);
         danel.add(new JLabel(""), BorderLayout.BEFORE_LINE_BEGINS);
         danel.add(new JLabel(" "), BorderLayout.AFTER_LINE_ENDS);
@@ -337,5 +342,16 @@ public class DoctorsFrame {
 
         infoF.add(danel);
         infoF.setVisible(true);
+    }
+
+    private String addPatientAppointment(){
+        JDialog infoF = new JDialog(frame, "Set appointment", Dialog.ModalityType.DOCUMENT_MODAL);
+        infoF.setSize(500, 500);
+        infoF.add(tabPatients(1));
+        infoF.setLocation(100, 150);
+        infoF.setLocationByPlatform(true);
+        infoF.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        infoF.setVisible(true);
+        return "";
     }
 }
