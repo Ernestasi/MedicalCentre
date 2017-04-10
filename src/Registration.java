@@ -75,7 +75,7 @@ public class Registration{
                     if(count == 0){
                         System.out.println(count);
                         Patient pat = new Patient(nameString, surNameString, IDString, 0, " ");
-                        mc.patients.add(pat);
+
                         //window.dispose();
 
                         window.setEnabled(false);
@@ -113,6 +113,7 @@ public class Registration{
 
                                 FileWriter fw;
                                 try{
+                                    mc.patients.add(pat);
                                     String filename = "./src/Data/Patients.txt";
                                     fw = new FileWriter(filename, true);
                                     fw.write("\n");
