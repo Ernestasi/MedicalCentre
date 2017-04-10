@@ -54,7 +54,6 @@ public class Registration{
         panel1.add(rb0);
         window.add(panel1);
 
-        int insurance = (rb0.isSelected())? 0 : (rb1.isSelected())? 1 : (rb2.isSelected())? 2 : 3;
         JLabel warning = new JLabel("");
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         window.add(warning);
@@ -74,7 +73,8 @@ public class Registration{
                     }
                     if(count == 0){
                         System.out.println(count);
-                        Patient pat = new Patient(nameString, surNameString, IDString, 0, " ");
+                        int insurance = (rb0.isSelected())? 0 : (rb1.isSelected())? 1 : (rb2.isSelected())? 2 : 3;
+                        Patient pat = new Patient(nameString, surNameString, IDString, insurance, " ");
                         mc.patients.add(pat);
                         //window.dispose();
 
