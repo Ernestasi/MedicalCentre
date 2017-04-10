@@ -1,3 +1,5 @@
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,6 +20,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
     TimeFrame tFrame;
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm  E");
     Calendar cal = Calendar.getInstance();
+
     DoctorsFrame DocFrame;
     PatientsFrame PatFrame;
 
@@ -114,7 +117,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
         MedicalCenter medCent = new  MedicalCenter();
         System.out.println("Application started!!");
         medCent.init(medCent);
-
+        System.out.println(Calendar.DAY_OF_WEEK);
         /*for(Patient p : medCent.patients){
             System.out.println(p.toString());
         }*/

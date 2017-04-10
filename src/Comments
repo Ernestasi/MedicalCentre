@@ -1,3 +1,29 @@
 Kiekvienas klientas turi tureti varda, pavarde,asmens kodas ,draudimo iformacija(0-nera, 1-national, 2-personal, 3-both)
 daktarai: Genute 8:30-16:20/5:00-15:00/-/-/
 ligos :Sepsis 2:00 50euru 3meetu 80 90 //cia 80% national 90% personal
+
+/////////////////////////////
+Functionality of the program:
+- Displays virtual time (start point is current time)
+- Allows user to select its role (doctor/patient)
+
+@ if Doctor selected:
+    - Opens Login frame for doctors /not yet included
+    - Loads "Medical center application for doctors" frame witch displays doctors, patients list and schedule of current week in tabs
+    - User(doctor) can open information frame about other doctors or patients by pressing on them in lists
+    - User can add some comments to patient in patient information frame
+    - User can open information frame about patient by pressing on button in schedule tab next to patient name if appointment is scheduled
+    - User can open set appointment frame by pressing on add button in schedule tab and frame with patients list appears
+
+@ if Patient selected:
+    - Opens Login frame where user can select if he wants to login or register as a new patient
+
+    @ if Login selected:
+        - Asks to enter id which is already in database if id doesn't exist displays a massage and suggest to register or allows to correct id;
+        - If login was successful opens "Medical Center Application for Patient" frame
+        //more functionality will be added
+
+    @ If Register selected:
+        - Asks User to enter name, surname, id and select insurance type, checks entered data and if it is
+        correct opens information frame and shows entered data and user can submit/cancel data
+        - if data is submitted opens "Medical Center Application for Patient" frame and does its functionality
