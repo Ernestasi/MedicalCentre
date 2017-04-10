@@ -165,7 +165,6 @@ public class PatientsFrame {
                             for (Patient p : mc.patients) {
                                 if ((ID.length() == 11) && (ID.matches("[0-9]+"))) {
                                     if (ID.equals(p.getId())) {
-                                        //test.setText("ID is good (go to user inferface)");
                                         securityID.dispose();
                                         logged(p);
                                         check++;
