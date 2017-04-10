@@ -5,6 +5,7 @@ ligos :Sepsis 2:00 50euru 3meetu 80 90 //cia 80% national 90% personal
 /////////////////////////////
 Functionality of the program:
 - Displays virtual time (start point is current time)
+- time can be forwarded by day, week, month, year
 - Allows user to select its role (doctor/patient)
 
 @ if Doctor selected:

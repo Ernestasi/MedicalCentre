@@ -1,5 +1,3 @@
-import com.sun.org.apache.xpath.internal.SourceTree;
-
 import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -7,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 //
-public class MedicalCenter  extends Canvas implements Runnable{
+public class MedicalCenter extends Canvas implements Runnable{
 
     ArrayList<Doctor> doctors = new ArrayList<>();
     ArrayList<Patient> patients = new ArrayList<>();
@@ -21,8 +19,8 @@ public class MedicalCenter  extends Canvas implements Runnable{
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm  E");
     Calendar cal = Calendar.getInstance();
 
-    DoctorsFrame DocFrame;
-    PatientsFrame PatFrame;
+    DoctorsFrame docFrame;
+    PatientsFrame patFrame;
 
     private Thread thread;
     private boolean running = false;
@@ -35,7 +33,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
         thread.start();
     }
 
-    public void run() {
+    public void run(){
 
         long lastTime = System.nanoTime();
         final double amountOfTicks = 2.0;
@@ -58,7 +56,7 @@ public class MedicalCenter  extends Canvas implements Runnable{
             render();
             frames++;
             //System.out.println(System.currentTimeMillis()- timer + " " );
-            if(System.currentTimeMillis()- timer > 1000){
+            if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
                 cal.add(Calendar.MINUTE, 1);
                 //System.out.println(updates + " Ticks, Fps " + frames);
@@ -71,32 +69,33 @@ public class MedicalCenter  extends Canvas implements Runnable{
     }
 
     private void tick(){
-        if(DocFrame != null)
-            DocFrame.tick();
+        if(docFrame != null)
+            docFrame.tick();
         tFrame.tick();
+        if(patFrame != null)
+            patFrame.tick();
+
     }
 
     private void render(){
-        // DmFrame.render(this);                                    //main frame for doctors ar patients?
+        // DmFrame.mainPatientFrame(this);                                    //main frame for doctors ar patients?
         // jei doctors tai mFrame pakeisti i DmFrame, jei patients tai i PmFrame
     }
 
-    private  synchronized  void stop(){
+    private synchronized void stop(){
         if(!running)
             return;
         running = false;
-        try {
+        try{
             thread.join();
-        }catch (InterruptedException e){
+        }catch(InterruptedException e){
             e.printStackTrace();
         }
         System.exit(1);
     }
 
 
-
-
-    public void init( MedicalCenter  medCent) {
+    public void init(MedicalCenter medCent){
         rd = new ReadData();
         tFrame = new TimeFrame(this);
 
@@ -112,9 +111,9 @@ public class MedicalCenter  extends Canvas implements Runnable{
     }
 
 
-    public static void  main(String[] args) {
+    public static void main(String[] args){
 
-        MedicalCenter medCent = new  MedicalCenter();
+        MedicalCenter medCent = new MedicalCenter();
         System.out.println("Application started!!");
         medCent.init(medCent);
         System.out.println(Calendar.DAY_OF_WEEK);

@@ -42,8 +42,8 @@ public class Login {
         doctors.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                mc.DocFrame = new DoctorsFrame(mc);
-                mc.DocFrame.init();
+                mc.docFrame = new DoctorsFrame(mc);
+                mc.docFrame.init();
                 window.dispose();
             }
 
@@ -54,8 +54,8 @@ public class Login {
         patients.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                mc.PatFrame = new PatientsFrame(mc);
-                mc.PatFrame.render();
+                mc.patFrame = new PatientsFrame(mc);
+                mc.patFrame.mainPatientFrame();
                 window.dispose();
             }
 

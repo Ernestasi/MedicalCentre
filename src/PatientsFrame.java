@@ -1,13 +1,11 @@
-
-import com.sun.deploy.panel.JavaPanel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Calendar;
 
 public class PatientsFrame {
+
+    JLabel time = new JLabel();
 
     private MedicalCenter mc;
     public PatientsFrame(MedicalCenter mc){
@@ -37,7 +35,7 @@ public class PatientsFrame {
         //info panel
         info.setLayout(new GridLayout(3,2));
 
-        JLabel time = new JLabel();
+
         time.setText("Time: " + (mc.dateFormat.format(mc.cal.getTime())));
         time.setFont(new Font("Serif", Font.BOLD,24 ));
         info.add(time);
@@ -76,7 +74,7 @@ public class PatientsFrame {
         signOutBTN.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                render();
+                mainPatientFrame();
                 loggedIn.dispose();
             }
         });
@@ -91,14 +89,10 @@ public class PatientsFrame {
 
     }
 
-
-
-
-    void render() {
+    void mainPatientFrame() {
 
         JFrame frame = new JFrame("Medical Centre Application for Patients  ");
         frame.setLocationRelativeTo(null);
-        frame.setPreferredSize(new Dimension(500, 200));
         frame.setSize(500, 200);
         frame.getContentPane().setLayout(new GridLayout(1, 2));
         frame.setResizable(false);
@@ -204,7 +198,7 @@ public class PatientsFrame {
                     public void mouseClicked(MouseEvent e) {
                         PatientsFrame goBack = new PatientsFrame(mc);
                         securityID.dispose();
-                        goBack.render();
+                        goBack.mainPatientFrame();
                     }
                 });
                 securityID.add(back);
@@ -212,7 +206,11 @@ public class PatientsFrame {
             }
         });
         frame.add(oldB);
-
     }
 
+
+    public void tick(){
+        time.setText("Time: " + (mc.dateFormat.format(mc.cal.getTime())));
+
+    }
 }

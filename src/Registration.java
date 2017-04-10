@@ -117,7 +117,7 @@ public class Registration {
                                         fw.write(nameString + "," +  surNameString + "," +  IDString + "," + "0");
                                         fw.close();
                                         PatientsFrame forPatien = new PatientsFrame(mc);
-                                        forPatien.render();
+                                        forPatien.mainPatientFrame();
                                         submited.dispose();
                                         window.dispose();
                                     }
@@ -166,7 +166,7 @@ public class Registration {
 @Override
 public void mouseClicked(MouseEvent e) {
         PatientsFrame goBack = new PatientsFrame(mc);
-        goBack.render();
+        goBack.mainPatientFrame();
         window.dispose();
         }
         });
