@@ -8,7 +8,7 @@ import javax.swing.*;
 
 
 public class DoctorsFrame{
-    int currentDoctor = 0; //TODO reikia kad reaguotu kuris daktaras!!!!
+    int currentDoctor; //TODO reikia kad reaguotu kuris daktaras!!!!
 
     MedicalCenter mc;
     Doctor d;
@@ -267,12 +267,13 @@ public class DoctorsFrame{
         JPanel info3 = new JPanel();
         info3.setLayout(new BorderLayout(10, 0));
         // info3.add(new JLabel("description: "), BorderLayout.PAGE_START);
-        JTextArea txt3 = new JTextArea(p.getDescription(), 14, 20);
+        JTextArea txt3 = new JTextArea(p.getDescription(), 14, 20);//todo description text
         txt3.setLineWrap(true);
         txt3.setWrapStyleWord(true);
         info3.add(txt3, BorderLayout.CENTER);
         info3.add(new JLabel(), BorderLayout.PAGE_END);
         txt3.setEditable(false);
+        System.out.println(p.time);//todo add time format xd
 
         panel.setLayout(new BorderLayout(10, 10));
         JPanel info0 = new JPanel();

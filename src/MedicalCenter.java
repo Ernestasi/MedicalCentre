@@ -107,9 +107,9 @@ public class MedicalCenter extends Canvas implements Runnable{
         rd.readDisease(diseases);
         rd.readAppointment(patients);
 
-
         log = new Login(this);
         log.render();
+
     }
 
 

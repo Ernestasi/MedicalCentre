@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 //
 public class Patient extends Human{
@@ -20,6 +21,9 @@ public class Patient extends Human{
         this.insurance = insurance;
         insType = intToIns(insurance);
         this.description = description;
+        appointments = new ArrayList<>();
+        docId = new ArrayList<>();
+        time = new ArrayList<>();
     }
 
     @Override
@@ -78,5 +82,22 @@ public class Patient extends Human{
 
     public void setAppointments(ArrayList<String> appointments){
         this.appointments = appointments;
+    }
+
+    public void AppointmentToTime(){
+        for(String s : appointments){
+            String[] temp = s.split("_");
+            //1_2017-05-01_10:30
+            //1
+            //2017-05-01
+            //String t =
+            String[] t = temp[1].split("-");
+            String[] t2 = temp[2].split(":");
+            Calendar tempCal =  Calendar.getInstance();
+            tempCal.setTime(new Date( Integer.parseInt(t[0]) ,Integer.parseInt(t[1]),Integer.parseInt(t[2]), Integer.parseInt(t2[0]), Integer.parseInt(t2[1])));
+            time.add(tempCal);
+            docId.add(temp[0]);
+
+        }
     }
 }

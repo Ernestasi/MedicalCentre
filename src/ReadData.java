@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReadData{
@@ -52,17 +51,20 @@ public class ReadData{
         }
     }
 
-    public void readAppointment(ArrayList<Patient> pat){
+    public void readAppointment(List<Patient> pat){
         try{
             BufferedReader br = new BufferedReader(new FileReader("./src/Data/Dates.txt"));
             String line;
             while((line = br.readLine())     != null){
                 String[] pID = line.split(",");
-                for(int i=0; i<pat.size(); i++){
-                    if(pat.get(i).getId() == pID[0]){
-                        for(int j=1; j<pID.length; j++){
-                            pat.get(i).getAppointments().add(pID[j]);
+                String tempID = pID[0];
+                for(Patient p:pat){
+                    if(p.getId().equals(tempID)){
+                        for(int i=1; i<pID.length; i++){
+                            p.appointments.add(pID[i]);
                         }
+                        p.AppointmentToTime();
+                        break;
                     }
                 }
             }
