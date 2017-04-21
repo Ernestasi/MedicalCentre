@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReadData{
@@ -60,6 +61,7 @@ public class ReadData{
                 String tempID = pID[0];
                 for(Patient p:pat){
                     if(p.getId().equals(tempID)){
+                        p.appointments = new ArrayList<>();
                         for(int i=1; i<pID.length; i++){
                             p.appointments.add(pID[i]);
                         }
