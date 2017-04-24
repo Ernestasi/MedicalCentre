@@ -80,8 +80,11 @@ public class Patient extends Human{
         return appointments;
     }
 
-    public void setAppointments(ArrayList<String> appointments){
-        this.appointments = appointments;
+    public void setAppointments(String appointments){
+        if(this.appointments == null)
+            this.appointments = new ArrayList<>();
+        this.appointments.add(appointments);
+        AppointmentToTime();
     }
 
     public ArrayList<String> getDocId(){
@@ -101,6 +104,10 @@ public class Patient extends Human{
     }
 
     public void AppointmentToTime(){
+        time = null;
+        docId = null;
+        time= new ArrayList<>();
+        docId= new ArrayList<>();
         for(String s : appointments){
             String[] temp = s.split("_");
             docId.add(temp[0]);
