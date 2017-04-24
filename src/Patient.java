@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 //
 public class Patient extends Human{
@@ -20,6 +21,9 @@ public class Patient extends Human{
         this.insurance = insurance;
         insType = intToIns(insurance);
         this.description = description;
+
+        docId = new ArrayList<>();
+        time = new ArrayList<>();
     }
 
     @Override
@@ -76,7 +80,50 @@ public class Patient extends Human{
         return appointments;
     }
 
-    public void setAppointments(ArrayList<String> appointments){
-        this.appointments = appointments;
+    public void setAppointments(String appointments){
+        if(this.appointments == null)
+            this.appointments = new ArrayList<>();
+        this.appointments.add(appointments);
+        AppointmentToTime();
+    }
+
+    public ArrayList<String> getDocId(){
+        return docId;
+    }
+
+    public void setDocId(ArrayList<String> docId){
+        this.docId = docId;
+    }
+
+    public ArrayList<Calendar> getTime(){
+        return time;
+    }
+
+    public void setTime(ArrayList<Calendar> time){
+        this.time = time;
+    }
+
+    public void AppointmentToTime(){
+        time = null;
+        docId = null;
+        time= new ArrayList<>();
+        docId= new ArrayList<>();
+        for(String s : appointments){
+            String[] temp = s.split("_");
+            docId.add(temp[0]);
+            //1_2017-05-01_10:30
+            //1
+            //2017-05-01
+            String[] t = temp[1].split("-");
+            String[] t2 = temp[2].split(":");
+            Calendar tempCal =  Calendar.getInstance();
+            tempCal.set(Calendar.YEAR, Integer.parseInt(t[0]));
+            tempCal.set(Calendar.MONTH, Integer.parseInt(t[1])-1);
+            tempCal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(t[2]));
+            tempCal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(t2[0]));
+            tempCal.set(Calendar.MINUTE, Integer.parseInt(t2[1]));
+            time.add(tempCal);
+
+        }
     }
 }

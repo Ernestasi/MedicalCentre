@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-//
 public class MedicalCenter extends Canvas implements Runnable{
 
     ArrayList<Doctor> doctors = new ArrayList<>();
@@ -12,8 +11,6 @@ public class MedicalCenter extends Canvas implements Runnable{
     ArrayList<Disease> diseases = new ArrayList<>();
 
     private ReadData rd;
-    //    private MainFrameForDoctors DmFrame;
-//    private MainFrameForPatients PmFrame;
     Login log;
     TimeFrame tFrame;
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm  E");
@@ -44,7 +41,6 @@ public class MedicalCenter extends Canvas implements Runnable{
         long timer = System.currentTimeMillis();
 
         while(running){
-            //System.out.println(" Ticks, Fps ");
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
@@ -55,11 +51,9 @@ public class MedicalCenter extends Canvas implements Runnable{
             }
             render();
             frames++;
-            //System.out.println(System.currentTimeMillis()- timer + " " );
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
                 cal.add(Calendar.MINUTE, 1);
-                //System.out.println(updates + " Ticks, Fps " + frames);
                 updates = 0;
                 frames = 0;
             }
@@ -78,8 +72,6 @@ public class MedicalCenter extends Canvas implements Runnable{
     }
 
     private void render(){
-        // DmFrame.mainPatientFrame(this);                                    //main frame for doctors ar patients?
-        // jei doctors tai mFrame pakeisti i DmFrame, jei patients tai i PmFrame
     }
 
     private synchronized void stop(){
@@ -107,9 +99,9 @@ public class MedicalCenter extends Canvas implements Runnable{
         rd.readDisease(diseases);
         rd.readAppointment(patients);
 
-
         log = new Login(this);
         log.render();
+
     }
 
 
@@ -119,10 +111,6 @@ public class MedicalCenter extends Canvas implements Runnable{
         System.out.println("Application started!!");
         medCent.init(medCent);
         System.out.println(Calendar.DAY_OF_WEEK);
-        /*for(Patient p : medCent.patients){
-            System.out.println(p.toString());
-        }*/
 
     }
-    //
 }

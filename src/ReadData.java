@@ -6,13 +6,10 @@ import java.util.List;
 
 public class ReadData{
 
-    // Doctor doc;
-
     public void readDoctors(List doc){
         try{
             BufferedReader br = new BufferedReader(new FileReader("./src/Data/Doctors.txt"));
             String line;
-            int i = 0;
             while((line = br.readLine()) != null){
                 String[] word = line.split(" ");
                 doc.add(new Doctor(word[0], word[1], Integer.parseInt(word[2]), word[3]));
@@ -52,25 +49,27 @@ public class ReadData{
         }
     }
 
-    public void readAppointment(ArrayList<Patient> pat){
+    public void readAppointment(List<Patient> pat){
         try{
             BufferedReader br = new BufferedReader(new FileReader("./src/Data/Dates.txt"));
             String line;
-            while((line = br.readLine())     != null){
+            while((line = br.readLine()) != null){
                 String[] pID = line.split(",");
-                for(int i=0; i<pat.size(); i++){
-                    if(pat.get(i).getId() == pID[0]){
-                        for(int j=1; j<pID.length; j++){
-                            pat.get(i).getAppointments().add(pID[j]);
+                String tempID = pID[0];
+                for(Patient p : pat){
+                    if(p.getId().equals(tempID)){
+                        p.appointments = new ArrayList<>();
+                        for(int i = 1; i < pID.length; i++){
+                            p.appointments.add(pID[i]);
                         }
+                        p.AppointmentToTime();
+                        break;
                     }
                 }
             }
-
 
         }catch(IOException e){
             e.printStackTrace();
         }
     }
 }
-//
