@@ -62,7 +62,7 @@ public class DoctorsFrame{
             but.add(new JLabel(String.format("%1$" + 15 + "s", d.getName())));
             but.add(new JLabel(String.format("%1$" + 50 + "s", d.getSurName())));
             but.add(new JLabel(String.format("%1$" + 90 + "s", d.getCab())));
-            but.add(new JLabel(String.format("%1$" + 130 + "s", "Specelizatoin")));
+            but.add(new JLabel(String.format("%1$" + 130 + "s", d.getSpec())));
             but.setPreferredSize(new Dimension(300, 30));
             but.addMouseListener(new MouseAdapter(){
                 @Override

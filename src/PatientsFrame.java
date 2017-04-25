@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class PatientsFrame {
 
@@ -15,7 +16,7 @@ public class PatientsFrame {
     private void logged (Patient p) {
 
         JFrame loggedIn = new JFrame();
-        loggedIn.setSize(650, 600);
+        loggedIn.setSize(650, 650);
         loggedIn.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         loggedIn.setResizable(false);
         loggedIn.setLocationRelativeTo(null);
@@ -25,6 +26,32 @@ public class PatientsFrame {
         JPanel info = new JPanel();
         JPanel main = new JPanel();
         JPanel buttons = new JPanel();
+
+
+        ArrayList<String> tempList = new ArrayList<String>();
+        tempList.add(mc.doctors.get(1).getSpec());
+        for(Doctor d: mc.doctors){
+            int temp = 0;
+            for(int i = 0; i < tempList.size(); i++){
+                if(d.getSpec().equals(tempList.get(i)))
+                    temp++;
+            }
+            if(temp == 0){
+                tempList.add(d.getSpec());
+
+            }
+
+        }
+        GridLayout mainGrid = new GridLayout(tempList.size(),1);
+        for (int i = 0; i < tempList.size(); i++){
+            String temp = tempList.get(i);
+            System.out.println(temp);
+            JButton specBTN = new JButton(temp);
+            main.add(specBTN);
+        }
+
+
+        main.setLayout(mainGrid);
 
 
         loggedIn.add(info,BorderLayout.NORTH);

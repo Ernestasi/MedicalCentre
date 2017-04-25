@@ -3,15 +3,17 @@ import java.util.Arrays;
 
 public class Doctor extends Human{
     private int cab;
+    private String spec;
     private String time;
     private String[] timeDay;
     private String data;
 
 
-    public Doctor(String name, String surName, int cab, String time){
+    public Doctor(String name, String surName, int cab,String spec, String time){
         setName(name);
         setSurName(surName);
         this.cab = cab;
+        this.spec = spec;
         this.time = time;
         toDay(time);
         constructData();
@@ -56,6 +58,8 @@ public class Doctor extends Human{
     public String getTimeDay(int i) {
         return timeDay[i];
     }
+
+    public String getSpec(){return spec;}
 
     public void setTimeDay(String[] timeDay) {
         this.timeDay = timeDay;
