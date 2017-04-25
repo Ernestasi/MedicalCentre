@@ -337,7 +337,7 @@ public class DoctorsFrame{
         info2.add(new JLabel("Insurance: "));
         JTextField txt2 = new JTextField(p.getInsType(), 13);
         info2.add(txt2);
-        info2.add(new JLabel("    description:            "));
+        info2.add(new JLabel("    Description:            "));
         txt2.setEditable(false);
 
         JPanel info3 = new JPanel();
@@ -346,12 +346,32 @@ public class DoctorsFrame{
         txt3.setLineWrap(true);
         txt3.setWrapStyleWord(true);
         info3.add(txt3, BorderLayout.CENTER);
-        info3.add(new JLabel(), BorderLayout.PAGE_END);
         txt3.setEditable(false);
         if(p.getAppointments() != null){
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm  E");
             System.out.println(dateFormat.format(p.time.get(1).getTime()));//todo add time format xd
         }
+        JButton editBut = new JButton("Edit");
+        editBut.setSize(10, 10);
+        editBut.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                if(!txt3.isEditable()){
+                    txt3.setEditable(true);
+                    editBut.setText("Save ");
+                    txt3.setText(txt3.getText() + "\n");
+                    txt3.requestFocus();
+                }else{
+                    txt3.setEditable(false);
+                    editBut.setText("Edit");
+                }
+            }
+        });
+        JPanel jl = new JPanel();
+        jl.setLayout(new GridBagLayout());
+        jl.add(editBut);
+
+        info3.add( jl, BorderLayout.PAGE_END);
         panel.setLayout(new BorderLayout(10, 10));
         JPanel info0 = new JPanel();
         info0.setLayout(new GridLayout(0, 1));
@@ -359,7 +379,8 @@ public class DoctorsFrame{
         info0.add(info2);
         panel.add(info0, BorderLayout.BEFORE_FIRST_LINE);
         panel.add(info3, BorderLayout.CENTER);
-        panel.add(new JLabel(""), BorderLayout.BEFORE_LINE_BEGINS);
+        panel.add(new JLabel(" "), BorderLayout.BEFORE_LINE_BEGINS);
+       // panel.add(editBut, BorderLayout.SOUTH);
         panel.add(new JLabel(" "), BorderLayout.AFTER_LINE_ENDS);
         panel.add(new JLabel(), BorderLayout.PAGE_END);
 
