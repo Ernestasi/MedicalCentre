@@ -12,7 +12,7 @@ public class ReadData{
             String line;
             while((line = br.readLine()) != null){
                 String[] word = line.split(" ");
-                doc.add(new Doctor(word[0], word[1], Integer.parseInt(word[2]), word[3], word[4]));
+                doc.add(new Doctor(word[0], word[1], Integer.parseInt(word[2]), word[3].replace("_", " "), word[4]));
             }
             br.close();
 
