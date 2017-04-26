@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import javax.swing.plaf.basic.BasicArrowButton;
 
 
@@ -58,21 +59,21 @@ public class DoctorsFrame {
         panelD.setLayout(new GridLayout(0, 1));
 
         for (Doctor d : mc.doctors) {
-            JButton but = new JButton();
-            but.setHorizontalAlignment(SwingConstants.LEFT);
-            but.add(new JLabel(String.format("%1$" + 15 + "s", d.getName())));
-            but.add(new JLabel(String.format("%1$" + 50 + "s", d.getSurName())));
-            but.add(new JLabel(String.format("%1$" + 90 + "s", d.getCab())));
-            but.add(new JLabel(String.format("%1$" + 130 + "s", d.getSpec())));
-            but.setPreferredSize(new Dimension(300, 30));
-            but.addMouseListener(new MouseAdapter() {
+            JButton doctorBut = new JButton();
+            doctorBut.setHorizontalAlignment(SwingConstants.LEFT);
+            doctorBut.add(new JLabel(String.format("%1$" + 15 + "s", d.getName())));
+            doctorBut.add(new JLabel(String.format("%1$" + 50 + "s", d.getSurName())));
+            doctorBut.add(new JLabel(String.format("%1$" + 90 + "s", d.getCab())));
+            doctorBut.add(new JLabel(String.format("%1$" + 130 + "s", d.getSpec())));
+            doctorBut.setPreferredSize(new Dimension(300, 30));
+            doctorBut.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     System.out.println("Pressed on doctor: " + d.getName() + " " + d.getSurName());
                     doctorInfoFrame(d);
                 }
             });
-            panelD.add(but);
+            panelD.add(doctorBut);
         }
 
         JScrollPane scrollPane = new JScrollPane(panelD);
@@ -94,21 +95,21 @@ public class DoctorsFrame {
         panel.setLayout(new GridLayout(0, 1));
 
         for (Patient p : mc.patients) {
-            JButton but = new JButton();
-            but.setHorizontalAlignment(SwingConstants.LEFT);
-            but.add(new JLabel(p.getId()));
-            but.add(new JLabel(String.format("%1$" + 50 + "s", p.getName())));
-            but.add(new JLabel(String.format("%1$" + 90 + "s", p.getSurName())));
-            but.add(new JLabel(String.format("%1$" + 130 + "s", p.getInsType())));
-            but.setPreferredSize(new Dimension(300, 30));
-            but.addMouseListener(new MouseAdapter() {
+            JButton patientBut = new JButton();
+            patientBut.setHorizontalAlignment(SwingConstants.LEFT);
+            patientBut.add(new JLabel(p.getId()));
+            patientBut.add(new JLabel(String.format("%1$" + 50 + "s", p.getName())));
+            patientBut.add(new JLabel(String.format("%1$" + 90 + "s", p.getSurName())));
+            patientBut.add(new JLabel(String.format("%1$" + 130 + "s", p.getInsType())));
+            patientBut.setPreferredSize(new Dimension(300, 30));
+            patientBut.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     System.out.println("Pressed on patient: " + p.getName() + " " + p.getSurName());
                     patientInfoFrame(p);
                 }
             });
-            panel.add(but);
+            panel.add(patientBut);
         }
 
         JScrollPane scrollPaneP = new JScrollPane(panel);
@@ -125,14 +126,14 @@ public class DoctorsFrame {
         panel.setLayout(new GridLayout(0, 1));
 
         for (Patient p : mc.patients) {
-            JButton but = new JButton();
-            but.setHorizontalAlignment(SwingConstants.LEFT);
-            but.add(new JLabel(p.getId()));
-            but.add(new JLabel(String.format("%1$" + 50 + "s", p.getName())));
-            but.add(new JLabel(String.format("%1$" + 90 + "s", p.getSurName())));
-            but.add(new JLabel(String.format("%1$" + 130 + "s", p.getInsType())));
-            but.setPreferredSize(new Dimension(300, 30));
-            but.addMouseListener(new MouseAdapter() {
+            JButton patientBut = new JButton();
+            patientBut.setHorizontalAlignment(SwingConstants.LEFT);
+            patientBut.add(new JLabel(p.getId()));
+            patientBut.add(new JLabel(String.format("%1$" + 50 + "s", p.getName())));
+            patientBut.add(new JLabel(String.format("%1$" + 90 + "s", p.getSurName())));
+            patientBut.add(new JLabel(String.format("%1$" + 130 + "s", p.getInsType())));
+            patientBut.setPreferredSize(new Dimension(300, 30));
+            patientBut.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     System.out.println("added patient: " + p.getName() + " " + p.getSurName());
@@ -148,7 +149,7 @@ public class DoctorsFrame {
                     //todo setting up patient's appointment
                 }
             });
-            panel.add(but);
+            panel.add(patientBut);
         }
         JScrollPane scrollPaneP = new JScrollPane(panel);
         JLabel lab = new JLabel();
@@ -215,11 +216,11 @@ public class DoctorsFrame {
                 time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(s[0]));
                 time.set(Calendar.MINUTE, Integer.parseInt(s[1]));
                 JPanel pan = new JPanel();
-                pan.setLayout(new GridLayout(0, 1));
+                pan.setLayout(new GridLayout(0, 1, 3, 3));
                 JPanel pan2 = new JPanel();
                 pan2.setLayout(new GridLayout(0, 1, 3, 3));
-                pan.setPreferredSize(new Dimension(90, 30));
-                pan2.setPreferredSize(new Dimension(200, 30));
+                pan.setPreferredSize(new Dimension(90, 40));
+                pan2.setPreferredSize(new Dimension(200, 40));
 
                 Calendar temptime = (Calendar) time.clone();
 
@@ -265,7 +266,7 @@ public class DoctorsFrame {
                                 ) {
                             but.setText("i");
                             but.setBorder(BorderFactory.createLineBorder(null));
-                            but.setPreferredSize(new Dimension(21, 21));
+                            but.setPreferredSize(new Dimension(21, 19));
                             timeLine.add(new JLabel(String.format("%1$" + 25 + "s", p.getName() + " " + p.getSurName())), BorderLayout.CENTER);
                             timeLine.add(butPan, BorderLayout.WEST);
                             but.addMouseListener(new MouseAdapter() {
@@ -277,9 +278,12 @@ public class DoctorsFrame {
                             });
                             JPanel but2Pan = new JPanel(new GridBagLayout());
                             JButton but2 = new JButton("x");
+                            if(time.getTime().before(mc.cal.getTime())){
+                                but2.setEnabled(false);
+                            }
                             but2Pan.add(but2);
                             but2.setBorder(BorderFactory.createLineBorder(null));
-                            but2.setPreferredSize(new Dimension(21, 21));
+                            but2.setPreferredSize(new Dimension(21, 19));
                             int a = j;
                             but2.addMouseListener(new MouseAdapter() {
                                 @Override
@@ -296,6 +300,7 @@ public class DoctorsFrame {
                                             p.getAppointments().remove(a);
                                             p.AppointmentToTime();
                                             checkTime.add(Calendar.YEAR, 1);
+                                            methods.updateDatesFile(mc.patients);
                                             cancelApointment.dispose();
                                         }
                                     });
@@ -327,8 +332,11 @@ public class DoctorsFrame {
         }
         if (but.getText().equals("")) {
             but.setText("+");
+            if(time.getTime().before(mc.cal.getTime())){
+                but.setEnabled(false);
+            }
             but.setBorder(BorderFactory.createLineBorder(null));
-            but.setPreferredSize(new Dimension(21, 21));
+            but.setPreferredSize(new Dimension(21, 19));
             Calendar timeClone = (Calendar) time.clone();
             timeLine.add(new JLabel(String.format("%1$" + 20 + "s", "----")), BorderLayout.CENTER);
             timeLine.add(butPan, BorderLayout.EAST);
@@ -372,11 +380,14 @@ public class DoctorsFrame {
 
         JPanel info3 = new JPanel();
         info3.setLayout(new BorderLayout(10, 0));
-        JTextArea txt3 = new JTextArea(p.getDescription(), 14, 20);//todo description text
+        JTextArea txt3 = new JTextArea(p.getDescription().replaceAll("#n#", "\n"), 14, 20);
+
+        JScrollPane descriptionScrollable = new JScrollPane(txt3);
+        descriptionScrollable.setBorder( new EtchedBorder( EtchedBorder.LOWERED ) );
         txt3.setLineWrap(true);
         txt3.setWrapStyleWord(true);
-        info3.add(txt3, BorderLayout.CENTER);
         txt3.setEditable(false);
+        info3.add(descriptionScrollable, BorderLayout.CENTER);
         JButton editBut = new JButton(" Edit ");
         JButton closeBut = new JButton(" Close");
 
@@ -384,30 +395,32 @@ public class DoctorsFrame {
         editBut.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (!txt3.isEditable()) {
+                if (!txt3.isEditable()) { //edit
                     txt3.setEditable(true);
                     editBut.setText(" Save  ");
                     closeBut.setText("Cancel");
-                    if (!txt3.getText().equals(" "))
-                        txt3.setText(tempText[0] + "\n");
+                    txt3.setText(tempText[0] + "");
                     txt3.requestFocus();
-                } else {
+                } else { //save
                     txt3.setEditable(false);
                     tempText[0] = txt3.getText();
                     editBut.setText(" Edit ");
                     closeBut.setText(" Close");
-                    p.setDescription(txt3.getText());
+                    p.setDescription(txt3.getText().replaceAll("\n", " #n#"));
+
+                    methods.updatePatientsFile(mc.patients);
                 }
             }
         });
         closeBut.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (closeBut.getText().equals(" Close")) {
+                if (closeBut.getText().equals(" Close")) { //close
                     infoF.dispose();
-                } else {
+                } else { //cancel
                     txt3.setEditable(false);
                     editBut.setText(" Edit ");
+                    closeBut.setText(" Close");
                     txt3.setText(tempText[0]);
                 }
             }
@@ -426,7 +439,6 @@ public class DoctorsFrame {
         panel.add(info0, BorderLayout.BEFORE_FIRST_LINE);
         panel.add(info3, BorderLayout.CENTER);
         panel.add(new JLabel(" "), BorderLayout.BEFORE_LINE_BEGINS);
-        // panel.add(editBut, BorderLayout.SOUTH);
         panel.add(new JLabel(" "), BorderLayout.AFTER_LINE_ENDS);
         panel.add(new JLabel(), BorderLayout.PAGE_END);
 

@@ -110,7 +110,6 @@ public class MedicalCenter extends Canvas implements Runnable{
         MedicalCenter medCent = new MedicalCenter();
         System.out.println("Application started!!");
         medCent.init(medCent);
-        System.out.println(Calendar.DAY_OF_WEEK);
 
     }
 }

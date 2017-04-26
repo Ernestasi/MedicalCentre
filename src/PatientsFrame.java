@@ -2,20 +2,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class PatientsFrame {
+public class PatientsFrame{
 
     JLabel time = new JLabel();
 
     private MedicalCenter mc;
+
     public PatientsFrame(MedicalCenter mc){
         this.mc = mc;
     }
 
-    private void logged (Patient p) {
+    private void logged(Patient currentPat){
 
-        JFrame loggedIn = new JFrame();
+        JFrame loggedIn = new JFrame("Medical Centre Application for Patients - " + currentPat.getName() + " " + currentPat.getSurName());
         loggedIn.setSize(650, 650);
         loggedIn.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         loggedIn.setResizable(false);
@@ -23,14 +25,32 @@ public class PatientsFrame {
         loggedIn.setLayout(new BorderLayout());
 
         //Panels
-        JPanel info = new JPanel();
-        JPanel main = new JPanel();
+        JTabbedPane tabs = new JTabbedPane();
+        JPanel info = new JPanel(new GridLayout(2, 1, 5, 5));
+        JPanel doctorsSpec = new JPanel();
         JPanel buttons = new JPanel();
+        JScrollPane descriptionScrollable;
+        JPanel appointmets;
+
+
+        //info panel
+
+        JLabel name = new JLabel("You are logged in as: " + currentPat.getName() + " " + currentPat.getSurName());
+        name.setFont(new Font("Serif", Font.BOLD, 20));
+        name.setVerticalAlignment(SwingConstants.TOP);
+
+
+        JLabel insuranceType = new JLabel("Your insurance is: " + currentPat.getInsType());
+        insuranceType.setFont(new Font("Serif", Font.BOLD, 20));
+        insuranceType.setVerticalAlignment(SwingConstants.TOP);
+        info.add(name);
+        info.add(insuranceType);
+        //Info labels ends there
 
 
         ArrayList<String> tempList = new ArrayList<String>();
         tempList.add(mc.doctors.get(1).getSpec());
-        for(Doctor d: mc.doctors){
+        for(Doctor d : mc.doctors){
             int temp = 0;
             for(int i = 0; i < tempList.size(); i++){
                 if(d.getSpec().equals(tempList.get(i)))
@@ -43,13 +63,13 @@ public class PatientsFrame {
 
         }
         //Specialization tab
-        GridLayout mainGrid = new GridLayout(tempList.size(),1);
-        for (int i = 0; i < tempList.size(); i++){
+        GridLayout mainGrid = new GridLayout(tempList.size(), 1);
+        for(int i = 0; i < tempList.size(); i++){
             String temp = tempList.get(i);
             JButton specBTN = new JButton(temp);
-            specBTN.addMouseListener(new MouseAdapter() {
+            specBTN.addMouseListener(new MouseAdapter(){
                 @Override
-                public void mouseClicked(MouseEvent e) {
+                public void mouseClicked(MouseEvent e){
                     String currentSpec = "null";
                     ArrayList<String> currentDocs = new ArrayList<>();
                     for(Doctor d : mc.doctors){
@@ -65,23 +85,23 @@ public class PatientsFrame {
                         meetingFrame.setLocationRelativeTo(null);
                         meetingFrame.setLayout(new BorderLayout());
                         meetingFrame.setVisible(true);
-                        meetingFrame.setLayout(new GridLayout(currentDocs.size()+2, 1));
+                        meetingFrame.setLayout(new GridLayout(currentDocs.size() + 2, 1));
                         for(int i = 0; i < currentDocs.size(); i++){
                             JButton doctorSelectBTN = new JButton(currentDocs.get(i));
                             String docName = currentDocs.get(i);
-                            doctorSelectBTN.addMouseListener(new MouseAdapter() {
+                            doctorSelectBTN.addMouseListener(new MouseAdapter(){
                                 @Override
-                                public void mouseClicked(MouseEvent e) {
+                                public void mouseClicked(MouseEvent e){
                                     meetingFrame.dispose();
                                     JFrame setMeeting = new JFrame(docName);
                                     setMeeting.setSize(500, 500);
                                     setMeeting.setResizable(false);
                                     setMeeting.setLocationRelativeTo(null);
-                                    setMeeting.setLayout(new GridLayout(2,7));
+                                    setMeeting.setLayout(new GridLayout(2, 7));
                                     setMeeting.setVisible(true);
-                                    String[] week = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
-                                    for(Doctor d: mc.doctors){
-                                        if((d.getName()+ " "+d.getSurName()).equals(docName)){
+                                    String[] week = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+                                    for(Doctor d : mc.doctors){
+                                        if((d.getName() + " " + d.getSurName()).equals(docName)){
                                             for(int i = 0; i < 7; i++)
                                                 setMeeting.add(new JLabel(week[i]));
                                             for(int i = 0; i < 7; i++)
@@ -93,9 +113,9 @@ public class PatientsFrame {
                             meetingFrame.add(doctorSelectBTN);
                         }
                         JButton close = new JButton("Close");
-                        close.addMouseListener(new MouseAdapter() {
+                        close.addMouseListener(new MouseAdapter(){
                             @Override
-                            public void mouseClicked(MouseEvent e) {
+                            public void mouseClicked(MouseEvent e){
                                 meetingFrame.dispose();
                             }
                         });
@@ -104,63 +124,57 @@ public class PatientsFrame {
                     }
                 }
             });
-            main.add(specBTN);
+            doctorsSpec.add(specBTN);
         }
+        //Specialization tab End here
+
+        //Description tab
+        JTextArea txt3 = new JTextArea(currentPat.getDescription().replaceAll("#n#", "\n"), 14, 20);
+        descriptionScrollable = new JScrollPane(txt3);
+        txt3.setLineWrap(true);
+        txt3.setWrapStyleWord(true);
+        txt3.setEditable(false);
+
+        //Description tab ends here
+        appointmets = new JPanel(new GridLayout(0,1,5,5));
+        SimpleDateFormat appFormat = new SimpleDateFormat("YYYY-MM-dd HH:MM");
+        if(currentPat.getAppointments() != null){
+            for(int i = 0; i < currentPat.getAppointments().size(); i++){
+                Doctor doc =mc.doctors.get(Integer.parseInt(currentPat.getDocId().get(i)));
+                appointmets.add(new JLabel(appFormat.format(currentPat.getTime().get(i).getTime()) + " " + doc.toString()));
+            }
+            appointmets.setPreferredSize(new Dimension(600, appointmets.getComponentCount() *30));
+        }else{
+            appointmets.add(new JLabel("You have no appointments scheduled"));
+        }
+        //Appontments tab
 
 
-        main.setLayout(mainGrid);
+        //Appontments tab end here
+        doctorsSpec.setLayout(mainGrid);
 
+        tabs.add(descriptionScrollable, "Description");
+        tabs.add(doctorsSpec, "Doctors");
+        tabs.add(appointmets, "Appointments");
+        //tabs.add(doctorsSpec, "Contacts");
 
-        loggedIn.add(info,BorderLayout.NORTH);
-        loggedIn.add(main,BorderLayout.CENTER);
-        loggedIn.add(buttons,BorderLayout.SOUTH);//
+        loggedIn.add(info, BorderLayout.NORTH);
+        loggedIn.add(tabs, BorderLayout.CENTER);
+        loggedIn.add(buttons, BorderLayout.SOUTH);//
         //Panels ends there
-
-        //info panel
-        info.setLayout(new GridLayout(3,2));
-
-
-//        time.setText("Time: " + (mc.dateFormat.format(mc.cal.getTime())));
-//        time.setFont(new Font("Serif", Font.BOLD,24 ));
-//        info.add(time);
-
-        JLabel empty = new JLabel("");
-        info.add(empty);
-
-        JLabel name = new JLabel("You are logged in as: ");
-        name.setFont(new Font("Serif", Font.BOLD, 20));
-        name.setVerticalAlignment(SwingConstants.TOP);
-
-        JLabel name1 = new JLabel(p.getName()+" "+p.getSurName());
-        name1.setFont(new Font("Serif", Font.BOLD, 20));
-        name1.setVerticalAlignment(SwingConstants.TOP);
-
-        JLabel insuranceType = new JLabel("Your insurance is: ");
-        insuranceType.setFont(new Font("Serif", Font.BOLD, 20));
-        insuranceType.setVerticalAlignment(SwingConstants.TOP);
-
-        JLabel insuranceType1 = new JLabel(p.getInsType());
-        insuranceType1.setFont(new Font("Serif", Font.BOLD, 20));
-        insuranceType1.setVerticalAlignment(SwingConstants.TOP);
-
-        info.add(name);
-        info.add(name1);
-        info.add(insuranceType);
-        info.add(insuranceType1);
-        //Info labels ends there
 
         //buttuns panel
         buttons.setLayout(new GridLayout(0, 1));
         JButton signOutBTN = new JButton("Sign out");
-        signOutBTN.addMouseListener(new MouseAdapter() {
+        signOutBTN.addMouseListener(new MouseAdapter(){
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e){
                 mainPatientFrame();
                 loggedIn.dispose();
             }
         });
 
-        buttons.add(signOutBTN,BorderLayout.EAST);
+        buttons.add(signOutBTN, BorderLayout.EAST);
         //Buttons ends there
 
         //loggedIn.pack();
@@ -168,7 +182,7 @@ public class PatientsFrame {
 
     }
 
-    void mainPatientFrame() {
+    void mainPatientFrame(){
 
         JFrame frame = new JFrame("Medical Centre Application for Patients  ");
         frame.setLocationRelativeTo(null);
@@ -179,9 +193,9 @@ public class PatientsFrame {
         frame.setVisible(true);
         frame.requestFocus();
         JButton newB = new JButton("New patient");
-        newB.addMouseListener(new MouseAdapter() {
+        newB.addMouseListener(new MouseAdapter(){
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e){
                 Registration reg = new Registration(mc);
                 reg.render();
                 frame.dispose();
@@ -189,11 +203,11 @@ public class PatientsFrame {
         });
         frame.add(newB);
         JButton oldB = new JButton("Registered patient");
-        oldB.addMouseListener(new MouseAdapter() {
+        oldB.addMouseListener(new MouseAdapter(){
             String ID;
 
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e){
                 frame.dispose();
 
 
@@ -213,12 +227,12 @@ public class PatientsFrame {
 
                 JLabel test = new JLabel("Enter your ID");
                 test.setHorizontalAlignment(SwingConstants.CENTER);
-                top.add (test,BorderLayout.WEST);
+                top.add(test, BorderLayout.WEST);
 
                 JButton regBTN = new JButton("Register");
-                regBTN.addMouseListener(new MouseAdapter() {
+                regBTN.addMouseListener(new MouseAdapter(){
                     @Override
-                    public void mouseClicked(MouseEvent e) {
+                    public void mouseClicked(MouseEvent e){
                         Registration reg = new Registration(mc);
                         reg.render();
                         securityID.dispose();
@@ -227,7 +241,7 @@ public class PatientsFrame {
                 regBTN.setEnabled(false);
                 regBTN.setVisible(false);
                 regBTN.setHorizontalAlignment(SwingConstants.RIGHT);
-                top.add(regBTN,BorderLayout.EAST);
+                top.add(regBTN, BorderLayout.EAST);
 
                 securityID.add(top);
                 JPanel jp = new JPanel();
@@ -235,31 +249,30 @@ public class PatientsFrame {
                 jp.add(textID);
                 securityID.add(textID);
                 JButton submit = new JButton("Submit");
-                submit.addMouseListener(new MouseAdapter() {
+                submit.addMouseListener(new MouseAdapter(){
                     @Override
-                    public void mouseClicked(MouseEvent e) {
+                    public void mouseClicked(MouseEvent e){
                         ID = textID.getText();
-                        if (ID != null) {
+                        if(ID != null){
                             int check = 0;
-                            for (Patient p : mc.patients) {
-                                if ((ID.length() == 11) && (ID.matches("[0-9]+"))) {
-                                    if (ID.equals(p.getId())) {
+                            for(Patient p : mc.patients){
+                                if((ID.length() == 11) && (ID.matches("[0-9]+"))){
+                                    if(ID.equals(p.getId())){
                                         securityID.dispose();
                                         logged(p);
                                         check++;
                                     }
-                                    if (check == 0) {
+                                    if(check == 0){
                                         test.setText("No such ID");
                                         //regBTN.setBackground(Color.red);
                                         regBTN.setEnabled(true);
                                         regBTN.setVisible(true);
 
 
-
                                     }
-                                } else if (!ID.matches("[0-9]+"))
+                                }else if(!ID.matches("[0-9]+"))
                                     test.setText("ID can contain only digits!");
-                                else if (ID.length() != 11)
+                                else if(ID.length() != 11)
                                     test.setText("ID has to be 11 digits long!");
 
 
@@ -271,9 +284,9 @@ public class PatientsFrame {
                 });
                 securityID.add(submit);
                 JButton back = new JButton("Back");
-                back.addMouseListener(new MouseAdapter() {
+                back.addMouseListener(new MouseAdapter(){
                     @Override
-                    public void mouseClicked(MouseEvent e) {
+                    public void mouseClicked(MouseEvent e){
                         PatientsFrame goBack = new PatientsFrame(mc);
                         securityID.dispose();
                         goBack.mainPatientFrame();
@@ -288,7 +301,6 @@ public class PatientsFrame {
 
 
     public void tick(){
-        time.setText("Time: " + (mc.dateFormat.format(mc.cal.getTime())));
 
     }
 }
