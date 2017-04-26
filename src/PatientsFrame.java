@@ -42,11 +42,68 @@ public class PatientsFrame {
             }
 
         }
+        //Specialization tab
         GridLayout mainGrid = new GridLayout(tempList.size(),1);
         for (int i = 0; i < tempList.size(); i++){
             String temp = tempList.get(i);
-            System.out.println(temp);
             JButton specBTN = new JButton(temp);
+            specBTN.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    String currentSpec = "null";
+                    ArrayList<String> currentDocs = new ArrayList<>();
+                    for(Doctor d : mc.doctors){
+                        if(temp.equals(d.getSpec())){
+                            currentSpec = d.getSpec();
+                            currentDocs.add(d.getName() + " " + d.getSurName());
+                        }
+                    }
+                    if(currentDocs.size() > 0){
+                        JFrame meetingFrame = new JFrame(currentSpec);
+                        meetingFrame.setSize(300, 500);
+                        meetingFrame.setResizable(false);
+                        meetingFrame.setLocationRelativeTo(null);
+                        meetingFrame.setLayout(new BorderLayout());
+                        meetingFrame.setVisible(true);
+                        meetingFrame.setLayout(new GridLayout(currentDocs.size()+2, 1));
+                        for(int i = 0; i < currentDocs.size(); i++){
+                            JButton doctorSelectBTN = new JButton(currentDocs.get(i));
+                            String docName = currentDocs.get(i);
+                            doctorSelectBTN.addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseClicked(MouseEvent e) {
+                                    meetingFrame.dispose();
+                                    JFrame setMeeting = new JFrame(docName);
+                                    setMeeting.setSize(500, 500);
+                                    setMeeting.setResizable(false);
+                                    setMeeting.setLocationRelativeTo(null);
+                                    setMeeting.setLayout(new GridLayout(2,7));
+                                    setMeeting.setVisible(true);
+                                    String[] week = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+                                    for(Doctor d: mc.doctors){
+                                        if((d.getName()+ " "+d.getSurName()).equals(docName)){
+                                            for(int i = 0; i < 7; i++)
+                                                setMeeting.add(new JLabel(week[i]));
+                                            for(int i = 0; i < 7; i++)
+                                                setMeeting.add(new JLabel(d.getTimeDay(i)));
+                                        }
+                                    }
+                                }
+                            });
+                            meetingFrame.add(doctorSelectBTN);
+                        }
+                        JButton close = new JButton("Close");
+                        close.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                meetingFrame.dispose();
+                            }
+                        });
+                        meetingFrame.add(new JLabel());
+                        meetingFrame.add(close);
+                    }
+                }
+            });
             main.add(specBTN);
         }
 
@@ -63,9 +120,9 @@ public class PatientsFrame {
         info.setLayout(new GridLayout(3,2));
 
 
-        time.setText("Time: " + (mc.dateFormat.format(mc.cal.getTime())));
-        time.setFont(new Font("Serif", Font.BOLD,24 ));
-        info.add(time);
+//        time.setText("Time: " + (mc.dateFormat.format(mc.cal.getTime())));
+//        time.setFont(new Font("Serif", Font.BOLD,24 ));
+//        info.add(time);
 
         JLabel empty = new JLabel("");
         info.add(empty);
@@ -93,11 +150,8 @@ public class PatientsFrame {
         //Info labels ends there
 
         //buttuns panel
-        buttons.setLayout(new GridLayout(0, 3));
+        buttons.setLayout(new GridLayout(0, 1));
         JButton signOutBTN = new JButton("Sign out");
-        JButton submitBTN = new JButton("Submit");
-        JButton searchBTN = new JButton("Search");
-
         signOutBTN.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -106,8 +160,6 @@ public class PatientsFrame {
             }
         });
 
-        buttons.add(submitBTN,BorderLayout.WEST);
-        buttons.add(searchBTN,BorderLayout.CENTER);
         buttons.add(signOutBTN,BorderLayout.EAST);
         //Buttons ends there
 
