@@ -110,10 +110,7 @@ public class Patient extends Human{
         docId= new ArrayList<>();
         for(String s : appointments){
             String[] temp = s.split("_");
-            docId.add(temp[0]);
-            //1_2017-05-01_10:30
-            //1
-            //2017-05-01
+            docId.add(temp[0]);            //2017-05-01
             String[] t = temp[1].split("-");
             String[] t2 = temp[2].split(":");
             Calendar tempCal =  Calendar.getInstance();

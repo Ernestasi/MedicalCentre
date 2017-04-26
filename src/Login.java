@@ -34,6 +34,7 @@ public class Login {
                 window.setVisible(false);
                 JDialog jDialog = new JDialog(window, "Doctor", Dialog.ModalityType.DOCUMENT_MODAL);
                 jDialog.setDefaultCloseOperation(0);
+                jDialog.setResizable(false);
                 jDialog.setLocation(window.getX() + 50, window.getY() + 50);
                 jDialog.setSize(new Dimension(200, 130));
                 jDialog.setLayout(new GridLayout(0, 1, 1, 1));
