@@ -1,10 +1,12 @@
+import javafx.stage.Modality;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import java.util.regex.Pattern;
+import javax.swing.*;
 
 public class Login {
 
@@ -25,26 +27,49 @@ public class Login {
         window.getContentPane().setLayout(new GridLayout(3, 1));
         window.pack();
 
-        /*
-        JLabel label = new JLabel("I am doctor"); //Label : For doctors
-        label.setHorizontalAlignment(JLabel.CENTER);
-        label.setVerticalAlignment(JLabel.CENTER);
-        window.add(label);
-
-        JLabel label1 = new JLabel("I am patient"); //Label : For patient
-        label1.setHorizontalAlignment(JLabel.CENTER);
-        label1.setVerticalAlignment(JLabel.CENTER);
-        window.add(label1);*/
-
-
         JButton doctors = new JButton("I am doctor"); //Doctors button
-        //doctors.setSize(150,75);
         doctors.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                mc.docFrame = new DoctorsFrame(mc);
-                mc.docFrame.init();
-                window.dispose();
+                window.setVisible(false);
+                JDialog jDialog = new JDialog(window, "Doctor", Dialog.ModalityType.DOCUMENT_MODAL);
+                jDialog.setDefaultCloseOperation(0);
+                jDialog.setLocation(window.getX() + 50, window.getY() + 50);
+                jDialog.setSize(new Dimension(200, 130));
+                jDialog.setLayout(new GridLayout(0, 1, 1, 1));
+                JPanel jPanel = new JPanel(new GridBagLayout());
+                jPanel.add(new JLabel("Enter your ID:    "));
+                JTextField jText = new JTextField(7);
+                jPanel.add(jText);
+                jDialog.add(jPanel);
+
+                JPanel jPanel1 = new JPanel(new GridBagLayout());
+                JButton confirmBut = new JButton("Confirm");
+                confirmBut.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        if (jText.getText().matches("^[0-9]$") ) {
+                            jDialog.dispose();
+                            mc.docFrame = new DoctorsFrame(mc, Integer.parseInt(jText.getText()));
+                            mc.docFrame.init();
+                            window.dispose();
+                        }
+                    }
+                });
+                JButton cancelBut = new JButton(" Cancel");
+                cancelBut.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        jDialog.dispose();
+                        window.setVisible(true);
+                    }
+                });
+                jPanel1.add(confirmBut);
+                jPanel1.add(new JLabel(" "));
+                jPanel1.add(cancelBut);
+                jDialog.add(jPanel1);
+                jDialog.setVisible(true);
+
             }
 
         });
@@ -53,7 +78,7 @@ public class Login {
         JButton patients = new JButton("I am patient"); //Doctors button
         patients.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 mc.patFrame = new PatientsFrame(mc);
                 mc.patFrame.mainPatientFrame();
                 window.dispose();

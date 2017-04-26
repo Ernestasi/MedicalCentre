@@ -12,7 +12,7 @@ import javax.swing.plaf.basic.BasicArrowButton;
 
 
 public class DoctorsFrame{
-    int currentDoctor = 0; //TODO reikia kad reaguotu kuris daktaras!!!!
+    private int currentDoctor = 0; //TODO reikia kad reaguotu kuris daktaras!!!!
 
     MedicalCenter mc;
     Doctor d;
@@ -25,13 +25,14 @@ public class DoctorsFrame{
     JTabbedPane tabs = new JTabbedPane();
     SimpleDateFormat weekFormat = new SimpleDateFormat("yyyy/MM/dd EE", Locale.ENGLISH);
 
-    public DoctorsFrame(MedicalCenter mc){
+    public DoctorsFrame(MedicalCenter mc, int currentDoctor){
+        this.currentDoctor = currentDoctor;
         this.mc = mc;
     }
 
     public void init(){
         d = mc.doctors.get(currentDoctor);
-        frame = new JFrame("Medical Centre Application for Doctors  ");
+        frame = new JFrame("Medical Centre Application for Doctors - " + d.getName() + " " + d.getSurName());
 
         checkTime = (Calendar) mc.cal.clone();
         scheduleTime = (Calendar) mc.cal.clone();
@@ -182,13 +183,13 @@ public class DoctorsFrame{
     private JLabel tabSchedule(){
 
         panelSh.setLayout(new GridLayout(0, 2, 30, 30));
-        panelSh.setPreferredSize(new Dimension(0, 1000));
         panelSh.add(timeGraph(1));
         panelSh.add(timeGraph(2));
         panelSh.add(timeGraph(3));
         panelSh.add(timeGraph(4));
         panelSh.add(timeGraph(5));
         panelSh.add(timeGraph(6));
+        panelSh.setPreferredSize(new Dimension(0, 1111));
 
         JScrollPane scrollPaneP = new JScrollPane(panelSh);
 
@@ -247,8 +248,6 @@ public class DoctorsFrame{
         }
         day -= 1;
         JPanel dayPanel = new JPanel(new BorderLayout());
-        dayPanel.setPreferredSize(new Dimension(300, 300));
-        dayPanel.setMaximumSize(new Dimension(300, 300));
 
         DateFormat dateForm = new SimpleDateFormat("HH:mm ");
         if(!(d.getTimeDay(day).equals("-"))){
@@ -263,11 +262,9 @@ public class DoctorsFrame{
                 JPanel pan = new JPanel();
                 pan.setLayout(new GridLayout(0, 1));
                 JPanel pan2 = new JPanel();
-                pan2.setLayout(new GridLayout(0, 1));
-                pan.setPreferredSize(new Dimension(90, 20));
-                pan.setMaximumSize(new Dimension(90, 20));
-                pan2.setPreferredSize(new Dimension(200, 20));
-                pan2.setMaximumSize(new Dimension(200, 20));
+                pan2.setLayout(new GridLayout(0, 1, 3,3));
+                pan.setPreferredSize(new Dimension(90, 30));
+                pan2.setPreferredSize(new Dimension(200, 30));
 
                 Calendar temptime = (Calendar) time.clone();
 
@@ -286,7 +283,6 @@ public class DoctorsFrame{
                 dayPanel.add(pan, BorderLayout.WEST);
                 dayPanel.add(pan2, BorderLayout.EAST);
             }
-
             return dayPanel;
         }else{
             dayPanel.add(new JLabel(String.format("%1$-" + 12 + "s", dayName) + d.getTimeDay(day)), BorderLayout.NORTH);
@@ -298,6 +294,8 @@ public class DoctorsFrame{
     private JPanel patientBut(Calendar time){
         JPanel timeLine = new JPanel(new BorderLayout(1 ,1));
         JButton but = new JButton("");
+        JPanel butPan = new JPanel(new GridBagLayout());
+        butPan.add(but);
         for(Patient p : mc.patients){
             if(p.getDocId() != null){
                 for(int j = 0; j < p.getDocId().size(); j++){
@@ -311,10 +309,10 @@ public class DoctorsFrame{
                                 && time.get(Calendar.MINUTE) == tempCal.get(Calendar.MINUTE)
                                 ){
                             but.setText("i");
-                            but.setBorder(BorderFactory.createEmptyBorder());
-                            but.setPreferredSize(new Dimension(20, 10));
+                            but.setBorder(BorderFactory.createLineBorder(null));
+                            but.setPreferredSize(new Dimension(21, 21));
                             timeLine.add(new JLabel(String.format("%1$" + 25 + "s", p.getName() + " " + p.getSurName())), BorderLayout.CENTER);
-                            timeLine.add(but, BorderLayout.WEST);
+                            timeLine.add(butPan, BorderLayout.WEST);
                             but.addMouseListener(new MouseAdapter(){
                                 @Override
                                 public void mouseClicked(MouseEvent e){
@@ -322,9 +320,11 @@ public class DoctorsFrame{
                                     patientInfoFrame(p);
                                 }
                             });
+                            JPanel but2Pan = new JPanel(new GridBagLayout());
                             JButton but2 = new JButton("x");
+                            but2Pan.add(but2);
                             but2.setBorder(BorderFactory.createLineBorder(null));
-                            but2.setPreferredSize(new Dimension(30, 10));
+                            but2.setPreferredSize(new Dimension(21, 21));
                             int a= j;
                             but2.addMouseListener(new MouseAdapter(){
                                 @Override
@@ -362,7 +362,7 @@ public class DoctorsFrame{
 
                                 }
                             });
-                            timeLine.add(but2, BorderLayout.EAST);
+                            timeLine.add(but2Pan, BorderLayout.EAST);
                         }
                     }
                 }
@@ -372,10 +372,10 @@ public class DoctorsFrame{
         if(but.getText().equals("")){
             but.setText("+");
             but.setBorder(BorderFactory.createLineBorder(null));
-            but.setPreferredSize(new Dimension(30, 10));
+            but.setPreferredSize(new Dimension(21, 21));
             Calendar timeClone = (Calendar) time.clone();
             timeLine.add(new JLabel(String.format("%1$" + 20 + "s", "----")), BorderLayout.CENTER);
-            timeLine.add(but, BorderLayout.EAST);
+            timeLine.add(butPan, BorderLayout.EAST);
             but.addMouseListener(new MouseAdapter(){
                 @Override
                 public void mouseClicked(MouseEvent e){
@@ -546,11 +546,8 @@ public class DoctorsFrame{
             tabs.add("Schedule", tabSchedule());
             tabs.remove(2);
             tabs.setSelectedIndex(indexOfTab);
-            // aaa=10;
             checkTime = (Calendar) mc.cal.clone();
         }
         frame.repaint();
-
-        // System.out.println(mc.cal.get(Calendar.DAY_OF_WEEK)); // TODO will need this ;)
     }
 }

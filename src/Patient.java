@@ -34,13 +34,13 @@ public class Patient extends Human{
 
     private String intToIns(int i){
         if(i == 0){
-            return "Type0";
+            return "None";
         }else if(i == 1){
-            return "Type1";
+            return "National";
         }else if(i == 2){
-            return "Type2";
+            return "Personal";
         }else{
-            return "Type3";
+            return "Both";
         }
     }
 
