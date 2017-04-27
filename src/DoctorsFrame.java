@@ -18,7 +18,7 @@ public class DoctorsFrame {
     MedicalCenter mc;
     Doctor d;
     JFrame frame;
-    Methods methods= new Methods();
+    Methods methods = new Methods();
 
     JLabel timeDisp = new JLabel();
     JPanel panelSh = new JPanel();
@@ -278,7 +278,7 @@ public class DoctorsFrame {
                             });
                             JPanel but2Pan = new JPanel(new GridBagLayout());
                             JButton but2 = new JButton("x");
-                            if(time.getTime().before(mc.cal.getTime())){
+                            if (time.getTime().before(mc.cal.getTime())) {
                                 but2.setEnabled(false);
                             }
                             but2Pan.add(but2);
@@ -288,39 +288,40 @@ public class DoctorsFrame {
                             but2.addMouseListener(new MouseAdapter() {
                                 @Override
                                 public void mouseClicked(MouseEvent e) {
-                                    JDialog cancelApointment = new JDialog(frame, "Remove", Dialog.ModalityType.DOCUMENT_MODAL);
-                                    cancelApointment.setLayout(new GridLayout(2, 1));
-                                    cancelApointment.setLocation(frame.getX() + 50, frame.getY() + 100);
-                                    cancelApointment.setSize(300, 100);
-                                    cancelApointment.setResizable(false);
-                                    JButton yesBut = new JButton("YES");
-                                    yesBut.addMouseListener(new MouseAdapter() {
-                                        @Override
-                                        public void mouseClicked(MouseEvent e) {
-                                            p.getAppointments().remove(a);
-                                            p.AppointmentToTime();
-                                            checkTime.add(Calendar.YEAR, 1);
-                                            methods.updateDatesFile(mc.patients);
-                                            cancelApointment.dispose();
-                                        }
-                                    });
-                                    JButton noBut = new JButton("NO");
-                                    noBut.addMouseListener(new MouseAdapter() {
-                                        @Override
-                                        public void mouseClicked(MouseEvent e) {
-                                            cancelApointment.dispose();
-                                        }
-                                    });
+                                    if (but2.isEnabled()) {
+                                        JDialog cancelApointment = new JDialog(frame, "Remove", Dialog.ModalityType.DOCUMENT_MODAL);
+                                        cancelApointment.setLayout(new GridLayout(2, 1));
+                                        cancelApointment.setLocation(frame.getX() + 50, frame.getY() + 100);
+                                        cancelApointment.setSize(300, 100);
+                                        cancelApointment.setResizable(false);
+                                        JButton yesBut = new JButton("YES");
+                                        yesBut.addMouseListener(new MouseAdapter() {
+                                            @Override
+                                            public void mouseClicked(MouseEvent e) {
+                                                p.getAppointments().remove(a);
+                                                p.AppointmentToTime();
+                                                checkTime.add(Calendar.YEAR, 1);
+                                                methods.updateDatesFile(mc.patients);
+                                                cancelApointment.dispose();
+                                            }
+                                        });
+                                        JButton noBut = new JButton("NO");
+                                        noBut.addMouseListener(new MouseAdapter() {
+                                            @Override
+                                            public void mouseClicked(MouseEvent e) {
+                                                cancelApointment.dispose();
+                                            }
+                                        });
 
-                                    cancelApointment.add(new JLabel("Remove appointment?", SwingConstants.CENTER));
-                                    JPanel jPan = new JPanel(new GridBagLayout());
-                                    jPan.add(yesBut);
-                                    jPan.add(new JLabel(" "));
-                                    jPan.add(noBut);
-                                    cancelApointment.add(jPan);
-                                    cancelApointment.setVisible(true);
+                                        cancelApointment.add(new JLabel("Remove appointment?", SwingConstants.CENTER));
+                                        JPanel jPan = new JPanel(new GridBagLayout());
+                                        jPan.add(yesBut);
+                                        jPan.add(new JLabel(" "));
+                                        jPan.add(noBut);
+                                        cancelApointment.add(jPan);
+                                        cancelApointment.setVisible(true);
 
-
+                                    }
                                 }
                             });
                             timeLine.add(but2Pan, BorderLayout.EAST);
@@ -332,7 +333,7 @@ public class DoctorsFrame {
         }
         if (but.getText().equals("")) {
             but.setText("+");
-            if(time.getTime().before(mc.cal.getTime())){
+            if (time.getTime().before(mc.cal.getTime())) {
                 but.setEnabled(false);
             }
             but.setBorder(BorderFactory.createLineBorder(null));
@@ -343,9 +344,10 @@ public class DoctorsFrame {
             but.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    System.out.println("Setting up new appointment " + timeClone.getTime());
-
-                    but.setText(addPatientAppointment(timeClone));
+                    if (but.isEnabled()) {
+                        System.out.println("Setting up new appointment " + timeClone.getTime());
+                        but.setText(addPatientAppointment(timeClone));
+                    }
                 }
             });
         }
@@ -383,7 +385,7 @@ public class DoctorsFrame {
         JTextArea txt3 = new JTextArea(p.getDescription().replaceAll("#n#", "\n"), 14, 20);
 
         JScrollPane descriptionScrollable = new JScrollPane(txt3);
-        descriptionScrollable.setBorder( new EtchedBorder( EtchedBorder.LOWERED ) );
+        descriptionScrollable.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
         txt3.setLineWrap(true);
         txt3.setWrapStyleWord(true);
         txt3.setEditable(false);
