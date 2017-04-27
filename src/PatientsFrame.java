@@ -80,6 +80,7 @@ public class PatientsFrame{
                     }
                     if(currentDocs.size() > 0){
                         JFrame meetingFrame = new JFrame(currentSpec);
+                        // JDialog meetingFrame = new JDialog(loggedIn, currentSpec, Dialog.ModalityType.DOCUMENT_MODAL);
                         meetingFrame.setSize(300, 500);
                         meetingFrame.setResizable(false);
                         meetingFrame.setLocationRelativeTo(null);
