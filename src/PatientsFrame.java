@@ -58,12 +58,11 @@ public class PatientsFrame{
             }
             if(temp == 0){
                 tempList.add(d.getSpec());
-
             }
 
         }
         //Specialization tab
-        GridLayout mainGrid = new GridLayout(tempList.size(), 1);
+        GridLayout mainGrid = new GridLayout(tempList.size(), 1, 10,10);
         for(int i = 0; i < tempList.size(); i++){
             String temp = tempList.get(i);
             JButton specBTN = new JButton(temp);
@@ -79,16 +78,18 @@ public class PatientsFrame{
                         }
                     }
                     if(currentDocs.size() > 0){
+                        loggedIn.setVisible(false);
                         JFrame meetingFrame = new JFrame(currentSpec);
                         meetingFrame.setSize(300, 500);
                         meetingFrame.setResizable(false);
                         meetingFrame.setLocationRelativeTo(null);
+                        meetingFrame.setDefaultCloseOperation(0);
                         meetingFrame.setLayout(new BorderLayout());
                         meetingFrame.setVisible(true);
-                        meetingFrame.setLayout(new GridLayout(currentDocs.size() + 2, 1));
+                        meetingFrame.setLayout(new GridLayout(currentDocs.size() + 2, 1,5,5));
                         for(int i = 0; i < currentDocs.size(); i++){
-                            JButton doctorSelectBTN = new JButton(currentDocs.get(i));
                             String docName = currentDocs.get(i);
+                            JButton doctorSelectBTN = new JButton(currentDocs.get(i));
                             doctorSelectBTN.addMouseListener(new MouseAdapter(){
                                 @Override
                                 public void mouseClicked(MouseEvent e){
@@ -96,36 +97,60 @@ public class PatientsFrame{
                                     JFrame setMeeting = new JFrame(docName);
                                     setMeeting.setSize(500, 500);
                                     setMeeting.setResizable(false);
+                                    setMeeting.setDefaultCloseOperation(0);
                                     setMeeting.setLocationRelativeTo(null);
-                                    setMeeting.setLayout(new GridLayout(2, 7));
+                                    setMeeting.setLayout(new GridLayout(3, 1));
+                                    //labels
+                                    JLabel dayLBL = new JLabel();
+                                    JLabel timeLBL = new JLabel();
+                                    JLabel closeLBL = new JLabel();
+
+                                    dayLBL.setLayout(new GridLayout(1,7,5,5));
+                                    timeLBL.setLayout(new GridLayout(1,7,5,5));
+                                    closeLBL.setLayout(new GridLayout(1,1));
+                                    // label end
                                     setMeeting.setVisible(true);
                                     String[] week = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
                                     for(Doctor d : mc.doctors){
                                         if((d.getName() + " " + d.getSurName()).equals(docName)){
+                                            JComboBox dayBOX = new JComboBox(week);
+                                            dayLBL.add(dayBOX);
                                             for(int i = 0; i < 7; i++)
-                                                setMeeting.add(new JLabel(week[i]));
-                                            for(int i = 0; i < 7; i++)
-                                                setMeeting.add(new JLabel(d.getTimeDay(i)));
+                                                timeLBL.add(new JLabel(d.getTimeDay(i)));
+                                            JButton closeBTN = new JButton("Close");
+                                            closeBTN.addMouseListener(new MouseAdapter() {
+                                                @Override
+                                                public void mouseClicked(MouseEvent e) {
+                                                    setMeeting.dispose();
+                                                    loggedIn.setVisible(true);
+                                                }
+                                            });
+                                            closeLBL.add(closeBTN);
                                         }
                                     }
+                                    setMeeting.add(dayLBL);
+                                    setMeeting.add(timeLBL);
+                                    setMeeting.add(closeLBL);
                                 }
                             });
                             meetingFrame.add(doctorSelectBTN);
                         }
-                        JButton close = new JButton("Close");
-                        close.addMouseListener(new MouseAdapter(){
+                        JButton closeBTN = new JButton("Close");
+                        closeBTN.addMouseListener(new MouseAdapter(){
                             @Override
                             public void mouseClicked(MouseEvent e){
                                 meetingFrame.dispose();
+                                loggedIn.setVisible(true);
                             }
                         });
                         meetingFrame.add(new JLabel());
-                        meetingFrame.add(close);
+                        meetingFrame.add(closeBTN);
                     }
                 }
             });
             doctorsSpec.add(specBTN);
         }
+
         //Specialization tab End here
 
         //Description tab
