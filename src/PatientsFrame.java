@@ -47,8 +47,7 @@ public class PatientsFrame{
         info.add(insuranceType);
         //Info labels ends there
 
-
-        ArrayList<String> tempList = new ArrayList<String>();
+        ArrayList<String> tempList = new ArrayList<>();
         tempList.add(mc.doctors.get(1).getSpec());
         for(Doctor d : mc.doctors){
             int temp = 0;
@@ -61,7 +60,18 @@ public class PatientsFrame{
             }
 
         }
-        //Specialization tab
+
+        //Description tab
+
+        JTextArea txt3 = new JTextArea(currentPat.getDescription().replaceAll("#n#", "\n"), 14, 20);
+        descriptionScrollable = new JScrollPane(txt3);
+        txt3.setLineWrap(true);
+        txt3.setWrapStyleWord(true);
+        txt3.setEditable(false);
+        //Description tab ends here
+
+        //Doctors tab
+
         GridLayout mainGrid = new GridLayout(tempList.size(), 1, 10,10);
         for(int i = 0; i < tempList.size(); i++){
             String temp = tempList.get(i);
@@ -83,6 +93,7 @@ public class PatientsFrame{
                         // JDialog meetingFrame = new JDialog(loggedIn, currentSpec, Dialog.ModalityType.DOCUMENT_MODAL);
                         meetingFrame.setSize(300, 500);
                         meetingFrame.setResizable(false);
+                        meetingFrame.setAlwaysOnTop(true);
                         meetingFrame.setLocationRelativeTo(null);
                         meetingFrame.setDefaultCloseOperation(0);
                         meetingFrame.setLayout(new BorderLayout());
@@ -98,27 +109,31 @@ public class PatientsFrame{
                                     JFrame setMeeting = new JFrame(docName);
                                     setMeeting.setSize(500, 500);
                                     setMeeting.setResizable(false);
-                                    setMeeting.setDefaultCloseOperation(0);
+                                    setMeeting.setAlwaysOnTop(true);
+                                    setMeeting.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                                     setMeeting.setLocationRelativeTo(null);
-                                    setMeeting.setLayout(new GridLayout(3, 1));
-                                    //labels
-                                    JLabel dayLBL = new JLabel();
-                                    JLabel timeLBL = new JLabel();
-                                    JLabel closeLBL = new JLabel();
+                                    setMeeting.setLayout(new BorderLayout(10, 10));
 
-                                    dayLBL.setLayout(new GridLayout(1,7,5,5));
-                                    timeLBL.setLayout(new GridLayout(1,7,5,5));
-                                    closeLBL.setLayout(new GridLayout(1,1));
-                                    // label end
+                                    //Panels
+                                    JPanel dayPNL = new JPanel();
+                                    JPanel timePNL = new JPanel();
+                                    JPanel buttonsPNL = new JPanel();
+
+                                    dayPNL.setLayout(new GridLayout(1,7,5,5));
+                                    timePNL.setLayout(new GridLayout(1,7,5,5));
+                                    buttonsPNL.setLayout(new GridLayout(1,1));
+                                    // labels end
+
                                     setMeeting.setVisible(true);
                                     String[] week = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
                                     for(Doctor d : mc.doctors){
                                         if((d.getName() + " " + d.getSurName()).equals(docName)){
                                             JComboBox dayBOX = new JComboBox(week);
-                                            dayLBL.add(dayBOX);
+                                            dayPNL.add(dayBOX);
                                             for(int i = 0; i < 7; i++)
-                                                timeLBL.add(new JLabel(d.getTimeDay(i)));
+                                                timePNL.add(new JLabel(d.getTimeDay(i)));
                                             JButton closeBTN = new JButton("Close");
+                                            closeBTN.setHorizontalAlignment(SwingConstants.CENTER);
                                             closeBTN.addMouseListener(new MouseAdapter() {
                                                 @Override
                                                 public void mouseClicked(MouseEvent e) {
@@ -126,57 +141,52 @@ public class PatientsFrame{
                                                     loggedIn.setVisible(true);
                                                 }
                                             });
-                                            closeLBL.add(closeBTN);
+                                            buttonsPNL.add(closeBTN);
                                         }
                                     }
-                                    setMeeting.add(dayLBL);
-                                    setMeeting.add(timeLBL);
-                                    setMeeting.add(closeLBL);
+                                    setMeeting.add(dayPNL, BorderLayout.NORTH);
+                                    setMeeting.add(timePNL,BorderLayout.CENTER);
+                                    setMeeting.add(buttonsPNL,BorderLayout.SOUTH);
                                 }
                             });
                             meetingFrame.add(doctorSelectBTN);
                         }
+                        meetingFrame.add(new JLabel());
                         JButton closeBTN = new JButton("Close");
                         closeBTN.addMouseListener(new MouseAdapter(){
                             @Override
                             public void mouseClicked(MouseEvent e){
                                 meetingFrame.dispose();
                                 loggedIn.setVisible(true);
+                                loggedIn.setAlwaysOnTop(true);
                             }
                         });
-                        meetingFrame.add(new JLabel());
                         meetingFrame.add(closeBTN);
                     }
                 }
             });
             doctorsSpec.add(specBTN);
         }
+        //Doctors tab End here
 
-        //Specialization tab End here
 
-        //Description tab
-        JTextArea txt3 = new JTextArea(currentPat.getDescription().replaceAll("#n#", "\n"), 14, 20);
-        descriptionScrollable = new JScrollPane(txt3);
-        txt3.setLineWrap(true);
-        txt3.setWrapStyleWord(true);
-        txt3.setEditable(false);
+        // Appointments tab
 
-        //Description tab ends here
         appointmets = new JPanel(new GridLayout(0,1,5,5));
+        appointmets.setLayout(new BorderLayout());
         SimpleDateFormat appFormat = new SimpleDateFormat("YYYY-MM-dd HH:MM");
         if(currentPat.getAppointments() != null){
             for(int i = 0; i < currentPat.getAppointments().size(); i++){
                 Doctor doc =mc.doctors.get(Integer.parseInt(currentPat.getDocId().get(i)));
-                appointmets.add(new JLabel(appFormat.format(currentPat.getTime().get(i).getTime()) + " " + doc.toString()));
+                appointmets.add(new JLabel(appFormat.format(currentPat.getTime().get(i).getTime()) + " " + doc.toString()),BorderLayout.NORTH);
             }
             appointmets.setPreferredSize(new Dimension(600, appointmets.getComponentCount() *30));
         }else{
             appointmets.add(new JLabel("You have no appointments scheduled"));
         }
-        //Appontments tab
+        //Appointments tab end here
 
 
-        //Appontments tab end here
         doctorsSpec.setLayout(mainGrid);
 
         tabs.add(descriptionScrollable, "Description");
@@ -190,7 +200,7 @@ public class PatientsFrame{
         //Panels ends there
 
         //buttuns panel
-        buttons.setLayout(new GridLayout(0, 1));
+        buttons.setLayout(new BorderLayout(50, 50));
         JButton signOutBTN = new JButton("Sign out");
         signOutBTN.addMouseListener(new MouseAdapter(){
             @Override
@@ -200,7 +210,17 @@ public class PatientsFrame{
             }
         });
 
+        JButton newAppointmentBTN = new JButton("New Appointment");
+        newAppointmentBTN.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+        });
+
+
         buttons.add(signOutBTN, BorderLayout.EAST);
+        buttons.add(newAppointmentBTN,BorderLayout.WEST);
         //Buttons ends there
 
         //loggedIn.pack();
@@ -240,6 +260,7 @@ public class PatientsFrame{
                 JFrame securityID = new JFrame("Enter your security ID");
 
                 securityID.setLocationRelativeTo(null);
+                securityID.setAlwaysOnTop(true);
                 securityID.setPreferredSize(new Dimension(300, 150));
                 securityID.setSize(300, 150);
                 securityID.setLayout(new GridLayout(4, 1));
