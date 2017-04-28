@@ -11,7 +11,6 @@ import javax.swing.*;
 public class Login {
 
     MedicalCenter mc;
-    Methods methods = new Methods();
     public Login(MedicalCenter mc) {
         this.mc = mc;
     }
