@@ -141,12 +141,10 @@ public class DoctorsFrame {
                     String dateString = currentDoctor + "_" + date.get(Calendar.YEAR) + "-" + String.format("%1$" + 2 + "s", date.get(Calendar.MONTH) + 1).replace(" ", "0") + "-" + String.format("%1$" + 2 + "s", date.get(Calendar.DAY_OF_MONTH)).replace(" ", "0")
                             + "_" + String.format("%1$" + 2 + "s", date.get(Calendar.HOUR_OF_DAY)).replace(" ", "0") + ":" + String.format("%1$" + 2 + "s", date.get(Calendar.MINUTE)).replace(" ", "0");
                     p.setAppointments(dateString);
-                    System.out.println(p.getAppointments().toString());
                     checkTime.add(Calendar.YEAR, 1);
 //////////////////////////////
                     methods.updateDatesFile(mc.patients);
 //////////////////////////////
-                    //todo setting up patient's appointment
                 }
             });
             panel.add(patientBut);
@@ -467,21 +465,22 @@ public class DoctorsFrame {
         txt1.setEditable(false);
         info.add(txt1);
 
-        JPanel info3 = new JPanel();
+        /*JPanel info3 = new JPanel();
         info3.setLayout(new BorderLayout(10, 0));
         JTextArea txt3 = new JTextArea("", 14, 20);
         txt3.setLineWrap(true);
         txt3.setWrapStyleWord(true);
         info3.add(txt3, BorderLayout.CENTER);
         info3.add(new JLabel(), BorderLayout.PAGE_END);
-        txt3.setEditable(false);
+        txt3.setEditable(false);*/
 
         danel.setLayout(new BorderLayout(10, 10));
         JPanel info0 = new JPanel();
         info0.setLayout(new GridLayout(0, 1));
         info0.add(info);
         danel.add(info0, BorderLayout.BEFORE_FIRST_LINE);
-        danel.add(info3, BorderLayout.CENTER);
+        danel.add(methods.selectTimePanel(d, null, scheduleTime), BorderLayout.CENTER);
+        //danel.add(info3, BorderLayout.CENTER);
         danel.add(new JLabel(""), BorderLayout.BEFORE_LINE_BEGINS);
         danel.add(new JLabel(" "), BorderLayout.AFTER_LINE_ENDS);
         danel.add(new JLabel(), BorderLayout.PAGE_END);
