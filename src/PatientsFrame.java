@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class PatientsFrame{
 
     JLabel time = new JLabel();
-
     private MedicalCenter mc;
 
     public PatientsFrame(MedicalCenter mc){
@@ -16,7 +15,7 @@ public class PatientsFrame{
     }
 
     private void logged(Patient currentPat){
-
+        System.out.println("Sveikas");
         JFrame loggedIn = new JFrame("Medical Centre Application for Patients - " + currentPat.getName() + " " + currentPat.getSurName());
         loggedIn.setSize(650, 650);
         loggedIn.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -11,13 +11,12 @@ import javax.swing.*;
 public class Login {
 
     MedicalCenter mc;
-
+    Methods methods = new Methods();
     public Login(MedicalCenter mc) {
         this.mc = mc;
     }
 
     public void render() {
-
         JFrame window = new JFrame("Login");
         window.setLocationRelativeTo(null);
         window.setPreferredSize(new Dimension(500, 300));
