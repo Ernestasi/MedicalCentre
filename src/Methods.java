@@ -1,5 +1,7 @@
 //maybe will need this for global methods
 
+import sun.awt.geom.AreaOp;
+
 import javax.swing.*;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
@@ -104,6 +106,9 @@ public class Methods{
 
         JPanel northPanel = new JPanel(new FlowLayout());
 
+
+        Calendar cal = Calendar.getInstance();
+
         String[] year = {String.valueOf(time.get(Calendar.YEAR)), String.valueOf(time.get(Calendar.YEAR) + 1), String.valueOf(time.get(Calendar.YEAR) + 2)};
 
         JComboBox yearBox = new JComboBox(year);
@@ -129,12 +134,29 @@ public class Methods{
             @Override
             public void actionPerformed(ActionEvent e){
                 dayBox.removeAllItems();
-                for(int i = 0 ; i <= 5; i++){
-                    dayBox.addItem(i+time.get(Calendar.DAY_OF_MONTH));
+                //String.valueOf(time.get(Calendar.YEAR)).equals(yearBox.getSelectedItem()) &&
+                cal.set(Calendar.YEAR, Integer.parseInt((String) yearBox.getSelectedItem()));
+                cal.set(Calendar.MONTH,1);
+                if( monthBox.getSelectedItem()!= null)
+                cal.set(Calendar.MONTH, (Integer) monthBox.getSelectedItem()-1);
+                cal.set(Calendar.DAY_OF_MONTH, 1);
+                for(int i = (time.get(Calendar.YEAR) == cal.get(Calendar.YEAR) && time.get(Calendar.MONTH) == cal.get(Calendar.MONTH))?time.get(Calendar.DAY_OF_MONTH):1; i <= cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++){
+                    dayBox.addItem(i);
                 }
             }
         });
         monthBox.setSelectedIndex(0);
+
+        dayBox.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                cal.set(Calendar.YEAR, Integer.parseInt((String) yearBox.getSelectedItem()));
+                if( monthBox.getSelectedItem()!= null)
+                cal.set(Calendar.MONTH, (Integer) monthBox.getSelectedItem()-1);
+                if( dayBox.getSelectedItem()!= null)
+                cal.set(Calendar.DAY_OF_MONTH, (Integer) dayBox.getSelectedItem());
+            }
+        });
 
         northPanel.add(new JLabel("Year: "));
         northPanel.add(yearBox);
