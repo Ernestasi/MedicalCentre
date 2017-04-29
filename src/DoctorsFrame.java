@@ -31,6 +31,8 @@ public class DoctorsFrame {
         this.mc = mc;
     }
 
+    public DoctorsFrame(){}
+
     public void init() {
         d = mc.doctors.get(currentDoctor);
         frame = new JFrame("Medical Centre Application for Doctors - " + d.getName() + " " + d.getSurName());
@@ -198,7 +200,7 @@ public class DoctorsFrame {
         return lab;
     }
 
-    private JPanel timeGraph(int day) {
+    public JPanel timeGraph(int day) {
         Calendar time;
         time = (Calendar) scheduleTime.clone();
         time.set(Calendar.DAY_OF_WEEK, day + 1);
