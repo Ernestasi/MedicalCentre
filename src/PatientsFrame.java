@@ -365,7 +365,7 @@ public class PatientsFrame{
             reminderFrame.setResizable(false);
             reminderFrame.setLocation(0,0);
             reminderFrame.setAlwaysOnTop(true);
-            reminderFrame.getContentPane().setBackground(Color.red);
+            reminderFrame.getContentPane().setBackground(Color.pink);
             reminderFrame.setLayout(new GridLayout(1,1));
             //labels
             JLabel reminderLabel = new JLabel("You have an appointment in upcoming week, check appointments tab.");
