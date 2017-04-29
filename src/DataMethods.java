@@ -1,10 +1,8 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadData{
+public class DataMethods{
 
     public void readDoctors(List doc){
         try{
@@ -70,6 +68,60 @@ public class ReadData{
 
         }catch(IOException e){
             e.printStackTrace();
+        }
+    }
+
+    public void updateDatesFile(ArrayList<Patient> patients){
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+        try{
+            fw = new FileWriter("./src/Data/Dates.txt");
+            bw = new BufferedWriter(fw);
+            for(Patient p : patients){
+                if(p.getAppointments() != null){
+                    String string = p.getId();
+                    for(String times : p.appointments){
+                        string = string + "," + times;
+                    }
+                    string = string + "\n";
+                    bw.write(string);
+                }
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if(bw != null)
+                    bw.close();
+                if(fw != null)
+                    fw.close();
+            }catch(IOException ex){
+                ex.printStackTrace();
+            }
+        }
+
+    }
+
+    public void updatePatientsFile(ArrayList<Patient> patients){
+
+        String string = "";
+        for(Patient p : patients){
+            //Ona_Petraite_99286715699_0_ _
+            String a = "_";
+            string = string + p.getName() + a + p.getSurName() + a + p.getId() + a + p.getInsurance() + a + p.getDescription() + a + "\n";
+        }
+        BufferedWriter writer = null;
+        try{
+            writer = new BufferedWriter(new FileWriter("./src/Data/Patients.txt"));
+            writer.write(string);
+
+        }catch(IOException e){
+        }finally{
+            try{
+                if(writer != null)
+                    writer.close();
+            }catch(IOException e){
+            }
         }
     }
 }

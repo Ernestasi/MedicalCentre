@@ -17,6 +17,7 @@ public class DoctorsFrame {
     Doctor d;
     JFrame frame;
     Methods methods = new Methods();
+    DataMethods dataMethods = new DataMethods();
 
     JLabel timeDisp = new JLabel();
     JPanel panelSh = new JPanel();
@@ -143,7 +144,7 @@ public class DoctorsFrame {
                     p.setAppointments(dateString);
                     checkTime.add(Calendar.YEAR, 1);
 //////////////////////////////
-                    methods.updateDatesFile(mc.patients);
+                    dataMethods.updateDatesFile(mc.patients);
 //////////////////////////////
                 }
             });
@@ -296,7 +297,7 @@ public class DoctorsFrame {
                                                 p.getAppointments().remove(a);
                                                 p.AppointmentToTime();
                                                 checkTime.add(Calendar.YEAR, 1);
-                                                methods.updateDatesFile(mc.patients);
+                                                dataMethods.updateDatesFile(mc.patients);
                                                 cancelApointment.dispose();
                                             }
                                         });

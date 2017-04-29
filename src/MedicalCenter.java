@@ -10,7 +10,7 @@ public class MedicalCenter extends Canvas implements Runnable{
     ArrayList<Patient> patients = new ArrayList<>();
     ArrayList<Disease> diseases = new ArrayList<>();
 
-    private ReadData rd;
+    private DataMethods rd;
     Login log;
     TimeFrame tFrame;
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm  E");
@@ -88,7 +88,7 @@ public class MedicalCenter extends Canvas implements Runnable{
 
 
     public void init(MedicalCenter medCent){
-        rd = new ReadData();
+        rd = new DataMethods();
         tFrame = new TimeFrame(this);
 
 
