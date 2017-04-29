@@ -1,5 +1,3 @@
-import javafx.scene.text.TextAlignment;
-
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -163,7 +161,7 @@ public class DoctorsFrame {
 
         panelSh.setLayout(new GridLayout(0, 2, 30, 30));
         for (int i = 1; i < 7; i++) {
-            panelSh.add(timeGraph(i));
+            panelSh.add(dayPanel(i));
         }
         panelSh.setPreferredSize(new Dimension(0, 1111));
         JScrollPane scrollPaneP = new JScrollPane(panelSh);
@@ -200,7 +198,7 @@ public class DoctorsFrame {
         return lab;
     }
 
-    public JPanel timeGraph(int day) {
+    public JPanel dayPanel(int day) {
         Calendar time;
         time = (Calendar) scheduleTime.clone();
         time.set(Calendar.DAY_OF_WEEK, day + 1);
@@ -209,33 +207,32 @@ public class DoctorsFrame {
         SimpleDateFormat dayNameFormat = new SimpleDateFormat("EEEE (dd'd.') ");
         DateFormat dateForm = new SimpleDateFormat("HH:mm ");
         if (!(d.getTimeDay(day).equals("-"))) {
-            dayPanel.add(new JLabel(String.format("%1$-" + 37 + "s", dayNameFormat.format(time.getTime())) + String.format("%1$" + 11 + "s", d.getTimeDay(day)).replace(" ", "0")), BorderLayout.NORTH);
+            dayPanel.add(new JLabel(String.format("%1$-" + 37 + "s", dayNameFormat.format(time.getTime())) + String.format("%1$" + 11 + "s", d.getTimeDay(day)).replace(" ", "0")), BorderLayout.NORTH); // dienos pavadinimas ir darbo laikas ta diena
 
-            {
+            { // Dienos susitikimu laikai  + pacentas + mygtukai
                 String[] s = (d.getTimeDay(day).split("-|:"));
                 time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(s[0]));
                 time.set(Calendar.MINUTE, Integer.parseInt(s[1]));
-                JPanel pan = new JPanel();
-                pan.setLayout(new GridLayout(0, 1, 3, 3));
-                JPanel pan2 = new JPanel();
-                pan2.setLayout(new GridLayout(0, 1, 3, 3));
+                JPanel pan = new JPanel(new GridLayout(0, 1, 3, 3));
+                JPanel pan2 = new JPanel(new GridLayout(0, 1, 3, 3));
                 pan.setPreferredSize(new Dimension(90, 40));
                 pan2.setPreferredSize(new Dimension(200, 40));
 
                 Calendar temptime = (Calendar) time.clone();
-
                 temptime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(s[0]));
                 temptime.set(Calendar.MINUTE, Integer.parseInt(s[1]));
                 Calendar temptime2 = (Calendar) temptime.clone();
                 temptime2.set(Calendar.HOUR_OF_DAY, Integer.parseInt(s[2]));
                 temptime2.set(Calendar.MINUTE, Integer.parseInt(s[3]));
+
                 for (Calendar cal = temptime; cal.before(temptime2); cal.add(Calendar.MINUTE, 30)) {
                     JLabel labTemp = new JLabel(dateForm.format(time.getTime()) + " - ");
                     time.add(Calendar.MINUTE, 30);
                     labTemp.setText(labTemp.getText() + dateForm.format(time.getTime()));
                     pan.add(labTemp);
-                    pan2.add(patientBut(cal), BorderLayout.CENTER);
+                    pan2.add(patientBut(cal), BorderLayout.CENTER); // pacentas ir mygtukai
                 }
+
                 dayPanel.add(pan, BorderLayout.WEST);
                 dayPanel.add(pan2, BorderLayout.EAST);
             }
@@ -255,12 +252,10 @@ public class DoctorsFrame {
         for (Patient p : mc.patients) {
             if (p.getDocId() != null) {
                 for (int j = 0; j < p.getDocId().size(); j++) {
-                    String tempS = p.getDocId().get(j);
-                    Calendar tempCal = (Calendar) p.getTime().get(j).clone();
-                    if (Integer.parseInt(tempS) == currentDoctor) {
+                    if (Integer.parseInt(p.getDocId().get(j)) == currentDoctor) {
+                        Calendar tempCal = (Calendar) p.getTime().get(j).clone();
                         if (time.get(Calendar.YEAR) == tempCal.get(Calendar.YEAR)
-                                && time.get(Calendar.MONTH) == tempCal.get(Calendar.MONTH)
-                                && time.get(Calendar.DAY_OF_MONTH) == tempCal.get(Calendar.DAY_OF_MONTH)
+                                && time.get(Calendar.DAY_OF_YEAR) == tempCal.get(Calendar.DAY_OF_YEAR)
                                 && time.get(Calendar.HOUR_OF_DAY) == tempCal.get(Calendar.HOUR_OF_DAY)
                                 && time.get(Calendar.MINUTE) == tempCal.get(Calendar.MINUTE)
                                 ) {
@@ -481,7 +476,8 @@ public class DoctorsFrame {
         info0.setLayout(new GridLayout(0, 1));
         info0.add(info);
         danel.add(info0, BorderLayout.BEFORE_FIRST_LINE);
-        danel.add(methods.selectTimePanel(d, null, scheduleTime), BorderLayout.CENTER);
+
+        danel.add(methods.selectTimePanel(d, null, mc.cal, mc), BorderLayout.CENTER);
         //danel.add(info3, BorderLayout.CENTER);
         danel.add(new JLabel(""), BorderLayout.BEFORE_LINE_BEGINS);
         danel.add(new JLabel(" "), BorderLayout.AFTER_LINE_ENDS);

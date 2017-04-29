@@ -121,7 +121,7 @@ public class PatientsFrame{
                                     JPanel dayPNL = new JPanel();
                                     for(Doctor doc : mc.doctors){
                                         if((doc.getName()+" "+doc.getSurName()).equals(docName)){
-                                            dayPNL = methods.selectTimePanel(doc,currentPat, scheduleTime);
+                                            dayPNL = methods.selectTimePanel(doc,currentPat, scheduleTime, mc);
                                         }
                                     }
 

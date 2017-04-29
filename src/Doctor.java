@@ -9,17 +9,6 @@ public class Doctor extends Human{
     private String data;
     private int id;
 
-
-    public Doctor(String name, String surName, int cab,String spec, String time){
-        setName(name);
-        setSurName(surName);
-        this.cab = cab;
-        this.spec = spec;
-        this.time = time;
-        toDay(time);
-        constructData();
-    }
-
     public Doctor(String name, String surName, int cab,String spec, String time, int id){
         setName(name);
         setSurName(surName);

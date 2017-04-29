@@ -1,6 +1,7 @@
 //maybe will need this for global methods
 
 import sun.awt.geom.AreaOp;
+import sun.util.resources.cldr.mas.CalendarData_mas_KE;
 
 import javax.print.Doc;
 import javax.swing.*;
@@ -9,6 +10,8 @@ import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
@@ -103,7 +106,7 @@ public class Methods {
         }
     }
 
-    public JPanel selectTimePanel(Doctor doctor, Patient patient, Calendar time) {
+    public JPanel selectTimePanel(Doctor doctor, Patient patient, Calendar time, MedicalCenter mc) {
         JPanel returnPanel = new JPanel(new BorderLayout());
 
         JPanel northPanel = new JPanel(new FlowLayout());
@@ -167,12 +170,12 @@ public class Methods {
                     cal.set(Calendar.DAY_OF_MONTH, (Integer) dayBox.getSelectedItem());
 //////////////////////////
                 centerPanel.removeAll();
-                centerPanel.add(dayShedule(cal, doctor));
+                centerPanel.add(dayShedule(cal, doctor, patient, mc));
                 returnPanel.updateUI();
 ////////////////////////////
             }
         });
-
+        dayBox.setSelectedIndex(0);
         northPanel.add(new JLabel("Year: "));
         northPanel.add(yearBox);
         northPanel.add(new JLabel("Month: "));
@@ -187,13 +190,15 @@ public class Methods {
         return returnPanel;
     }
 
-    public JPanel dayShedule(Calendar time, Doctor doctor) {
-        JPanel returnPanel = new JPanel(new GridLayout(16, 1, 1, 1));
-        if (time.get(Calendar.DAY_OF_WEEK) - 2>=0) {
-            System.out.println("#1");
+    private JPanel dayShedule(Calendar time, Doctor doctor, Patient patient, MedicalCenter mc) {
+        JPanel returnPanel = new JPanel(new GridLayout(16, 2, 1, 1));
+        returnPanel.setBackground(Color.LIGHT_GRAY);
+        returnPanel.add(new JLabel("Doctor doesn't work on selected day"));
+
+        if (time.get(Calendar.DAY_OF_WEEK) - 2 >= 0) {
             if (!doctor.getTimeDay(time.get(Calendar.DAY_OF_WEEK) - 2).equals("-")) {
+                returnPanel.removeAll();
                 String[] temp = (doctor.getTimeDay(time.get(Calendar.DAY_OF_WEEK) - 2).split("-|:"));
-                System.out.println("#" + doctor.getTimeDay(0));
                 time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(temp[0]));
                 time.set(Calendar.MINUTE, Integer.parseInt(temp[1]));
 
@@ -203,17 +208,46 @@ public class Methods {
 
 
                 SimpleDateFormat hoursFormat = new SimpleDateFormat("HH:mm");
-                for (Calendar cal = (Calendar) time.clone(); cal.before(time2); cal.add(Calendar.MINUTE, 30)) {
-                    JLabel jl = new JLabel(hoursFormat.format(cal.getTime()));
-                    returnPanel.add(jl);
+                for (Calendar cal = (Calendar) time.clone(); cal.before(time2); ) {
+                    JPanel line = new JPanel(new BorderLayout());
+                    JLabel jl = new JLabel(hoursFormat.format(cal.getTime()) + "-");
+                    line.add(jl, BorderLayout.WEST);
+                    line.add(checkIfBusyPanel(cal, doctor, patient, mc), BorderLayout.CENTER);
+                    cal.add(Calendar.MINUTE, 30);
+                    jl.setText(jl.getText() + hoursFormat.format(cal.getTime()) + "  ");
+                    returnPanel.add(line);
                 }
-            }else{
-                returnPanel.add(new JLabel("Doctor doesn't work on selected day"));
             }
-        }else{
-            returnPanel.add(new JLabel("Doctor doesn't work on selected day"));
+        }
+
+        return returnPanel;
+    }
+
+    private JPanel checkIfBusyPanel(Calendar time, Doctor doctor, Patient patient, MedicalCenter mc) {
+        JPanel returnPanel = new JPanel();
+
+        for (Patient p : mc.patients) {
+            if (p.getDocId() != null) {
+                for (int j = 0; j < p.getDocId().size(); j++) {
+                    Calendar tempCal = (Calendar) p.getTime().get(j).clone();
+                    SimpleDateFormat minutesFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm");
+                    if( time.get(Calendar.YEAR) == tempCal.get(Calendar.YEAR)
+                            && time.get(Calendar.DAY_OF_YEAR) == tempCal.get(Calendar.DAY_OF_YEAR)
+                            && time.get(Calendar.HOUR_OF_DAY) == tempCal.get(Calendar.HOUR_OF_DAY)
+                            && time.get(Calendar.MINUTE) == tempCal.get(Calendar.MINUTE)
+                            ){
+                        if(patient==null){
+                            returnPanel.add(new JLabel(p.fullName()));
+                        }else{
+                            returnPanel.add(new JLabel("This time is unavailable"));
+                        }
+                   }
+                }
+            }
+
         }
 
         return returnPanel;
     }
 }
+

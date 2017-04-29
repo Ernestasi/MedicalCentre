@@ -32,6 +32,10 @@ public class Patient extends Human{
                 + "| " + String.format("%1$-" + 15 + "s", getName()) + "| " + String.format("%1$-" + 20 + "s", getSurName()) + " " + String.format("%1$-" + 20 + "s", insType);
     }
 
+    public String fullName(){
+        return String.format("%1$-" + 15 + "s", getName()) + " " + String.format("%1$-" + 20 + "s", getSurName()) + " " + String.format("%1$-" + 20 + "s", insType);
+    }
+
     private String intToIns(int i){
         if(i == 0){
             return "None";
