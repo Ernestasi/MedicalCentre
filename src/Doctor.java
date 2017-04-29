@@ -69,4 +69,8 @@ public class Doctor extends Human{
     public void setTimeDay(String[] timeDay) {
         this.timeDay = timeDay;
     }
+
+    public int getId(){
+        return id;
+    }
 }

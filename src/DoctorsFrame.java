@@ -11,7 +11,7 @@ import javax.swing.plaf.basic.BasicArrowButton;
 
 
 public class DoctorsFrame {
-    private int currentDoctor = 0; //TODO reikia kad reaguotu kuris daktaras!!!!
+    private int currentDoc = 0; //TODO reikia kad reaguotu kuris daktaras!!!!
 
     MedicalCenter mc;
     Doctor d;
@@ -24,15 +24,15 @@ public class DoctorsFrame {
     JTabbedPane tabs = new JTabbedPane();
     SimpleDateFormat weekFormat = new SimpleDateFormat("yyyy/MM/dd EE", Locale.ENGLISH);
 
-    public DoctorsFrame(MedicalCenter mc, int currentDoctor) {
-        this.currentDoctor = currentDoctor;
+    public DoctorsFrame(MedicalCenter mc, int currentDoc) {
+        this.currentDoc = currentDoc;
         this.mc = mc;
     }
 
     public DoctorsFrame(){}
 
     public void init() {
-        d = mc.doctors.get(currentDoctor);
+        d = mc.doctors.get(currentDoc);
         frame = new JFrame("Medical Centre Application for Doctors - " + d.getName() + " " + d.getSurName());
 
         checkTime = (Calendar) mc.cal.clone();
@@ -106,7 +106,7 @@ public class DoctorsFrame {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     System.out.println("Pressed on patient: " + p.getName() + " " + p.getSurName());
-                    patientInfoFrame(p);
+                    methods.patientInfoFrame(p, mc);
                 }
             });
             panel.add(patientBut);
@@ -120,7 +120,7 @@ public class DoctorsFrame {
         return lab;
     }
 
-    private JLabel tabPatients(Calendar date) {
+    private JLabel tabPatients(Calendar date, Doctor doctor) {
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 1));
@@ -138,7 +138,7 @@ public class DoctorsFrame {
                 public void mouseClicked(MouseEvent e) {
                     System.out.println("added patient: " + p.getName() + " " + p.getSurName());
                     addInfoF.dispose();
-                    String dateString = currentDoctor + "_" + date.get(Calendar.YEAR) + "-" + String.format("%1$" + 2 + "s", date.get(Calendar.MONTH) + 1).replace(" ", "0") + "-" + String.format("%1$" + 2 + "s", date.get(Calendar.DAY_OF_MONTH)).replace(" ", "0")
+                    String dateString = doctor.getId() + "_" + date.get(Calendar.YEAR) + "-" + String.format("%1$" + 2 + "s", date.get(Calendar.MONTH) + 1).replace(" ", "0") + "-" + String.format("%1$" + 2 + "s", date.get(Calendar.DAY_OF_MONTH)).replace(" ", "0")
                             + "_" + String.format("%1$" + 2 + "s", date.get(Calendar.HOUR_OF_DAY)).replace(" ", "0") + ":" + String.format("%1$" + 2 + "s", date.get(Calendar.MINUTE)).replace(" ", "0");
                     p.setAppointments(dateString);
                     checkTime.add(Calendar.YEAR, 1);
@@ -230,7 +230,7 @@ public class DoctorsFrame {
                     time.add(Calendar.MINUTE, 30);
                     labTemp.setText(labTemp.getText() + dateForm.format(time.getTime()));
                     pan.add(labTemp);
-                    pan2.add(patientBut(cal), BorderLayout.CENTER); // pacentas ir mygtukai
+                    pan2.add(patientBut(cal, mc.doctors.get(currentDoc)), BorderLayout.CENTER); // pacentas ir mygtukai
                 }
 
                 dayPanel.add(pan, BorderLayout.WEST);
@@ -244,7 +244,7 @@ public class DoctorsFrame {
         }
     }
 
-    private JPanel patientBut(Calendar time) {
+    private JPanel patientBut(Calendar time, Doctor doctor) {
         JPanel timeLine = new JPanel(new BorderLayout(1, 1));
         JButton but = new JButton("");
         JPanel butPan = new JPanel(new GridBagLayout());
@@ -252,7 +252,7 @@ public class DoctorsFrame {
         for (Patient p : mc.patients) {
             if (p.getDocId() != null) {
                 for (int j = 0; j < p.getDocId().size(); j++) {
-                    if (Integer.parseInt(p.getDocId().get(j)) == currentDoctor) {
+                    if (Integer.parseInt(p.getDocId().get(j)) == doctor.getId()) {
                         Calendar tempCal = (Calendar) p.getTime().get(j).clone();
                         if (time.get(Calendar.YEAR) == tempCal.get(Calendar.YEAR)
                                 && time.get(Calendar.DAY_OF_YEAR) == tempCal.get(Calendar.DAY_OF_YEAR)
@@ -268,7 +268,7 @@ public class DoctorsFrame {
                                 @Override
                                 public void mouseClicked(MouseEvent e) {
                                     System.out.println("Cheking patient: " + p.getName() + " " + p.getSurName());
-                                    patientInfoFrame(p);
+                                    methods.patientInfoFrame(p, mc);
                                 }
                             });
                             JPanel but2Pan = new JPanel(new GridBagLayout());
@@ -341,7 +341,7 @@ public class DoctorsFrame {
                 public void mouseClicked(MouseEvent e) {
                     if (but.isEnabled()) {
                         System.out.println("Setting up new appointment " + timeClone.getTime());
-                        but.setText(addPatientAppointment(timeClone));
+                        but.setText(addPatientAppointment(timeClone, doctor));
                     }
                 }
             });
@@ -349,103 +349,10 @@ public class DoctorsFrame {
         return timeLine;
     }
 
-    private void patientInfoFrame(Patient p) {
-        JFrame infoF = new JFrame(p.getName() + " " + p.getSurName());
-        infoF.setSize(400, 500);
-        infoF.setLocation(200, 160);
-        infoF.setLocationByPlatform(true);
-        infoF.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JPanel panel = new JPanel();
-
-        JPanel info = new JPanel();
-        info.add(new JLabel("Patient: "));
-        JTextField txt = new JTextField(p.getName().toUpperCase() + " " + p.getSurName().toUpperCase(), 15);
-        txt.setEditable(false);
-        info.add(txt);
-        info.add(new JLabel("  ID: "));
-        JTextField txt1 = new JTextField(p.getId(), 8);
-        txt1.setEditable(false);
-        info.add(txt1);
-
-        JPanel info2 = new JPanel();
-        info2.add(new JLabel("Insurance: "));
-        JTextField txt2 = new JTextField(p.getInsType(), 13);
-        info2.add(txt2);
-        info2.add(new JLabel("    Description:            "));
-        txt2.setEditable(false);
-
-        JPanel info3 = new JPanel();
-        info3.setLayout(new BorderLayout(10, 0));
-        JTextArea txt3 = new JTextArea(p.getDescription().replaceAll("#n#", "\n"), 14, 20);
-
-        JScrollPane descriptionScrollable = new JScrollPane(txt3);
-        descriptionScrollable.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
-        txt3.setLineWrap(true);
-        txt3.setWrapStyleWord(true);
-        txt3.setEditable(false);
-        info3.add(descriptionScrollable, BorderLayout.CENTER);
-        JButton editBut = new JButton(" Edit ");
-        JButton closeBut = new JButton(" Close");
-
-        final String[] tempText = {txt3.getText()};
-        editBut.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (!txt3.isEditable()) { //edit
-                    txt3.setEditable(true);
-                    editBut.setText(" Save  ");
-                    closeBut.setText("Cancel");
-                    txt3.setText(tempText[0] + "");
-                    txt3.requestFocus();
-                } else { //save
-                    txt3.setEditable(false);
-                    tempText[0] = txt3.getText();
-                    editBut.setText(" Edit ");
-                    closeBut.setText(" Close");
-                    p.setDescription(txt3.getText().replaceAll("\n", " #n#"));
-
-                    methods.updatePatientsFile(mc.patients);
-                }
-            }
-        });
-        closeBut.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (closeBut.getText().equals(" Close")) { //close
-                    infoF.dispose();
-                } else { //cancel
-                    txt3.setEditable(false);
-                    editBut.setText(" Edit ");
-                    closeBut.setText(" Close");
-                    txt3.setText(tempText[0]);
-                }
-            }
-        });
-        JPanel jl = new JPanel();
-        jl.setLayout(new GridBagLayout());
-        jl.add(editBut);
-        jl.add(closeBut);
-
-        info3.add(jl, BorderLayout.PAGE_END);
-        panel.setLayout(new BorderLayout(10, 10));
-        JPanel info0 = new JPanel();
-        info0.setLayout(new GridLayout(0, 1));
-        info0.add(info);
-        info0.add(info2);
-        panel.add(info0, BorderLayout.BEFORE_FIRST_LINE);
-        panel.add(info3, BorderLayout.CENTER);
-        panel.add(new JLabel(" "), BorderLayout.BEFORE_LINE_BEGINS);
-        panel.add(new JLabel(" "), BorderLayout.AFTER_LINE_ENDS);
-        panel.add(new JLabel(), BorderLayout.PAGE_END);
-
-        infoF.add(panel);
-        infoF.setVisible(true);
-    }
-
-    private void doctorInfoFrame(Doctor d) {
+    public void doctorInfoFrame(Doctor d) {
         JFrame infoF = new JFrame(d.getName() + " " + d.getSurName());
-        infoF.setSize(400, 500);
+        infoF.setSize(500, 650);
         infoF.setLocation(100, 160);
         infoF.setLocationByPlatform(true);
         infoF.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -489,10 +396,10 @@ public class DoctorsFrame {
 
     JDialog addInfoF;
 
-    private String addPatientAppointment(Calendar time) {
+    public String addPatientAppointment(Calendar time, Doctor doctor) {
         addInfoF = new JDialog(frame, "Set appointment", Dialog.ModalityType.DOCUMENT_MODAL);
         addInfoF.setSize(500, 500);
-        addInfoF.add(tabPatients(time));
+        addInfoF.add(tabPatients(time, doctor));
         addInfoF.setLocation(100, 150);
         addInfoF.setLocationByPlatform(true);
         addInfoF.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
