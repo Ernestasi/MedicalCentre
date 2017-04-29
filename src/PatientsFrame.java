@@ -4,17 +4,20 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class PatientsFrame{
 
     JLabel time = new JLabel();
     private MedicalCenter mc;
-
+    Calendar checkTime, scheduleTime;
+    Methods methods = new Methods();
     public PatientsFrame(MedicalCenter mc){
         this.mc = mc;
     }
 
     private void logged(Patient currentPat){
+        scheduleTime = (Calendar) mc.cal.clone();
         JFrame loggedIn = new JFrame("Medical Centre Application for Patients - " + currentPat.getName() + " " + currentPat.getSurName());
         loggedIn.setSize(650, 650);
         loggedIn.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -108,40 +111,20 @@ public class PatientsFrame{
                                     setMeeting.setSize(500, 500);
                                     setMeeting.setResizable(false);
                                     setMeeting.setAlwaysOnTop(true);
-                                    setMeeting.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                                    setMeeting.setDefaultCloseOperation(1);
                                     setMeeting.setLocationRelativeTo(null);
                                     setMeeting.setLayout(new BorderLayout(10, 10));
-
-                                    //Panels
-                                    JPanel dayPNL = new JPanel();
+                                    setMeeting.setVisible(true);
+                                    //panels
                                     JPanel timePNL = new JPanel();
                                     JPanel buttonsPNL = new JPanel();
-
-                                    dayPNL.setLayout(new GridLayout(1,7,5,5));
-                                    timePNL.setLayout(new GridLayout(1,7,5,5));
-                                    buttonsPNL.setLayout(new GridLayout(1,1));
-                                    // labels end
-
-                                    setMeeting.setVisible(true);
-                                    String[] week = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-                                    for(Doctor d : mc.doctors){
-                                        if((d.getName() + " " + d.getSurName()).equals(docName)){
-                                            JComboBox dayBOX = new JComboBox(week);
-                                            dayPNL.add(dayBOX);
-                                            for(int i = 0; i < 7; i++)
-                                                timePNL.add(new JLabel(d.getTimeDay(i)));
-                                            JButton closeBTN = new JButton("Close");
-                                            closeBTN.setHorizontalAlignment(SwingConstants.CENTER);
-                                            closeBTN.addMouseListener(new MouseAdapter() {
-                                                @Override
-                                                public void mouseClicked(MouseEvent e) {
-                                                    setMeeting.dispose();
-                                                    loggedIn.setVisible(true);
-                                                }
-                                            });
-                                            buttonsPNL.add(closeBTN);
+                                    JPanel dayPNL = new JPanel();
+                                    for(Doctor doc : mc.doctors){
+                                        if((doc.getName()+" "+doc.getSurName()).equals(docName)){
+                                            dayPNL = methods.selectTimePanel(doc,currentPat, scheduleTime);
                                         }
                                     }
+
                                     setMeeting.add(dayPNL, BorderLayout.NORTH);
                                     setMeeting.add(timePNL,BorderLayout.CENTER);
                                     setMeeting.add(buttonsPNL,BorderLayout.SOUTH);
