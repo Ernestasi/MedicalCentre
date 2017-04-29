@@ -46,7 +46,7 @@ public class PatientsFrame{
         insuranceType.setVerticalAlignment(SwingConstants.TOP);
         info.add(name);
         info.add(insuranceType);
-        //Info labels ends there
+        //Info labels ends theree
 
         ArrayList<String> tempList = new ArrayList<>();
         tempList.add(mc.doctors.get(1).getSpec());
