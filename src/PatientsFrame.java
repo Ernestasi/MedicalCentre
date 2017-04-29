@@ -152,13 +152,13 @@ public class PatientsFrame{
 
 
         // Appointments tab
-
+            //reiks pakeist i scrollpane
         appointmets = new JPanel(new GridLayout(0,1,5,5));
-        appointmets.setLayout(new BorderLayout());
+        appointmets.setLayout(new GridLayout(10, 1, 1, 1));
         SimpleDateFormat appFormat = new SimpleDateFormat("YYYY-MM-dd HH:MM");
         if(currentPat.getAppointments() != null){
             for(int i = 0; i < currentPat.getAppointments().size(); i++){
-                Doctor doc =mc.doctors.get(Integer.parseInt(currentPat.getDocId().get(i)));
+                Doctor doc = mc.doctors.get(Integer.parseInt(currentPat.getDocId().get(i)));
                 appointmets.add(new JLabel(appFormat.format(currentPat.getTime().get(i).getTime()) + " " + doc.toString()),BorderLayout.NORTH);
             }
             appointmets.setPreferredSize(new Dimension(600, appointmets.getComponentCount() *30));
