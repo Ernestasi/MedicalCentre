@@ -1,3 +1,5 @@
+import com.sun.xml.internal.bind.v2.model.core.ID;
+
 import javax.print.Doc;
 import java.util.Arrays;
 
@@ -38,6 +40,8 @@ public class Doctor extends Human{
     private void constructData(){
         data = getName() + " \t" + getSurName() + " \t" + cab + " \t" + timeDay;
     }
+
+    public int getID() { return id;}
 
     public int getCab() {
         return cab;
