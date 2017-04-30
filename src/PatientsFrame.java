@@ -8,7 +8,8 @@ import java.util.Calendar;
 
 public class PatientsFrame{
 
-    JLabel time = new JLabel();
+    JPanel appointments;
+
     private MedicalCenter mc;
     Calendar checkTime, scheduleTime;
     Methods methods = new Methods();
@@ -34,7 +35,6 @@ public class PatientsFrame{
         JPanel doctorsSpec = new JPanel();
         JPanel buttons = new JPanel();
         JScrollPane descriptionScrollable;
-        JPanel appointmets;
 
 
         //info panel
@@ -123,7 +123,6 @@ public class PatientsFrame{
                                     }
 
                                     setMeeting.add(dayPNL, BorderLayout.NORTH);
-
                                     setMeeting.setVisible(true);
                                 }
                             });
@@ -150,17 +149,17 @@ public class PatientsFrame{
 
         // Appointments tab
             //reiks pakeist i scrollpane
-        appointmets = new JPanel(new GridLayout(0,1,5,5));
-        appointmets.setLayout(new GridLayout(10, 1, 1, 1));
+        appointments = new JPanel(new GridLayout(0,1,5,5));
+        appointments.setLayout(new GridLayout(10, 1, 1, 1));
         SimpleDateFormat appFormat = new SimpleDateFormat("YYYY-MM-dd HH:MM");
         if(currentPat.getAppointments() != null){
             for(int i = 0; i < currentPat.getAppointments().size(); i++){
                 Doctor doc = mc.doctors.get(Integer.parseInt(currentPat.getDocId().get(i)));
-                appointmets.add(new JLabel(appFormat.format(currentPat.getTime().get(i).getTime()) + " " + doc.toString()),BorderLayout.NORTH);
+                appointments.add(new JLabel(appFormat.format(currentPat.getTime().get(i).getTime()) + " " + doc.toString()),BorderLayout.NORTH);
             }
-            appointmets.setPreferredSize(new Dimension(600, appointmets.getComponentCount() *30));
+            appointments.setPreferredSize(new Dimension(600, appointments.getComponentCount() *30));
         }else{
-            appointmets.add(new JLabel("You have no appointments scheduled"));
+            appointments.add(new JLabel("You have no appointments scheduled"));
         }
         //Appointments tab end here
 
@@ -169,7 +168,7 @@ public class PatientsFrame{
 
         tabs.add(descriptionScrollable, "Description");
         tabs.add(doctorsSpec, "Doctors");
-        tabs.add(appointmets, "Appointments");
+        tabs.add(appointments, "Appointments");
         //tabs.add(doctorsSpec, "Contacts");
 
         loggedIn.add(info, BorderLayout.NORTH);
@@ -357,7 +356,7 @@ public class PatientsFrame{
             reminderFrame.setSize(1010,100);
             reminderFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             reminderFrame.setResizable(false);
-            reminderFrame.setLocation(0,0);
+            reminderFrame.setLocationRelativeTo(null);
             reminderFrame.setAlwaysOnTop(true);
             reminderFrame.getContentPane().setBackground(Color.pink);
             reminderFrame.setLayout(new GridLayout(1,1));
@@ -387,6 +386,7 @@ public class PatientsFrame{
     }
 
     public void tick(){
-
+        if(appointments != null)
+            appointments.repaint();
     }
 }

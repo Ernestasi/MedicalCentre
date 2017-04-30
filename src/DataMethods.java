@@ -1,6 +1,8 @@
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Calendar;
 
 public class DataMethods{
 
@@ -72,6 +74,16 @@ public class DataMethods{
     }
 
     public void updateDatesFile(ArrayList<Patient> patients){
+        for(Patient p : patients){
+            if(p.time.size() != 0){
+                Calendar lastDate = p.time.get(p.time.size()-1);
+                for(Calendar c : p.time){
+                    if(c == lastDate){ // NESUPRANTU KAS NEGERAI NAXUI BLET KURWA
+                        System.out.println("test");
+                    }
+                }
+            }
+        }
         System.out.println("Dates file has been updated");
         BufferedWriter bw = null;
         FileWriter fw = null;
