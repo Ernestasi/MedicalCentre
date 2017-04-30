@@ -358,7 +358,7 @@ public class PatientsFrame{
                 }
             }
         }
-        if(!(needsVisit && (countMeetingsWeek == 0))){
+        if((needsVisit || (countMeetingsWeek != 0))){
             JFrame reminderFrame = new JFrame("Reminder");
             reminderFrame.setSize(1010,100);
             reminderFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
