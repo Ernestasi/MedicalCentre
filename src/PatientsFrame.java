@@ -112,11 +112,8 @@ public class PatientsFrame{
                                     JDialog setMeeting = new JDialog(meetingFrame, docName, Dialog.ModalityType.DOCUMENT_MODAL);
                                     setMeeting.setSize(500, 500);
                                     setMeeting.setResizable(false);
-                                    setMeeting.setAlwaysOnTop(true);
                                     setMeeting.setDefaultCloseOperation(1);
                                     setMeeting.setLocationRelativeTo(null);
-                                    setMeeting.setLayout(null);
-                                    setMeeting.setVisible(true);
                                     //panels
                                     JPanel dayPNL = new JPanel();
                                     for(Doctor doc : mc.doctors){
@@ -126,6 +123,8 @@ public class PatientsFrame{
                                     }
 
                                     setMeeting.add(dayPNL, BorderLayout.NORTH);
+
+                                    setMeeting.setVisible(true);
                                 }
                             });
                             meetingFrame.add(doctorSelectBTN);
