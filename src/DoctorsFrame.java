@@ -139,9 +139,8 @@ public class DoctorsFrame {
                 public void mouseClicked(MouseEvent e) {
                     System.out.println("added patient: " + p.getName() + " " + p.getSurName());
                     addInfoF.dispose();
-                    String dateString = doctor.getId() + "_" + date.get(Calendar.YEAR) + "-" + String.format("%1$" + 2 + "s", date.get(Calendar.MONTH) + 1).replace(" ", "0") + "-" + String.format("%1$" + 2 + "s", date.get(Calendar.DAY_OF_MONTH)).replace(" ", "0")
-                            + "_" + String.format("%1$" + 2 + "s", date.get(Calendar.HOUR_OF_DAY)).replace(" ", "0") + ":" + String.format("%1$" + 2 + "s", date.get(Calendar.MINUTE)).replace(" ", "0");
-                    p.setAppointments(dateString);
+                    SimpleDateFormat tempFormat = new SimpleDateFormat("_YYYY-MM-dd_HH:mm");
+                    p.setAppointments(doctor.getId() + tempFormat.format(date.getTime()));
                     checkTime.add(Calendar.YEAR, 1);
 //////////////////////////////
                     dataMethods.updateDatesFile(mc.patients);

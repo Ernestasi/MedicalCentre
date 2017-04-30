@@ -8,10 +8,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Methods{
     DataMethods dataMethods = new DataMethods();
+
     public void registerPatient(String docID, String patID, String chosenTime, MedicalCenter mc){
 
         boolean checkIfGoodId = false;
@@ -162,7 +164,7 @@ public class Methods{
                 for(int j = 0; j < p.getDocId().size(); j++){
                     if(Integer.parseInt(p.getDocId().get(j)) == doctor.getId()){
                         Calendar tempCal = (Calendar) p.getTime().get(j).clone();
-                        SimpleDateFormat minutesFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm");
+                      //  SimpleDateFormat minutesFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm");
                         if(time.get(Calendar.YEAR) == tempCal.get(Calendar.YEAR)
                                 && time.get(Calendar.DAY_OF_YEAR) == tempCal.get(Calendar.DAY_OF_YEAR)
                                 && time.get(Calendar.HOUR_OF_DAY) == tempCal.get(Calendar.HOUR_OF_DAY)
@@ -186,15 +188,15 @@ public class Methods{
                                     @Override
                                     public void mouseClicked(MouseEvent e){
                                         DoctorsFrame df = new DoctorsFrame();
-                                        if (removeBut.isEnabled()) {
+                                        if(removeBut.isEnabled()){
                                             JDialog cancelApointment = new JDialog(mc.docFrame.frame, "Remove", Dialog.ModalityType.DOCUMENT_MODAL);
                                             cancelApointment.setLayout(new GridLayout(2, 1));
                                             cancelApointment.setSize(300, 100);
                                             cancelApointment.setResizable(false);
                                             JButton yesBut = new JButton("YES");
-                                            yesBut.addMouseListener(new MouseAdapter() {
+                                            yesBut.addMouseListener(new MouseAdapter(){
                                                 @Override
-                                                public void mouseClicked(MouseEvent e) {
+                                                public void mouseClicked(MouseEvent e){
                                                     p.getAppointments().remove(a);
                                                     p.AppointmentToTime();
                                                     dataMethods.updateDatesFile(mc.patients);
@@ -203,9 +205,9 @@ public class Methods{
                                                 }
                                             });
                                             JButton noBut = new JButton("NO");
-                                            noBut.addMouseListener(new MouseAdapter() {
+                                            noBut.addMouseListener(new MouseAdapter(){
                                                 @Override
-                                                public void mouseClicked(MouseEvent e) {
+                                                public void mouseClicked(MouseEvent e){
                                                     cancelApointment.dispose();
                                                 }
                                             });
@@ -224,7 +226,11 @@ public class Methods{
 
                                 returnPanel.add(line);
                             }else{
-                                returnPanel.add(new JLabel("This time is unavailable"));
+                                if(patient.getId().equals(p.getId())){
+                                    returnPanel.add(new JLabel("You registered at this time"));
+                                }else{
+                                    returnPanel.add(new JLabel("This time is unavailable"));
+                                }
                             }
                         }
                     }
@@ -233,7 +239,7 @@ public class Methods{
         }
         if(returnPanel.getComponentCount() == 0){
             JButton addBut;
-            if(patient==null){
+            if(patient == null){
                 addBut = new JButton("Add new patient");
                 Calendar cal = (Calendar) time.clone();
                 addBut.addMouseListener(new MouseAdapter(){
@@ -254,7 +260,7 @@ public class Methods{
                     public void mouseClicked(MouseEvent e){
                         if(addBut.isEnabled()){
                             SimpleDateFormat tempFormat = new SimpleDateFormat("_YYYY-MM-dd_HH:mm");
-                            patient.appointments.add(doctor.getId() + tempFormat.format(cal.getTime()));// todo need repaint update or smth like that
+                            patient.setAppointments(doctor.getId() + tempFormat.format(cal.getTime()));// todo need repaint update or smth like that
                             dataMethods.updateDatesFile(mc.patients);
                             addBut.setEnabled(false);
                             returnPanel.updateUI();

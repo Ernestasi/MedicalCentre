@@ -72,6 +72,7 @@ public class DataMethods{
     }
 
     public void updateDatesFile(ArrayList<Patient> patients){
+        System.out.println("Dates file has been updated");
         BufferedWriter bw = null;
         FileWriter fw = null;
         try{
@@ -103,7 +104,7 @@ public class DataMethods{
     }
 
     public void updatePatientsFile(ArrayList<Patient> patients){
-
+        System.out.println("Patients file has been updated");
         String string = "";
         for(Patient p : patients){
             //Ona_Petraite_99286715699_0_ _
