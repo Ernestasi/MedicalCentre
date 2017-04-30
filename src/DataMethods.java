@@ -1,10 +1,14 @@
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar;
 
+
 public class DataMethods{
+
 
     public void readDoctors(List doc){
         try{
@@ -74,16 +78,29 @@ public class DataMethods{
     }
 
     public void updateDatesFile(ArrayList<Patient> patients){
+        int counter = 0;
         for(Patient p : patients){
             if(p.time.size() != 0){
                 Calendar lastDate = p.time.get(p.time.size()-1);
+
                 for(Calendar c : p.time){
-                    if(c == lastDate){ // NESUPRANTU KAS NEGERAI NAXUI BLET KURWA
-                        System.out.println("test");
+                    if(c.getTime().equals(lastDate.getTime())){
+                        counter++;
                     }
                 }
             }
         }
+        //JFrame start
+        if(counter > 1){
+            JFrame warningWindow = new JFrame();
+            warningWindow.setLocation(250,250);
+            warningWindow.setSize(400,100);
+            warningWindow.setAlwaysOnTop(true);
+            warningWindow.setLayout(new GridLayout(1,1));
+            warningWindow.add(new JLabel("Senas vizitas tokiu laiku buvo atsauktas(reik istrint)"));
+            warningWindow.setVisible(true);
+        }
+        //JFrame end
         System.out.println("Dates file has been updated");
         BufferedWriter bw = null;
         FileWriter fw = null;
