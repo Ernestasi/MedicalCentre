@@ -109,18 +109,15 @@ public class PatientsFrame{
                             doctorSelectBTN.addMouseListener(new MouseAdapter(){
                                 @Override
                                 public void mouseClicked(MouseEvent e){
-                                    meetingFrame.dispose();
-                                    JFrame setMeeting = new JFrame(docName);
+                                    JDialog setMeeting = new JDialog(meetingFrame, docName, Dialog.ModalityType.DOCUMENT_MODAL);
                                     setMeeting.setSize(500, 500);
                                     setMeeting.setResizable(false);
                                     setMeeting.setAlwaysOnTop(true);
                                     setMeeting.setDefaultCloseOperation(1);
                                     setMeeting.setLocationRelativeTo(null);
-                                    setMeeting.setLayout(new BorderLayout(10, 10));
+                                    setMeeting.setLayout(null);
                                     setMeeting.setVisible(true);
                                     //panels
-                                    JPanel timePNL = new JPanel();
-                                    JPanel buttonsPNL = new JPanel();
                                     JPanel dayPNL = new JPanel();
                                     for(Doctor doc : mc.doctors){
                                         if((doc.getName()+" "+doc.getSurName()).equals(docName)){
@@ -129,8 +126,6 @@ public class PatientsFrame{
                                     }
 
                                     setMeeting.add(dayPNL, BorderLayout.NORTH);
-                                    setMeeting.add(timePNL,BorderLayout.CENTER);
-                                    setMeeting.add(buttonsPNL,BorderLayout.SOUTH);
                                 }
                             });
                             meetingFrame.add(doctorSelectBTN);
