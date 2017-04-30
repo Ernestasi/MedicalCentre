@@ -234,18 +234,36 @@ public class Methods{
             }
         }
         if(returnPanel.getComponentCount() == 0){
-            JButton addBut = new JButton("Add new patient");
-            Calendar cal = (Calendar) time.clone();
-            addBut.addMouseListener(new MouseAdapter(){
-                @Override
-                public void mouseClicked(MouseEvent e){
-                    if(addBut.isEnabled()){
-                        mc.docFrame.addPatientAppointment(cal, doctor);// todo need repaint update or smth like that
-                        addBut.setEnabled(false);
-                        returnPanel.updateUI();
+            JButton addBut;
+            if(patient==null){
+                addBut = new JButton("Add new patient");
+                Calendar cal = (Calendar) time.clone();
+                addBut.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseClicked(MouseEvent e){
+                        if(addBut.isEnabled()){
+                            mc.docFrame.addPatientAppointment(cal, doctor);// todo need repaint update or smth like that
+                            addBut.setEnabled(false);
+                            returnPanel.updateUI();
+                        }
                     }
-                }
-            });
+                });
+            }else{
+                addBut = new JButton("Register");
+                Calendar cal = (Calendar) time.clone();
+                addBut.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseClicked(MouseEvent e){
+                        if(addBut.isEnabled()){
+                            SimpleDateFormat tempFormat = new SimpleDateFormat("_YYYY-MM-dd_HH:mm");
+                            patient.appointments.add(doctor.getId() + tempFormat.format(cal.getTime()));// todo need repaint update or smth like that
+                            dataMethods.updateDatesFile(mc.patients);
+                            addBut.setEnabled(false);
+                            returnPanel.updateUI();
+                        }
+                    }
+                });
+            }
             returnPanel.add(addBut, BorderLayout.CENTER);
         }
         return returnPanel;

@@ -351,7 +351,7 @@ public class PatientsFrame{
                 position = position + 20;
 
                 for(Doctor d : mc.doctors){
-                    String testDoc = String.valueOf(d.getID());
+                    String testDoc = String.valueOf(d.getId());
                     if((docID.equals(testDoc)) && (!d.getSpec().equals("family doctor"))){
                         needsVisit = false; // CIA REIKIA PRIDETI TIKRINIMA, KAD BUTU PRIES 6 MENESIUS!!!!!!!!!!!!
                     }

@@ -41,8 +41,6 @@ public class Doctor extends Human{
         data = getName() + " \t" + getSurName() + " \t" + cab + " \t" + timeDay;
     }
 
-    public int getID() { return id;}
-
     public int getCab() {
         return cab;
     }
