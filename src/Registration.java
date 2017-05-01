@@ -25,21 +25,21 @@ public class Registration{
 
         JPanel NamePanel = new JPanel();
         NamePanel.setLayout(new BorderLayout());
-        NamePanel.add(new JLabel("Name        :"),BorderLayout.WEST);
+        NamePanel.add(new JLabel(" Name          "),BorderLayout.WEST);
         JTextField name = new JTextField("");
         name.setEditable(true);
         NamePanel.add(name,BorderLayout.CENTER);
 
         JPanel SurNamePanel = new JPanel();
         SurNamePanel.setLayout(new BorderLayout());
-        SurNamePanel.add(new JLabel("SurName :"),BorderLayout.WEST);
+        SurNamePanel.add(new JLabel(" SurName   "),BorderLayout.WEST);
         JTextField surName = new JTextField("");
         surName.setEditable(true);
         SurNamePanel.add(surName,BorderLayout.CENTER);
 
         JPanel IDPanel = new JPanel();
         IDPanel.setLayout(new BorderLayout());
-        IDPanel.add(new JLabel("ID               :"),BorderLayout.WEST);
+        IDPanel.add(new JLabel(" ID                 "),BorderLayout.WEST);
         JTextField ID = new JTextField("");
         ID.setEditable(true);
         IDPanel.add(ID,BorderLayout.CENTER);
@@ -92,7 +92,7 @@ public class Registration{
                         System.out.println(count);
                         int insurance = (rb0.isSelected())? 0 : (rb1.isSelected())? 1 : (rb2.isSelected())? 2 : 3;
                         Patient pat = new Patient(nameString, surNameString, IDString, insurance, " ");
-                        mc.patients.add(pat);
+
                         //window.dispose();
 
                         window.setEnabled(false);
@@ -100,24 +100,24 @@ public class Registration{
 
                         JFrame submitted = new JFrame("Thank you");
                         submitted.setLocation(200, 200);
-                        submitted.setSize(600, 300);
+                        submitted.setSize(400, 200);
                         submitted.setResizable(false);
                         submitted.isAlwaysOnTop();
                         submitted.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         submitted.setLayout(new GridLayout(0, 1));
 
                         JLabel name = new JLabel("Name: " + pat.getName());
-                        name.setFont(new Font("Serif", Font.BOLD, 24));
+                        name.setFont(new Font("Serif", Font.BOLD, 20));
                         //name.setHorizontalAlignment(SwingConstants.LEFT );
                         submitted.add(name);
 
                         JLabel surName = new JLabel("Surname: " + pat.getSurName());
-                        surName.setFont(new Font("Serif", Font.BOLD, 24));
+                        surName.setFont(new Font("Serif", Font.BOLD, 20));
                         //surName.setHorizontalAlignment(SwingConstants.LEFT );
                         submitted.add(surName);
 
                         JLabel ID = new JLabel("ID: " + pat.getId());
-                        ID.setFont(new Font("Serif", Font.BOLD, 24));
+                        ID.setFont(new Font("Serif", Font.BOLD, 20));
                         //ID.setHorizontalAlignment(SwingConstants.LEFT );
                         submitted.add(ID);
 
@@ -130,6 +130,7 @@ public class Registration{
 
                                 FileWriter fw;
                                 try{
+                                    mc.patients.add(pat);
                                     String filename = "./src/Data/Patients.txt";
                                     fw = new FileWriter(filename, true);
                                     fw.write("\n");
@@ -164,12 +165,12 @@ public class Registration{
                         submitted.setVisible(true);
 
 
-                    }else warning.setText("  You are already on the system!");
+                    }else warning.setText(" You are already on the system!");
                 }else if(nameString.length() <= 1)
-                    warning.setText("  Entered name is too short!");
+                    warning.setText(" Entered name is too short!");
                 else if(surNameString.length() <= 1)
-                    warning.setText("  Entered sur name is too short!");
-                else warning.setText("  ID has to be 11 digits long!");
+                    warning.setText(" Entered sur name is too short!");
+                else warning.setText(" ID has to be 11 digits long!");
 
 
             }
