@@ -107,8 +107,8 @@ public class Patient extends Human{
     public void AppointmentToTime(){
         time = null;
         docId = null;
-        time= new ArrayList<>();
-        docId= new ArrayList<>();
+        time = new ArrayList<>();
+        docId = new ArrayList<>();
         for(String s : appointments){
             String[] temp = s.split("_");
             docId.add(temp[0]);            //2017-05-01
@@ -123,6 +123,12 @@ public class Patient extends Human{
             time.add(tempCal);
 
         }
+    }
+
+    public void removeAppointment(int i){
+        appointments.remove(i);
+        docId.remove(i);
+        time.remove(i);
     }
 
 
