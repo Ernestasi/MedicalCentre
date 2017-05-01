@@ -303,31 +303,13 @@ public class PatientsFrame{
         Calendar time = (Calendar) mc.cal.clone();
         time.add(Calendar.DAY_OF_MONTH, 7);
         int countMeetingsWeek = 0;
-        int appointmentsCount = 0;
         if(currentPat.time != null){
             for(Calendar c : currentPat.time){
                 if(c.after(mc.cal) && c.before(time))
                     countMeetingsWeek++;
-                appointmentsCount = currentPat.appointments.toString().length() / 20;
             }
         }
-        boolean needsVisit = true;
-        if(appointmentsCount != 0){
-            int position = 1;
-            for(int i = 0; i < appointmentsCount; i++){
-                char docIDChar = currentPat.appointments.toString().charAt(position);
-                String docID = String.valueOf(docIDChar);
-                position = position + 20;
-
-                for(Doctor d : mc.doctors){
-                    String testDoc = String.valueOf(d.getId());
-                    if((docID.equals(testDoc)) && (!d.getSpec().equals("family doctor"))){
-                        needsVisit = false;
-                    }
-                }
-            }
-        }
-        if((needsVisit || (countMeetingsWeek != 0))){
+        if((countMeetingsWeek != 0)){
             JFrame reminderFrame = new JFrame("Reminder");
             reminderFrame.setSize(1010, 100);
             reminderFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -339,24 +321,11 @@ public class PatientsFrame{
             //labels
             JLabel reminderLabel = new JLabel("You have an appointment in upcoming week, check appointments tab.");
             reminderLabel.setFont(new Font("TimesRoman", Font.BOLD, 30));
-            JLabel familyDoctorLabel = new JLabel("You haven't visited family doctor yet, please register.");
-            familyDoctorLabel.setFont(new Font("TimesRoman", Font.BOLD, 30));
             //labels end
             //checking if frame needs to be configured or even visible.
             if(countMeetingsWeek != 0)
                 reminderFrame.add(reminderLabel);
-            if(!needsVisit && (countMeetingsWeek != 0)){
-                reminderFrame.setSize(1010, 200);
-                reminderFrame.setLayout(new GridLayout(2, 1));
 
-                reminderFrame.add(familyDoctorLabel);
-            }
-            if(!needsVisit && (countMeetingsWeek == 0)){
-                reminderFrame.add(familyDoctorLabel);
-            }
-            if(appointmentsCount == 0){
-                reminderFrame.add(familyDoctorLabel);
-            }
             reminderFrame.setVisible(true);
         }
     }
@@ -408,7 +377,7 @@ public class PatientsFrame{
     }
     Calendar checkTime = Calendar.getInstance();
     public void tick(){
-        if(tabs != null && checkTime.get(Calendar.DAY_OF_YEAR)!=(mc.cal.get(Calendar.DAY_OF_YEAR)) && checkTime.get(Calendar.YEAR)!=mc.cal.get(Calendar.YEAR)){
+        if(tabs != null && checkTime.get(Calendar.DAY_OF_YEAR)!=(mc.cal.get(Calendar.DAY_OF_YEAR)) || (checkTime.get(Calendar.YEAR)!=mc.cal.get(Calendar.YEAR))){
             checkTime = (Calendar) mc.cal.clone();
             System.out.println("Refreshed");
             int selectedTab = tabs.getSelectedIndex();
