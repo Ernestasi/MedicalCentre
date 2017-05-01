@@ -25,11 +25,9 @@ Functionality of the program:
     @ If Register selected:
         - Asks User to enter name, surname, id and select insurance type, checks entered data and if it is
         correct opens information frame and shows entered data and user can submit/cancel data
-        - if data is submitted opens "Medical Center Application for Patient" frame and does its functionality
 
     @ If logged in:
-        - User can check their description
-        - User can check their appointments(can cancel them as well)
+        - User can check his description
+        - User can check his appointments(can cancel them as well)
         - User can register to specific doctor at specific time (all appointments are 30 minutes long by default)
-        - User gets reminder if he have not visited family doctor in 6 months
         - User gets reminder if he has an appointment in upcoming 7 days
