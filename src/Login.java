@@ -15,7 +15,7 @@ public class Login {
     public void render() {
         JFrame window = new JFrame("Login");
         window.setLocationRelativeTo(null);
-        window.setPreferredSize(new Dimension(500, 300));
+        window.setPreferredSize(new Dimension(300, 200));
         window.setSize(500, 300);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

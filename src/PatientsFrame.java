@@ -11,8 +11,9 @@ public class PatientsFrame{
     JPanel appointments;
 
     private MedicalCenter mc;
-    Calendar checkTime, scheduleTime;
+    Calendar scheduleTime;
     Methods methods = new Methods();
+    DataMethods dataMethods = new DataMethods();
     public PatientsFrame(MedicalCenter mc){
         this.mc = mc;
     }
@@ -157,8 +158,27 @@ public class PatientsFrame{
                 Doctor doc = mc.doctors.get(Integer.parseInt(currentPat.getDocId().get(i)));
                 JPanel tempPan = new JPanel(new GridLayout(1,0,1, 1));
 
+                Calendar lastDate = currentPat.time.get(i);
                 tempPan.add(new JLabel(appFormat.format(currentPat.getTime().get(i).getTime()) + " " + doc.toString()));
                 JButton removeBut = new JButton("remove");
+                removeBut.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        for(int j = 0; j < mc.patients.size(); j++){
+                            if(currentPat == mc.patients.get(j)){
+                                for(int x = 0; x < currentPat.appointments.size(); x++){
+
+                                    if(lastDate.toString().equals(currentPat.time.get(x).toString())){
+                                        mc.patients.get(j).appointments.remove(x);
+                                        mc.patients.get(j).AppointmentToTime();
+                                        dataMethods.updateDatesFile(mc.patients);
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
                 tempPan.add(removeBut);
                 appointments.add(tempPan, BorderLayout.NORTH);
             }
@@ -192,17 +212,7 @@ public class PatientsFrame{
             }
         });
 
-        JButton newAppointmentBTN = new JButton("New Appointment");
-        newAppointmentBTN.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-        });
-
-
-        buttons.add(signOutBTN, BorderLayout.EAST);
-        buttons.add(newAppointmentBTN,BorderLayout.WEST);
+        buttons.add(signOutBTN, BorderLayout.CENTER);
         //Buttons ends there
 
         //loggedIn.pack();
@@ -214,7 +224,7 @@ public class PatientsFrame{
 
         JFrame frame = new JFrame("Medical Centre Application for Patients  ");
         frame.setLocationRelativeTo(null);
-        frame.setSize(500, 200);
+        frame.setSize(300, 150);
         frame.getContentPane().setLayout(new GridLayout(1, 2));
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -15,7 +15,7 @@ public class Registration{
     public void render(){
         JFrame window = new JFrame("Registration");
         window.setLocationRelativeTo(null);
-        window.setSize(600, 300);
+        window.setSize(600, 400);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setLayout(new GridLayout(0, 1));
