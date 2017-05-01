@@ -197,7 +197,7 @@ public class DoctorsFrame {
         return lab;
     }
 
-    public JPanel dayPanel(int day) {
+    private JPanel dayPanel(int day) {
         Calendar time;
         time = (Calendar) scheduleTime.clone();
         time.set(Calendar.DAY_OF_WEEK, day + 1);
@@ -348,8 +348,7 @@ public class DoctorsFrame {
         return timeLine;
     }
 
-
-    public void doctorInfoFrame(Doctor d) {
+    private void doctorInfoFrame(Doctor d) {
         JFrame infoF = new JFrame(d.getName() + " " + d.getSurName());
         infoF.setSize(500, 650);
         infoF.setLocation(100, 160);

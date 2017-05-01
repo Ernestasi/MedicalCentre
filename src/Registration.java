@@ -191,6 +191,7 @@ public class Registration{
         window.add(panel,BorderLayout.NORTH);
         window.add(buttons, BorderLayout.SOUTH);
         //window.pack();
+        window.pack();
         window.setVisible(true);
     }
 

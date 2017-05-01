@@ -26,7 +26,8 @@ public class TimeFrame {
         window.setLocation((int) screenSize.getWidth() - window.getWidth(), 0);
         // window.getContentPane().setLayout(new GridLayout(2, 1));
         window.setVisible(true);
-        window.setAlwaysOnTop(true);
+        window.toFront();
+        //window.setAlwaysOnTop(true);
         //window.pack();
 
         panel.setBackground(Color.CYAN);

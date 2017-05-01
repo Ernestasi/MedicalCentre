@@ -371,6 +371,5 @@ public class Methods{
         infoF.setVisible(true);
     }
 
-
 }
 

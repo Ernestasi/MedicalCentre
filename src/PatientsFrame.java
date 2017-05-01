@@ -251,8 +251,8 @@ public class PatientsFrame{
                 JTextField textID = new JTextField(1);
                 jp.add(textID);
                 securityID.add(textID);
-                JButton submit = new JButton("Submit");
-                submit.addMouseListener(new MouseAdapter(){
+                JButton submitBTN = new JButton("Submit");
+                submitBTN.addMouseListener(new MouseAdapter(){
                     @Override
                     public void mouseClicked(MouseEvent e){
                         ID = textID.getText();
@@ -285,7 +285,7 @@ public class PatientsFrame{
 
                     }
                 });
-                securityID.add(submit);
+                securityID.add(submitBTN);
                 JButton back = new JButton("Back");
                 back.addMouseListener(new MouseAdapter(){
                     @Override
