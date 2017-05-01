@@ -1,10 +1,7 @@
 public class Human {
     private String name;
     private String surName;
-    public Human(String name, String surName){
-        this.name = name;
-        this.surName = name;
-    }
+
     public String getName() {
         return name;
     }

@@ -1,10 +1,4 @@
-Kiekvienas klientas turi tureti varda, pavarde,asmens kodas ,draudimo iformacija(0-nera, 1-national, 2-personal, 3-both)
-daktarai: Genute Geniene 8:30-16:20/5:00-15:00/-/-/
-ligos: Sepsis 2:00 50euru 3meetu 80 90 //cia 80% national 90% personal
-Dates: Patient id, doctor id, date, doctor id , date...
 
-
-/////////////////////////////
 Functionality of the program:
 - Displays virtual time (start point is current time)
 - time can be forwarded by day, week, month, year
@@ -24,9 +18,15 @@ Functionality of the program:
     @ if Login selected:
         - Asks to enter id which is already in database if id doesn't exist displays a massage and suggest to register or allows to correct id;
         - If login was successful opens "Medical Center Application for Patient" frame
-        //more functionality will be added
 
     @ If Register selected:
         - Asks User to enter name, surname, id and select insurance type, checks entered data and if it is
         correct opens information frame and shows entered data and user can submit/cancel data
         - if data is submitted opens "Medical Center Application for Patient" frame and does its functionality
+
+    @ If logged in:
+        - User can check their description
+        - User can check their appointments(can cancel them as well)
+        - User can register to specific doctor at specific time (all appointments are 30 minutes long by default)
+        - User gets reminder if he have not visited family doctor in 6 months
+        - User gets reminder if he has an appointment in upcoming 7 days

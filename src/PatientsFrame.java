@@ -321,7 +321,7 @@ public class PatientsFrame {
                 for (Doctor d : mc.doctors) {
                     String testDoc = String.valueOf(d.getId());
                     if ((docID.equals(testDoc)) && (!d.getSpec().equals("family doctor"))) {
-                        needsVisit = false; // CIA REIKIA PRIDETI TIKRINIMA, KAD BUTU PRIES 6 MENESIUS!!!!!!!!!!!!
+                        needsVisit = false;
                     }
                 }
             }
@@ -338,7 +338,7 @@ public class PatientsFrame {
             //labels
             JLabel reminderLabel = new JLabel("You have an appointment in upcoming week, check appointments tab.");
             reminderLabel.setFont(new Font("TimesRoman", Font.BOLD, 30));
-            JLabel familyDoctorLabel = new JLabel("You haven't visited family doctor for 6 months.");
+            JLabel familyDoctorLabel = new JLabel("You haven't visited family doctor yet, please register.");
             familyDoctorLabel.setFont(new Font("TimesRoman", Font.BOLD, 30));
             //labels end
             //checking if frame needs to be configured or even visible.

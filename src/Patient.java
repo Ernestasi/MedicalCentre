@@ -13,7 +13,8 @@ public class Patient extends Human{
     public ArrayList<Calendar> time;
 
     public Patient(String name, String surName, String id, int insurance, String description){
-        super(name, surName);
+        setName(name);
+        setSurName(surName);
         this.id = id;
         this.insurance = insurance;
         insType = intToIns(insurance);

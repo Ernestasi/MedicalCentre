@@ -7,7 +7,8 @@ public class Doctor extends Human{
     private int id;
 
     public Doctor(String name, String surName, int cab,String spec, String time, int id){
-        super(name, surName);
+        setName(name);
+        setSurName(surName);
         this.cab = cab;
         this.spec = spec;
         this.time = time;
@@ -17,7 +18,6 @@ public class Doctor extends Human{
     }
 
     public Doctor(){
-        super(null, null);
     }
 
     private void toDay(String time){
