@@ -151,11 +151,16 @@ public class PatientsFrame{
             //reiks pakeist i scrollpane
         appointments = new JPanel(new GridLayout(0,1,5,5));
         appointments.setLayout(new GridLayout(10, 1, 1, 1));
-        SimpleDateFormat appFormat = new SimpleDateFormat("YYYY-MM-dd HH:MM");
+        SimpleDateFormat appFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm");
         if(currentPat.getAppointments() != null){
             for(int i = 0; i < currentPat.getAppointments().size(); i++){
                 Doctor doc = mc.doctors.get(Integer.parseInt(currentPat.getDocId().get(i)));
-                appointments.add(new JLabel(appFormat.format(currentPat.getTime().get(i).getTime()) + " " + doc.toString()),BorderLayout.NORTH);
+                JPanel tempPan = new JPanel(new GridLayout(1,0,1, 1));
+
+                tempPan.add(new JLabel(appFormat.format(currentPat.getTime().get(i).getTime()) + " " + doc.toString()));
+                JButton removeBut = new JButton("remove");
+                tempPan.add(removeBut);
+                appointments.add(tempPan, BorderLayout.NORTH);
             }
             appointments.setPreferredSize(new Dimension(600, appointments.getComponentCount() *30));
         }else{

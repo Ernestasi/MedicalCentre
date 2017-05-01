@@ -239,6 +239,9 @@ public class Methods{
             JButton addBut;
             if(patient == null){
                 addBut = new JButton("Add new patient");
+                if(time.before(mc.cal)){
+                    addBut.setEnabled(false);
+                }
                 Calendar cal = (Calendar) time.clone();
                 addBut.addMouseListener(new MouseAdapter(){
                     @Override
@@ -252,6 +255,9 @@ public class Methods{
                 });
             }else{
                 addBut = new JButton("Register");
+                if(time.before(mc.cal)){
+                    addBut.setEnabled(false);
+                }
                 Calendar cal = (Calendar) time.clone();
                 addBut.addMouseListener(new MouseAdapter(){
                     @Override
