@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
-//
 public class Patient extends Human{
 
 
@@ -15,8 +13,7 @@ public class Patient extends Human{
     public ArrayList<Calendar> time;
 
     public Patient(String name, String surName, String id, int insurance, String description){
-        setName(name);
-        setSurName(surName);
+        super(name, surName);
         this.id = id;
         this.insurance = insurance;
         insType = intToIns(insurance);

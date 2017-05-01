@@ -1,8 +1,3 @@
-import com.sun.xml.internal.bind.v2.model.core.ID;
-
-import javax.print.Doc;
-import java.util.Arrays;
-
 public class Doctor extends Human{
     private int cab;
     private String spec;
@@ -12,8 +7,7 @@ public class Doctor extends Human{
     private int id;
 
     public Doctor(String name, String surName, int cab,String spec, String time, int id){
-        setName(name);
-        setSurName(surName);
+        super(name, surName);
         this.cab = cab;
         this.spec = spec;
         this.time = time;
@@ -23,7 +17,7 @@ public class Doctor extends Human{
     }
 
     public Doctor(){
-
+        super(null, null);
     }
 
     private void toDay(String time){

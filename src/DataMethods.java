@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar;
@@ -33,21 +32,6 @@ public class DataMethods{
                 String[] word = line.split("_");
                 pat.add(new Patient(word[0], word[1], word[2], Integer.parseInt(word[3]), word[4]));
             }
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void readDisease(List dis){
-        try{
-            BufferedReader br = new BufferedReader(new FileReader("./src/Data/Disease.txt"));
-            String line;
-            while((line = br.readLine()) != null){
-                String[] word = line.split(" ");
-                dis.add(new Disease(word[0], word[1], Double.parseDouble(word[2]), Integer.parseInt(word[3]), Integer.parseInt(word[4]), Integer.parseInt(word[5])));
-            }
-
-
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -88,19 +72,30 @@ public class DataMethods{
                         counter++;
                     }
                 }
+
+                if(counter > 1){
+                    for(int i = 0; i < p.appointments.size(); i++){
+                        if(p.time.get(i).toString().equals(lastDate.toString())){
+                            p.appointments.remove(i);
+                            p.AppointmentToTime();
+                            break;
+                        }
+                    }
+                    //JFrame start
+                    JFrame warningWindow = new JFrame();
+                    warningWindow.setLocation(250,250);
+                    warningWindow.setSize(400,100);
+                    warningWindow.setAlwaysOnTop(true);
+                    warningWindow.setLayout(new GridLayout(1,1));
+                    warningWindow.add(new JLabel("Old visit at this time was CANCELED"));
+                    warningWindow.setVisible(true);
+                    //JFrame end
+                }
+
+                counter = 0;
             }
         }
-        //JFrame start
-        if(counter > 1){
-            JFrame warningWindow = new JFrame();
-            warningWindow.setLocation(250,250);
-            warningWindow.setSize(400,100);
-            warningWindow.setAlwaysOnTop(true);
-            warningWindow.setLayout(new GridLayout(1,1));
-            warningWindow.add(new JLabel("Senas vizitas tokiu laiku buvo atsauktas(reik istrint)"));
-            warningWindow.setVisible(true);
-        }
-        //JFrame end
+
         System.out.println("Dates file has been updated");
         BufferedWriter bw = null;
         FileWriter fw = null;
