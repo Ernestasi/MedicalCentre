@@ -1,4 +1,3 @@
-//maybe will need this for global methods
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -8,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Methods{

@@ -3,7 +3,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.io.FileWriter;
-import java.io.IOException;//
+import java.io.IOException;
 
 public class Registration{
     private MedicalCenter mc;

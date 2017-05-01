@@ -1,12 +1,8 @@
-import javafx.stage.Modality;
-import org.omg.CosNaming.NamingContextPackage.InvalidNameHolder;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.regex.Pattern;
 import javax.swing.*;
 
 public class Login {
