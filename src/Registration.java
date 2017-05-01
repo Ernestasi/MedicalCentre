@@ -15,26 +15,38 @@ public class Registration{
     public void render(){
         JFrame window = new JFrame("Registration");
         window.setLocationRelativeTo(null);
-        window.setSize(600, 400);
+        window.setSize(400, 250);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.getContentPane().setLayout(new GridLayout(0, 1));
+        window.getContentPane().setLayout(new BorderLayout(10, 10));
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 0, 5, 5));
-        panel.add(new JLabel("Name :"));
+        panel.setLayout(new GridLayout(0, 1, 10, 10));
+
+        JPanel NamePanel = new JPanel();
+        NamePanel.setLayout(new BorderLayout());
+        NamePanel.add(new JLabel("Name        :"),BorderLayout.WEST);
         JTextField name = new JTextField("");
         name.setEditable(true);
-        panel.add(name);
-        panel.add(new JLabel("SurName :"));
+        NamePanel.add(name,BorderLayout.CENTER);
+
+        JPanel SurNamePanel = new JPanel();
+        SurNamePanel.setLayout(new BorderLayout());
+        SurNamePanel.add(new JLabel("SurName :"),BorderLayout.WEST);
         JTextField surName = new JTextField("");
         surName.setEditable(true);
-        panel.add(surName);
-        panel.add(new JLabel("ID:"));
+        SurNamePanel.add(surName,BorderLayout.CENTER);
+
+        JPanel IDPanel = new JPanel();
+        IDPanel.setLayout(new BorderLayout());
+        IDPanel.add(new JLabel("ID               :"),BorderLayout.WEST);
         JTextField ID = new JTextField("");
         ID.setEditable(true);
-        panel.add(ID);
-        window.add(panel);
+        IDPanel.add(ID,BorderLayout.CENTER);
+
+        panel.add(NamePanel);
+        panel.add(SurNamePanel);
+        panel.add(IDPanel);
 
         JPanel panel1 = new JPanel();
         panel1.setLayout(new GridLayout(1, 0));
@@ -52,11 +64,16 @@ public class Registration{
         panel1.add(rb2);
         panel1.add(rb3);
         panel1.add(rb0);
-        window.add(panel1);
+        panel.add(panel1,BorderLayout.CENTER);
 
         JLabel warning = new JLabel("");
+        //warning.setFont(new Font("Serif", Font.BOLD, 15));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        window.add(warning);
+        panel.add(warning);
+
+
+        //Buttons panel
+        JPanel buttons = new JPanel();
         JButton submit = new JButton("Submit");
         submit.addMouseListener(new MouseAdapter(){
             @Override
@@ -81,31 +98,31 @@ public class Registration{
                         window.setEnabled(false);
 
 
-                        JFrame submited = new JFrame("Thank you");
-                        submited.setLocation(200, 200);
-                        submited.setSize(600, 300);
-                        submited.setResizable(false);
-                        submited.isAlwaysOnTop();
-                        submited.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        submited.setLayout(new GridLayout(0, 1));
+                        JFrame submitted = new JFrame("Thank you");
+                        submitted.setLocation(200, 200);
+                        submitted.setSize(600, 300);
+                        submitted.setResizable(false);
+                        submitted.isAlwaysOnTop();
+                        submitted.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        submitted.setLayout(new GridLayout(0, 1));
 
                         JLabel name = new JLabel("Name: " + pat.getName());
                         name.setFont(new Font("Serif", Font.BOLD, 24));
                         //name.setHorizontalAlignment(SwingConstants.LEFT );
-                        submited.add(name);
+                        submitted.add(name);
 
                         JLabel surName = new JLabel("Surname: " + pat.getSurName());
                         surName.setFont(new Font("Serif", Font.BOLD, 24));
                         //surName.setHorizontalAlignment(SwingConstants.LEFT );
-                        submited.add(surName);
+                        submitted.add(surName);
 
                         JLabel ID = new JLabel("ID: " + pat.getId());
                         ID.setFont(new Font("Serif", Font.BOLD, 24));
                         //ID.setHorizontalAlignment(SwingConstants.LEFT );
-                        submited.add(ID);
+                        submitted.add(ID);
 
                         JPanel decision = new JPanel();
-                        decision.setLayout(new FlowLayout());
+                        decision.setLayout(new BorderLayout());
                         JButton confirm = new JButton("Confirm");
                         confirm.addMouseListener(new MouseAdapter(){
                             @Override
@@ -120,7 +137,7 @@ public class Registration{
                                     fw.close();
                                     PatientsFrame forPatien = new PatientsFrame(mc);
                                     forPatien.mainPatientFrame();
-                                    submited.dispose();
+                                    submitted.dispose();
                                     window.dispose();
                                 }catch(IOException ioe){
                                     System.err.println("IOException: " + ioe.getMessage());
@@ -130,21 +147,21 @@ public class Registration{
 
 
                         });
-                        decision.add(confirm);
+                        decision.add(confirm, BorderLayout.CENTER);
                         JButton back = new JButton("Back");
                         back.addMouseListener(new MouseAdapter(){
                             @Override
                             public void mousePressed(MouseEvent e){
                                 window.setEnabled(true);
-                                submited.dispose();
+                                submitted.dispose();
                             }
 
 
                         });
-                        decision.add(back);
-                        submited.add(decision);
+                        decision.add(back,BorderLayout.EAST);
+                        submitted.add(decision);
 
-                        submited.setVisible(true);
+                        submitted.setVisible(true);
 
 
                     }else warning.setText("  You are already on the system!");
@@ -157,7 +174,6 @@ public class Registration{
 
             }
         });
-        window.add(submit);
         JButton cancel = new JButton("Back");
         cancel.addMouseListener(new MouseAdapter(){
             @Override
@@ -167,8 +183,13 @@ public class Registration{
                 window.dispose();
             }
         });
-        window.add(cancel);
-        window.setAlwaysOnTop(true);
+
+        buttons.add(cancel);
+        buttons.add(submit);
+        //Buttons panel ends there
+
+        window.add(panel,BorderLayout.NORTH);
+        window.add(buttons, BorderLayout.SOUTH);
         //window.pack();
         window.setVisible(true);
     }
