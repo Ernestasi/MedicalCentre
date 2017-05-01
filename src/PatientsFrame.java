@@ -20,7 +20,7 @@ public class PatientsFrame{
     }
 
     private void logged(Patient currentPat){
-            this.currentP  = currentPat;
+        this.currentP = currentPat;
         scheduleTime = (Calendar) mc.cal.clone();
 
         warningFrame(mc, currentPat);
@@ -138,7 +138,10 @@ public class PatientsFrame{
                             public void mouseClicked(MouseEvent e){
                                 meetingFrame.dispose();
                                 loggedIn.setVisible(true);
-                               checkTime.add(Calendar.DAY_OF_YEAR, -1);
+                                int selectedTab = tabs.getSelectedIndex();
+                                tabs.remove(2);
+                                tabs.add(appointmentsTab(currentP), "Appointments");
+                                tabs.setSelectedIndex(selectedTab);
                             }
                         });
                         meetingFrame.add(closeBTN);
@@ -387,7 +390,10 @@ public class PatientsFrame{
                                         if(lastDate.toString().equals(currentPat.time.get(k).toString())){
                                             p.removeAppointment(k);
                                             dataMethods.updateDatesFile(mc.patients);
-                                            checkTime.add(Calendar.DAY_OF_YEAR, -1);
+                                            int selectedTab = tabs.getSelectedIndex();
+                                            tabs.remove(2);
+                                            tabs.add(appointmentsTab(currentP), "Appointments");
+                                            tabs.setSelectedIndex(selectedTab);
                                         }
                                     }
                                 }
@@ -406,15 +412,18 @@ public class PatientsFrame{
         return returnP;
 
     }
+
     Calendar checkTime = Calendar.getInstance();
+
     public void tick(){
-        if(tabs != null && checkTime.get(Calendar.DAY_OF_YEAR)!=(mc.cal.get(Calendar.DAY_OF_YEAR)) && checkTime.get(Calendar.YEAR)!=mc.cal.get(Calendar.YEAR)){
-            checkTime = (Calendar) mc.cal.clone();
-            System.out.println("Refreshed");
-            int selectedTab = tabs.getSelectedIndex();
-            tabs.remove(2);
-            tabs.add(appointmentsTab(currentP), "Appointments");
-            tabs.setSelectedIndex(selectedTab);
-        }
+        if(tabs != null)
+            if(checkTime.get(Calendar.DAY_OF_YEAR) != (mc.cal.get(Calendar.DAY_OF_YEAR)) || checkTime.get(Calendar.YEAR) != mc.cal.get(Calendar.YEAR)){
+                checkTime = (Calendar) mc.cal.clone();
+                System.out.println("Refreshed");
+                int selectedTab = tabs.getSelectedIndex();
+                tabs.remove(2);
+                tabs.add(appointmentsTab(currentP), "Appointments");
+                tabs.setSelectedIndex(selectedTab);
+            }
     }
 }

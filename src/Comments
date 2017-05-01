@@ -6,11 +6,14 @@ Functionality of the program:
 
 @ if Doctor selected:
     - Opens Login frame for doctors /not yet included
-    - Loads "Medical center application for doctors" frame witch displays doctors, patients list and schedule of current week in tabs
+    - Loads "Medical center application for doctors" frame witch displays doctors, patients lists and schedule of current week in tabs
     - User(doctor) can open information frame about other doctors or patients by pressing on them in lists
     - User can add some comments to patient in patient information frame
     - User can open information frame about patient by pressing on button in schedule tab next to patient name if appointment is scheduled
     - User can open set appointment frame by pressing on add button in schedule tab and frame with patients list appears
+    - User can cancel an appointment in his schedule
+    - In doctorInfoFrame user can register patient to that doctor, also can see/view info/delete patients registered to that doctor
+    - User can edit patient description in patientInfoFrame
 
 @ if Patient selected:
     - Opens Login frame where user can select if he wants to login or register as a new patient

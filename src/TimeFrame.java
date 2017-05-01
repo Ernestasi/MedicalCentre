@@ -22,7 +22,8 @@ public class TimeFrame {
         window.setResizable(false);
         window.setDefaultCloseOperation(0);
         window.setSize(400, 110);
-        window.setLocation(1100, 0);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        window.setLocation((int) screenSize.getWidth() - window.getWidth(), 0);
         // window.getContentPane().setLayout(new GridLayout(2, 1));
         window.setVisible(true);
         window.setAlwaysOnTop(true);
