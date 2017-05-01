@@ -24,7 +24,7 @@ Functionality of the program:
         correct opens information frame and shows entered data and user can submit/cancel data
 
     @ If logged in:
-        - User can check their description
-        - User can check their appointments(can cancel them as well)
+        - User can check his description
+        - User can check his appointments(can cancel them as well)
         - User can register to specific doctor at specific time (all appointments are 30 minutes long by default)
         - User gets reminder if he has an appointment in upcoming 7 days
