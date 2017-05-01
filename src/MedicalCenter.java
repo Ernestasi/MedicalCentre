@@ -8,7 +8,6 @@ public class MedicalCenter extends Canvas implements Runnable{
 
     ArrayList<Doctor> doctors = new ArrayList<>();
     ArrayList<Patient> patients = new ArrayList<>();
-    ArrayList<Disease> diseases = new ArrayList<>();
 
     private DataMethods rd;
     Login log;
@@ -68,7 +67,6 @@ public class MedicalCenter extends Canvas implements Runnable{
         tFrame.tick();
         if(patFrame != null)
             patFrame.tick();
-
     }
 
     private void render(){
@@ -96,7 +94,6 @@ public class MedicalCenter extends Canvas implements Runnable{
         tFrame.OpenTime();
         rd.readDoctors(doctors);
         rd.readPatients(patients);
-        rd.readDisease(diseases);
         rd.readAppointment(patients);
 
         log = new Login(this);
