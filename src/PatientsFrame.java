@@ -6,19 +6,21 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class PatientsFrame {
+public class PatientsFrame{
 
     private MedicalCenter mc;
     Calendar scheduleTime;
     Methods methods = new Methods();
     DataMethods dataMethods = new DataMethods();
-    JTabbedPane tabs = new JTabbedPane();
+    JTabbedPane tabs;
+    Patient currentP;
 
-    public PatientsFrame(MedicalCenter mc) {
+    public PatientsFrame(MedicalCenter mc){
         this.mc = mc;
     }
 
-    private void logged(Patient currentPat) {
+    private void logged(Patient currentPat){
+            this.currentP  = currentPat;
         scheduleTime = (Calendar) mc.cal.clone();
 
         warningFrame(mc, currentPat);
@@ -34,6 +36,7 @@ public class PatientsFrame {
         JPanel info = new JPanel(new GridLayout(2, 1, 5, 5));
         JPanel doctorsSpec = new JPanel();
         JPanel buttons = new JPanel();
+        tabs = new JTabbedPane();
         JScrollPane descriptionScrollable;
 
 
@@ -53,13 +56,13 @@ public class PatientsFrame {
 
         ArrayList<String> tempList = new ArrayList<>();
         tempList.add(mc.doctors.get(1).getSpec());
-        for (Doctor d : mc.doctors) {
+        for(Doctor d : mc.doctors){
             int temp = 0;
-            for (int i = 0; i < tempList.size(); i++) {
-                if (d.getSpec().equals(tempList.get(i)))
+            for(int i = 0; i < tempList.size(); i++){
+                if(d.getSpec().equals(tempList.get(i)))
                     temp++;
             }
-            if (temp == 0) {
+            if(temp == 0){
                 tempList.add(d.getSpec());
             }
 
@@ -77,21 +80,21 @@ public class PatientsFrame {
         //Doctors tab
 
         GridLayout mainGrid = new GridLayout(tempList.size(), 1, 10, 10);
-        for (int i = 0; i < tempList.size(); i++) {
+        for(int i = 0; i < tempList.size(); i++){
             String temp = tempList.get(i);
             JButton specBTN = new JButton(temp);
-            specBTN.addMouseListener(new MouseAdapter() {
+            specBTN.addMouseListener(new MouseAdapter(){
                 @Override
-                public void mouseClicked(MouseEvent e) {
+                public void mouseClicked(MouseEvent e){
                     String currentSpec = "null";
                     ArrayList<String> currentDocs = new ArrayList<>();
-                    for (Doctor d : mc.doctors) {
-                        if (temp.equals(d.getSpec())) {
+                    for(Doctor d : mc.doctors){
+                        if(temp.equals(d.getSpec())){
                             currentSpec = d.getSpec();
                             currentDocs.add(d.getName() + " " + d.getSurName());
                         }
                     }
-                    if (currentDocs.size() > 0) {
+                    if(currentDocs.size() > 0){
                         loggedIn.setVisible(false);
                         JFrame meetingFrame = new JFrame(currentSpec);
                         // JDialog meetingFrame = new JDialog(loggedIn, currentSpec, Dialog.ModalityType.DOCUMENT_MODAL);
@@ -103,12 +106,12 @@ public class PatientsFrame {
                         meetingFrame.setLayout(new BorderLayout());
                         meetingFrame.setVisible(true);
                         meetingFrame.setLayout(new GridLayout(currentDocs.size() + 2, 1, 5, 5));
-                        for (int i = 0; i < currentDocs.size(); i++) {
+                        for(int i = 0; i < currentDocs.size(); i++){
                             String docName = currentDocs.get(i);
                             JButton doctorSelectBTN = new JButton(currentDocs.get(i));
-                            doctorSelectBTN.addMouseListener(new MouseAdapter() {
+                            doctorSelectBTN.addMouseListener(new MouseAdapter(){
                                 @Override
-                                public void mouseClicked(MouseEvent e) {
+                                public void mouseClicked(MouseEvent e){
                                     JDialog setMeeting = new JDialog(meetingFrame, docName, Dialog.ModalityType.DOCUMENT_MODAL);
                                     setMeeting.setSize(500, 500);
                                     setMeeting.setResizable(false);
@@ -116,8 +119,8 @@ public class PatientsFrame {
                                     setMeeting.setLocationRelativeTo(null);
                                     //panels
                                     JPanel dayPNL = new JPanel();
-                                    for (Doctor doc : mc.doctors) {
-                                        if ((doc.getName() + " " + doc.getSurName()).equals(docName)) {
+                                    for(Doctor doc : mc.doctors){
+                                        if((doc.getName() + " " + doc.getSurName()).equals(docName)){
                                             dayPNL = methods.selectTimePanel(doc, currentPat, scheduleTime, mc);
                                         }
                                     }
@@ -130,15 +133,12 @@ public class PatientsFrame {
                         }
                         meetingFrame.add(new JLabel());
                         JButton closeBTN = new JButton("Close");
-                        closeBTN.addMouseListener(new MouseAdapter() {
+                        closeBTN.addMouseListener(new MouseAdapter(){
                             @Override
-                            public void mouseClicked(MouseEvent e) {
+                            public void mouseClicked(MouseEvent e){
                                 meetingFrame.dispose();
                                 loggedIn.setVisible(true);
-                                int selectedTab = tabs.getSelectedIndex();
-                                tabs.remove(2);
-                                tabs.add(appointmentsTab(currentPat), "Appointments");
-                                tabs.setSelectedIndex(selectedTab);
+                               checkTime.add(Calendar.DAY_OF_YEAR, -1);
                             }
                         });
                         meetingFrame.add(closeBTN);
@@ -164,9 +164,9 @@ public class PatientsFrame {
         //buttuns panel
         buttons.setLayout(new BorderLayout(50, 50));
         JButton signOutBTN = new JButton("Sign out");
-        signOutBTN.addMouseListener(new MouseAdapter() {
+        signOutBTN.addMouseListener(new MouseAdapter(){
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e){
                 tabs.removeAll();
                 loggedIn.dispose();
                 mainPatientFrame();
@@ -181,7 +181,7 @@ public class PatientsFrame {
 
     }
 
-    void mainPatientFrame() {
+    void mainPatientFrame(){
 
         JFrame frame = new JFrame("Medical Centre Application for Patients  ");
         frame.setLocationRelativeTo(null);
@@ -192,9 +192,9 @@ public class PatientsFrame {
         frame.setVisible(true);
         frame.requestFocus();
         JButton newB = new JButton("New patient");
-        newB.addMouseListener(new MouseAdapter() {
+        newB.addMouseListener(new MouseAdapter(){
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e){
                 Registration reg = new Registration(mc);
                 reg.render();
                 frame.dispose();
@@ -202,11 +202,11 @@ public class PatientsFrame {
         });
         frame.add(newB);
         JButton oldB = new JButton("Registered patient");
-        oldB.addMouseListener(new MouseAdapter() {
+        oldB.addMouseListener(new MouseAdapter(){
             String ID;
 
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e){
                 frame.dispose();
 
 
@@ -230,9 +230,9 @@ public class PatientsFrame {
                 top.add(test, BorderLayout.WEST);
 
                 JButton regBTN = new JButton("Register");
-                regBTN.addMouseListener(new MouseAdapter() {
+                regBTN.addMouseListener(new MouseAdapter(){
                     @Override
-                    public void mouseClicked(MouseEvent e) {
+                    public void mouseClicked(MouseEvent e){
                         Registration reg = new Registration(mc);
                         reg.render();
                         securityID.dispose();
@@ -249,20 +249,20 @@ public class PatientsFrame {
                 jp.add(textID);
                 securityID.add(textID);
                 JButton submit = new JButton("Submit");
-                submit.addMouseListener(new MouseAdapter() {
+                submit.addMouseListener(new MouseAdapter(){
                     @Override
-                    public void mouseClicked(MouseEvent e) {
+                    public void mouseClicked(MouseEvent e){
                         ID = textID.getText();
-                        if (ID != null) {
+                        if(ID != null){
                             int check = 0;
-                            for (Patient p : mc.patients) {
-                                if ((ID.length() == 11) && (ID.matches("[0-9]+"))) {
-                                    if (ID.equals(p.getId())) {
+                            for(Patient p : mc.patients){
+                                if((ID.length() == 11) && (ID.matches("[0-9]+"))){
+                                    if(ID.equals(p.getId())){
                                         securityID.dispose();
                                         logged(p);
                                         check++;
                                     }
-                                    if (check == 0) {
+                                    if(check == 0){
                                         test.setText("No such ID");
                                         //regBTN.setBackground(Color.red);
                                         regBTN.setEnabled(true);
@@ -270,9 +270,9 @@ public class PatientsFrame {
 
 
                                     }
-                                } else if (!ID.matches("[0-9]+"))
+                                }else if(!ID.matches("[0-9]+"))
                                     test.setText("ID can contain only digits!");
-                                else if (ID.length() != 11)
+                                else if(ID.length() != 11)
                                     test.setText("ID has to be 11 digits long!");
 
 
@@ -284,9 +284,9 @@ public class PatientsFrame {
                 });
                 securityID.add(submit);
                 JButton back = new JButton("Back");
-                back.addMouseListener(new MouseAdapter() {
+                back.addMouseListener(new MouseAdapter(){
                     @Override
-                    public void mouseClicked(MouseEvent e) {
+                    public void mouseClicked(MouseEvent e){
                         PatientsFrame goBack = new PatientsFrame(mc);
                         securityID.dispose();
                         goBack.mainPatientFrame();
@@ -299,35 +299,35 @@ public class PatientsFrame {
         frame.add(oldB);
     }
 
-    public void warningFrame(MedicalCenter mc, Patient currentPat) {
+    public void warningFrame(MedicalCenter mc, Patient currentPat){
         Calendar time = (Calendar) mc.cal.clone();
         time.add(Calendar.DAY_OF_MONTH, 7);
         int countMeetingsWeek = 0;
         int appointmentsCount = 0;
-        if (currentPat.time != null) {
-            for (Calendar c : currentPat.time) {
-                if (c.after(mc.cal) && c.before(time))
+        if(currentPat.time != null){
+            for(Calendar c : currentPat.time){
+                if(c.after(mc.cal) && c.before(time))
                     countMeetingsWeek++;
                 appointmentsCount = currentPat.appointments.toString().length() / 20;
             }
         }
         boolean needsVisit = true;
-        if (appointmentsCount != 0) {
+        if(appointmentsCount != 0){
             int position = 1;
-            for (int i = 0; i < appointmentsCount; i++) {
+            for(int i = 0; i < appointmentsCount; i++){
                 char docIDChar = currentPat.appointments.toString().charAt(position);
                 String docID = String.valueOf(docIDChar);
                 position = position + 20;
 
-                for (Doctor d : mc.doctors) {
+                for(Doctor d : mc.doctors){
                     String testDoc = String.valueOf(d.getId());
-                    if ((docID.equals(testDoc)) && (!d.getSpec().equals("family doctor"))) {
-                        needsVisit = false;
+                    if((docID.equals(testDoc)) && (!d.getSpec().equals("family doctor"))){
+                        needsVisit = false; // CIA REIKIA PRIDETI TIKRINIMA, KAD BUTU PRIES 6 MENESIUS!!!!!!!!!!!!
                     }
                 }
             }
         }
-        if ((needsVisit || (countMeetingsWeek != 0))) {
+        if((needsVisit || (countMeetingsWeek != 0))){
             JFrame reminderFrame = new JFrame("Reminder");
             reminderFrame.setSize(1010, 100);
             reminderFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -339,57 +339,56 @@ public class PatientsFrame {
             //labels
             JLabel reminderLabel = new JLabel("You have an appointment in upcoming week, check appointments tab.");
             reminderLabel.setFont(new Font("TimesRoman", Font.BOLD, 30));
-            JLabel familyDoctorLabel = new JLabel("You haven't visited family doctor yet, please register.");
+            JLabel familyDoctorLabel = new JLabel("You haven't visited family doctor for 6 months.");
             familyDoctorLabel.setFont(new Font("TimesRoman", Font.BOLD, 30));
             //labels end
             //checking if frame needs to be configured or even visible.
-            if (countMeetingsWeek != 0)
+            if(countMeetingsWeek != 0)
                 reminderFrame.add(reminderLabel);
-            if (!needsVisit && (countMeetingsWeek != 0)) {
+            if(!needsVisit && (countMeetingsWeek != 0)){
                 reminderFrame.setSize(1010, 200);
                 reminderFrame.setLayout(new GridLayout(2, 1));
 
                 reminderFrame.add(familyDoctorLabel);
             }
-            if (!needsVisit && (countMeetingsWeek == 0)) {
+            if(!needsVisit && (countMeetingsWeek == 0)){
                 reminderFrame.add(familyDoctorLabel);
             }
-            if (appointmentsCount == 0) {
+            if(appointmentsCount == 0){
                 reminderFrame.add(familyDoctorLabel);
             }
             reminderFrame.setVisible(true);
         }
     }
 
-    public void tick() {
-    }
-
-    private JPanel appointmentsTab(Patient currentPat) {
+    private JPanel appointmentsTab(Patient currentPat){
         JPanel returnP = new JPanel(new GridLayout());
-        JPanel tempPan = new JPanel(new GridLayout(0,2,1,1));
+        JPanel tempPan = new JPanel(new GridLayout(0, 2, 1, 1));
 
         SimpleDateFormat appFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm");
-        if (currentPat.getAppointments() != null) {
-            for (int i = 0; i < currentPat.getAppointments().size(); i++) {
+        if(currentPat.getAppointments() != null){
+            for(int i = 0; i < currentPat.getAppointments().size(); i++){
                 Doctor doc = mc.doctors.get(Integer.parseInt(currentPat.getDocId().get(i)));
                 Calendar lastDate = currentPat.time.get(i);
                 tempPan.add(new JLabel(appFormat.format(currentPat.getTime().get(i).getTime()) + " " + doc.toString()));
                 JButton removeBut = new JButton("remove");
+                if(currentPat.getTime().get(i).getTime().before(mc.cal.getTime())){
+                    removeBut.setEnabled(false);
+                }
                 int a = i;
-                removeBut.addMouseListener(new MouseAdapter() {
+                removeBut.addMouseListener(new MouseAdapter(){
                     @Override
-                    public void mouseClicked(MouseEvent e) {
-                        for (Patient p : mc.patients) {
-                            if (currentPat == p) {
-                                for (int k = 0; k < currentPat.appointments.size(); k++) {
+                    public void mouseClicked(MouseEvent e){
+                        if(removeBut.isEnabled()){
+                            for(Patient p : mc.patients){
+                                if(currentPat == p){
+                                    for(int k = 0; k < currentPat.appointments.size(); k++){
 
-                                    if (lastDate.toString().equals(currentPat.time.get(k).toString())) {
-                                        p.removeAppointment(k);
-                                        dataMethods.updateDatesFile(mc.patients);
-                                        int selectedTab = tabs.getSelectedIndex();
-                                        tabs.remove(2);
-                                        tabs.add(appointmentsTab(currentPat), "Appointments");
-                                        tabs.setSelectedIndex(selectedTab);
+                                        if(lastDate.toString().equals(currentPat.time.get(k).toString())){
+                                            p.removeAppointment(k);
+                                            dataMethods.updateDatesFile(mc.patients);
+                                            checkTime.add(Calendar.DAY_OF_YEAR, -1);
+                                        }
                                     }
                                 }
                             }
@@ -398,7 +397,7 @@ public class PatientsFrame {
                 });
                 tempPan.add(removeBut);
             }
-        } else {
+        }else{
             tempPan.add(new JLabel("You have no appointments scheduled"));
         }
 
@@ -406,5 +405,16 @@ public class PatientsFrame {
         returnP.add(scrollPan);
         return returnP;
 
+    }
+    Calendar checkTime = Calendar.getInstance();
+    public void tick(){
+        if(tabs != null && checkTime.get(Calendar.DAY_OF_YEAR)!=(mc.cal.get(Calendar.DAY_OF_YEAR)) && checkTime.get(Calendar.YEAR)!=mc.cal.get(Calendar.YEAR)){
+            checkTime = (Calendar) mc.cal.clone();
+            System.out.println("Refreshed");
+            int selectedTab = tabs.getSelectedIndex();
+            tabs.remove(2);
+            tabs.add(appointmentsTab(currentP), "Appointments");
+            tabs.setSelectedIndex(selectedTab);
+        }
     }
 }
