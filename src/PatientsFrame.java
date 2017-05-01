@@ -340,7 +340,7 @@ public class PatientsFrame{
                 Doctor doc = mc.doctors.get(Integer.parseInt(currentPat.getDocId().get(i)));
                 Calendar lastDate = currentPat.time.get(i);
                 tempPan.add(new JLabel(appFormat.format(currentPat.getTime().get(i).getTime()) + " " + doc.toString()));
-                JButton removeBut = new JButton("remove");
+                JButton removeBut = new JButton("Cancel appointment");
                 if(currentPat.getTime().get(i).getTime().before(mc.cal.getTime())){
                     removeBut.setEnabled(false);
                 }
