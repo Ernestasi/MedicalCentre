@@ -67,7 +67,6 @@ public class MedicalCenter extends Canvas implements Runnable{
         tFrame.tick();
         if(patFrame != null)
             patFrame.tick();
-
     }
 
     private void render(){
